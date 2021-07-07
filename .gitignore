@@ -1,0 +1,18 @@
+# See https://www.dartlang.org/guides/libraries/private-files
+
+# MacOS files
+.DS_Store
+*.iml
+.idea
+
+# Files and directories created by pub
+pubspec.lock
+.dart_tool/
+.packages
+.pub/
+build/
+ios/.generated/
+ios/Flutter/Generated.xcconfig
+ios/Runner/GeneratedPluginRegistrant.*
+
+
