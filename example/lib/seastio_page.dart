@@ -1,71 +1,47 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-const String YourWorkspaceKey = "afcfc4d1-d11d-476d-9956-e2c4f6c5e769";
-const String YourEventKey =
-    "20210807-1000-eee8070a-cfd3-4cdd-9ab0-64ae38e84900";
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Seatsio Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Seatsio Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+class SeatsioPage extends StatefulWidget {
+  SeatsioPage({
+    Key? key,
+    required this.publicKey,
+    required this.eventKey,
+    this.holdToken,
+  }) : super(key: key);
+  final String publicKey;
+  final String eventKey;
+  final String? holdToken;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _SeatsioPageState createState() => _SeatsioPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SeatsioPageState extends State<SeatsioPage> {
   WebViewController? _seatsioController;
   String? objectLabel;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 456,
-              child: _buildSeatsioView(),
-            ),
-            Text(
-              objectLabel ?? 'Try to click a seat object',
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _loadSeatsio,
-        tooltip: 'Increment',
-        child: Icon(Icons.refresh),
-      ),
-    );
+  void _loadSeatsio() {
+    final chartConfig = SeatingChartConfig.init().rebuild((b) => b
+      ..workspaceKey = widget.publicKey
+      ..eventKey = widget.eventKey
+      ..holdToken = widget.holdToken
+      ..session = "none");
+
+    final url = _generateHtmlContent(chartConfig);
+    _seatsioController?.loadUrl(url);
   }
 
-  Widget _buildSeatsioView() {
-    return SeatsioWebView(
+  void _clickSeat(SeatsioObject object) {
+    setState(() {
+      objectLabel = object.label;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final seatsioView = SeatsioWebView(
       enableRenderChart: false,
       onWebViewCreated: (controller) {
         print("[seatsio]->[example]-> onWebViewCreated");
@@ -85,22 +61,30 @@ class _MyHomePageState extends State<MyHomePage> {
             "[seatsio]->[example]-> onCategoryListCallback, categoryList: $categoryList");
       },
     );
-  }
 
-  void _clickSeat(SeatsioObject object) {
-    setState(() {
-      objectLabel = object.label;
-    });
-  }
-
-  void _loadSeatsio() {
-    final chartConfig = SeatingChartConfig.init().rebuild((b) => b
-      ..workspaceKey = YourWorkspaceKey
-      ..eventKey = YourEventKey
-      ..session = "start");
-
-    final url = _generateHtmlContent(chartConfig);
-    _seatsioController?.loadUrl(url);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Seat Page"),
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 333,
+              child: seatsioView,
+            ),
+            Text(
+              objectLabel ?? 'Try to click a seat object',
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _loadSeatsio,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
   }
 
   /// Generate html for seatsio webview

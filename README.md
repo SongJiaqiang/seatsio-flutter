@@ -1,6 +1,9 @@
 # seatsio
 
+## Description
 Seatsio SDK for Flutter.
+</br>
+![seatsio-flutter-demo](./seatsio-flutter-demo.gif)
 
 ## Getting Started
 
@@ -10,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  seatsio: ^0.0.1
+  seatsio: ^0.0.2
 ```
 
 Then, import `seatsio` package to your dart file.
@@ -20,67 +23,39 @@ import 'package:seatsio/seatsio.dart';
 
 Finally, config your seatsio chart with some parameters.
 ``` dart
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:seatsio/seatsio.dart';
-import 'package:built_collection/built_collection.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-
-const String YourWorkspaceKey = "";
-const String YourEventKey = "20210807-1000-eee8070a-cfd3-4cdd-9ab0-64ae38e84900";
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
 class _MyHomePageState extends State<MyHomePage> {
   WebViewController? _seatsioController;
   String? objectLabel;
 
-  void _loadSeatsio() {
-    final chartConfig = SeatingChartConfig.init().rebuild((b) => b
-      ..publicKey = YourWorkspaceKey
-      ..events = [YourEventKey].toBuiltList().toBuilder()
-      ..holdToken = null
-      ..session = "none"
-      );
-
-    final url = _generateHtmlContent(chartConfig);
-    _seatsioController?.loadUrl(url);
-  }
-
-  void _clickSeat(SeatsioObject object) {
-    setState(() {
-      objectLabel = object.label;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    final seatsioView = SeatsioWebView(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 456,
+              child: _buildSeatsioView(),
+            ),
+            Text(
+              objectLabel ?? 'Try to click a seat object',
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _loadSeatsio,
+        tooltip: 'Increment',
+        child: Icon(Icons.refresh),
+      ),
+    );
+  }
+
+  Widget _buildSeatsioView() {
+    return SeatsioWebView(
       enableRenderChart: false,
       onWebViewCreated: (controller) {
         print("[seatsio]->[example]-> onWebViewCreated");
@@ -100,35 +75,26 @@ class _MyHomePageState extends State<MyHomePage> {
             "[seatsio]->[example]-> onCategoryListCallback, categoryList: $categoryList");
       },
     );
+  }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 333,
-              child: seatsioView,
-            ),
-            Text(
-              objectLabel ?? 'Try to click a seat object',
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _loadSeatsio,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
-    );
+  void _clickSeat(SeatsioObject object) {
+    setState(() {
+      objectLabel = object.label;
+    });
+  }
+
+  void _loadSeatsio() {
+    final chartConfig = SeatingChartConfig.init().rebuild((b) => b
+      ..workspaceKey = YourWorkspaceKey
+      ..eventKey = YourEventKey
+      ..session = "start");
+
+    final url = _generateHtmlContent(chartConfig);
+    _seatsioController?.loadUrl(url);
   }
 
   /// Generate html for seatsio webview
   String _generateHtmlContent(SeatingChartConfig chartConfig) {
-
     // Convert chart configs to map
     final chartConfigMap = chartConfig.toMap();
 
@@ -160,5 +126,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return url.toString();
   }
 }
+
 ```
 

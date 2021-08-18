@@ -34,12 +34,14 @@ class _$SeatingChartConfigSerializer
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       'publicKey',
-      serializers.serialize(object.publicKey,
+      serializers.serialize(object.workspaceKey,
           specifiedType: const FullType(String)),
-      'events',
-      serializers.serialize(object.events,
-          specifiedType: const FullType(
-              BuiltList, const [const FullType.nullable(String)])),
+      'event',
+      serializers.serialize(object.eventKey,
+          specifiedType: const FullType(String)),
+      'showLoadingAnimation',
+      serializers.serialize(object.showLoadingAnimation,
+          specifiedType: const FullType(bool)),
       'enableObjectClickedCallback',
       serializers.serialize(object.enableObjectClickedCallback,
           specifiedType: const FullType(bool)),
@@ -299,13 +301,6 @@ class _$SeatingChartConfigSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.canGASelectionBeIncreased;
-    if (value != null) {
-      result
-        ..add('canGASelectionBeIncreased')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.objectColor;
     if (value != null) {
       result
@@ -359,14 +354,12 @@ class _$SeatingChartConfigSerializer
       final Object? value = iterator.current;
       switch (key) {
         case 'publicKey':
-          result.publicKey = serializers.deserialize(value,
+          result.workspaceKey = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'events':
-          result.events.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType.nullable(String)]))!
-              as BuiltList<Object?>);
+        case 'event':
+          result.eventKey = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
         case 'chart':
           result.chart = serializers.deserialize(value,
@@ -489,6 +482,10 @@ class _$SeatingChartConfigSerializer
           result.loading = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'showLoadingAnimation':
+          result.showLoadingAnimation = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'ticketListings':
           result.ticketListings = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -521,10 +518,6 @@ class _$SeatingChartConfigSerializer
           break;
         case 'isObjectSelectable':
           result.isObjectSelectable = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'canGASelectionBeIncreased':
-          result.canGASelectionBeIncreased = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
         case 'objectColor':
@@ -923,9 +916,9 @@ class _$TicketListingSerializer implements StructuredSerializer<TicketListing> {
 
 class _$SeatingChartConfig extends SeatingChartConfig {
   @override
-  final String publicKey;
+  final String workspaceKey;
   @override
-  final BuiltList<String?> events;
+  final String eventKey;
   @override
   final String? chart;
   @override
@@ -981,6 +974,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String? loading;
   @override
+  final bool showLoadingAnimation;
+  @override
   final List<TicketListing>? ticketListings;
   @override
   final bool? holdOnSelectForGAs;
@@ -996,8 +991,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   final String? isObjectVisible;
   @override
   final String? isObjectSelectable;
-  @override
-  final String? canGASelectionBeIncreased;
   @override
   final String? objectColor;
   @override
@@ -1018,8 +1011,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       (new SeatingChartConfigBuilder()..update(updates)).build();
 
   _$SeatingChartConfig._(
-      {required this.publicKey,
-      required this.events,
+      {required this.workspaceKey,
+      required this.eventKey,
       this.chart,
       this.pricing,
       this.numberOfPlacesToSelect,
@@ -1047,6 +1040,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.objectCategories,
       this.mode,
       this.loading,
+      required this.showLoadingAnimation,
       this.ticketListings,
       this.holdOnSelectForGAs,
       this.holdToken,
@@ -1055,7 +1049,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.objectIcon,
       this.isObjectVisible,
       this.isObjectSelectable,
-      this.canGASelectionBeIncreased,
       this.objectColor,
       this.sectionColor,
       this.extraConfig,
@@ -1065,9 +1058,11 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       required this.enableChartRenderedCallback})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        publicKey, 'SeatingChartConfig', 'publicKey');
+        workspaceKey, 'SeatingChartConfig', 'workspaceKey');
     BuiltValueNullFieldError.checkNotNull(
-        events, 'SeatingChartConfig', 'events');
+        eventKey, 'SeatingChartConfig', 'eventKey');
+    BuiltValueNullFieldError.checkNotNull(
+        showLoadingAnimation, 'SeatingChartConfig', 'showLoadingAnimation');
     BuiltValueNullFieldError.checkNotNull(enableObjectClickedCallback,
         'SeatingChartConfig', 'enableObjectClickedCallback');
     BuiltValueNullFieldError.checkNotNull(enableChartRenderedCallback,
@@ -1087,8 +1082,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is SeatingChartConfig &&
-        publicKey == other.publicKey &&
-        events == other.events &&
+        workspaceKey == other.workspaceKey &&
+        eventKey == other.eventKey &&
         chart == other.chart &&
         pricing == other.pricing &&
         numberOfPlacesToSelect == other.numberOfPlacesToSelect &&
@@ -1118,6 +1113,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         objectCategories == other.objectCategories &&
         mode == other.mode &&
         loading == other.loading &&
+        showLoadingAnimation == other.showLoadingAnimation &&
         ticketListings == other.ticketListings &&
         holdOnSelectForGAs == other.holdOnSelectForGAs &&
         holdToken == other.holdToken &&
@@ -1126,7 +1122,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         objectIcon == other.objectIcon &&
         isObjectVisible == other.isObjectVisible &&
         isObjectSelectable == other.isObjectSelectable &&
-        canGASelectionBeIncreased == other.canGASelectionBeIncreased &&
         objectColor == other.objectColor &&
         sectionColor == other.sectionColor &&
         extraConfig == other.extraConfig &&
@@ -1156,19 +1151,19 @@ class _$SeatingChartConfig extends SeatingChartConfig {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            $jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc(0, publicKey.hashCode), events.hashCode), chart.hashCode), pricing.hashCode), numberOfPlacesToSelect.hashCode), objectWithoutPricingSelectable.hashCode), objectWithoutCategorySelectable.hashCode), selectedObjects.hashCode), objectTooltip.hashCode), themePreset.hashCode), themeColor.hashCode), language.hashCode), messages.hashCode), priceLevelsTooltipMessage.hashCode), maxSelectedObjects.hashCode), unavailableCategories.hashCode), selectBestAvailable.hashCode), alwaysShowSectionContents.hashCode), showSectionContents.hashCode), showLegend.hashCode), legend.hashCode), showMinimap.hashCode), showActiveSectionTooltip.hashCode), showViewFromYourSeat.hashCode), selectionValidators.hashCode), categories.hashCode),
+                                                                            $jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc(0, workspaceKey.hashCode), eventKey.hashCode), chart.hashCode), pricing.hashCode), numberOfPlacesToSelect.hashCode), objectWithoutPricingSelectable.hashCode), objectWithoutCategorySelectable.hashCode), selectedObjects.hashCode), objectTooltip.hashCode), themePreset.hashCode), themeColor.hashCode), language.hashCode), messages.hashCode), priceLevelsTooltipMessage.hashCode), maxSelectedObjects.hashCode), unavailableCategories.hashCode), selectBestAvailable.hashCode), alwaysShowSectionContents.hashCode), showSectionContents.hashCode), showLegend.hashCode), legend.hashCode), showMinimap.hashCode), showActiveSectionTooltip.hashCode), showViewFromYourSeat.hashCode), selectionValidators.hashCode), categories.hashCode),
                                                                                 objectCategories.hashCode),
                                                                             mode.hashCode),
                                                                         loading.hashCode),
-                                                                    ticketListings.hashCode),
-                                                                holdOnSelectForGAs.hashCode),
-                                                            holdToken.hashCode),
-                                                        session.hashCode),
-                                                    objectLabel.hashCode),
-                                                objectIcon.hashCode),
-                                            isObjectVisible.hashCode),
-                                        isObjectSelectable.hashCode),
-                                    canGASelectionBeIncreased.hashCode),
+                                                                    showLoadingAnimation.hashCode),
+                                                                ticketListings.hashCode),
+                                                            holdOnSelectForGAs.hashCode),
+                                                        holdToken.hashCode),
+                                                    session.hashCode),
+                                                objectLabel.hashCode),
+                                            objectIcon.hashCode),
+                                        isObjectVisible.hashCode),
+                                    isObjectSelectable.hashCode),
                                 objectColor.hashCode),
                             sectionColor.hashCode),
                         extraConfig.hashCode),
@@ -1181,8 +1176,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SeatingChartConfig')
-          ..add('publicKey', publicKey)
-          ..add('events', events)
+          ..add('workspaceKey', workspaceKey)
+          ..add('eventKey', eventKey)
           ..add('chart', chart)
           ..add('pricing', pricing)
           ..add('numberOfPlacesToSelect', numberOfPlacesToSelect)
@@ -1212,6 +1207,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('objectCategories', objectCategories)
           ..add('mode', mode)
           ..add('loading', loading)
+          ..add('showLoadingAnimation', showLoadingAnimation)
           ..add('ticketListings', ticketListings)
           ..add('holdOnSelectForGAs', holdOnSelectForGAs)
           ..add('holdToken', holdToken)
@@ -1220,7 +1216,6 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('objectIcon', objectIcon)
           ..add('isObjectVisible', isObjectVisible)
           ..add('isObjectSelectable', isObjectSelectable)
-          ..add('canGASelectionBeIncreased', canGASelectionBeIncreased)
           ..add('objectColor', objectColor)
           ..add('sectionColor', sectionColor)
           ..add('extraConfig', extraConfig)
@@ -1236,14 +1231,13 @@ class SeatingChartConfigBuilder
     implements Builder<SeatingChartConfig, SeatingChartConfigBuilder> {
   _$SeatingChartConfig? _$v;
 
-  String? _publicKey;
-  String? get publicKey => _$this._publicKey;
-  set publicKey(String? publicKey) => _$this._publicKey = publicKey;
+  String? _workspaceKey;
+  String? get workspaceKey => _$this._workspaceKey;
+  set workspaceKey(String? workspaceKey) => _$this._workspaceKey = workspaceKey;
 
-  ListBuilder<String?>? _events;
-  ListBuilder<String?> get events =>
-      _$this._events ??= new ListBuilder<String?>();
-  set events(ListBuilder<String?>? events) => _$this._events = events;
+  String? _eventKey;
+  String? get eventKey => _$this._eventKey;
+  set eventKey(String? eventKey) => _$this._eventKey = eventKey;
 
   String? _chart;
   String? get chart => _$this._chart;
@@ -1384,6 +1378,11 @@ class SeatingChartConfigBuilder
   String? get loading => _$this._loading;
   set loading(String? loading) => _$this._loading = loading;
 
+  bool? _showLoadingAnimation;
+  bool? get showLoadingAnimation => _$this._showLoadingAnimation;
+  set showLoadingAnimation(bool? showLoadingAnimation) =>
+      _$this._showLoadingAnimation = showLoadingAnimation;
+
   List<TicketListing>? _ticketListings;
   List<TicketListing>? get ticketListings => _$this._ticketListings;
   set ticketListings(List<TicketListing>? ticketListings) =>
@@ -1419,11 +1418,6 @@ class SeatingChartConfigBuilder
   String? get isObjectSelectable => _$this._isObjectSelectable;
   set isObjectSelectable(String? isObjectSelectable) =>
       _$this._isObjectSelectable = isObjectSelectable;
-
-  String? _canGASelectionBeIncreased;
-  String? get canGASelectionBeIncreased => _$this._canGASelectionBeIncreased;
-  set canGASelectionBeIncreased(String? canGASelectionBeIncreased) =>
-      _$this._canGASelectionBeIncreased = canGASelectionBeIncreased;
 
   String? _objectColor;
   String? get objectColor => _$this._objectColor;
@@ -1464,8 +1458,8 @@ class SeatingChartConfigBuilder
   SeatingChartConfigBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _publicKey = $v.publicKey;
-      _events = $v.events.toBuilder();
+      _workspaceKey = $v.workspaceKey;
+      _eventKey = $v.eventKey;
       _chart = $v.chart;
       _pricing = $v.pricing?.toBuilder();
       _numberOfPlacesToSelect = $v.numberOfPlacesToSelect;
@@ -1493,6 +1487,7 @@ class SeatingChartConfigBuilder
       _objectCategories = $v.objectCategories?.toBuilder();
       _mode = $v.mode;
       _loading = $v.loading;
+      _showLoadingAnimation = $v.showLoadingAnimation;
       _ticketListings = $v.ticketListings;
       _holdOnSelectForGAs = $v.holdOnSelectForGAs;
       _holdToken = $v.holdToken;
@@ -1501,7 +1496,6 @@ class SeatingChartConfigBuilder
       _objectIcon = $v.objectIcon;
       _isObjectVisible = $v.isObjectVisible;
       _isObjectSelectable = $v.isObjectSelectable;
-      _canGASelectionBeIncreased = $v.canGASelectionBeIncreased;
       _objectColor = $v.objectColor;
       _sectionColor = $v.sectionColor;
       _extraConfig = $v.extraConfig?.toBuilder();
@@ -1531,9 +1525,10 @@ class SeatingChartConfigBuilder
     try {
       _$result = _$v ??
           new _$SeatingChartConfig._(
-              publicKey: BuiltValueNullFieldError.checkNotNull(
-                  publicKey, 'SeatingChartConfig', 'publicKey'),
-              events: events.build(),
+              workspaceKey: BuiltValueNullFieldError.checkNotNull(
+                  workspaceKey, 'SeatingChartConfig', 'workspaceKey'),
+              eventKey: BuiltValueNullFieldError.checkNotNull(
+                  eventKey, 'SeatingChartConfig', 'eventKey'),
               chart: chart,
               pricing: _pricing?.build(),
               numberOfPlacesToSelect: numberOfPlacesToSelect,
@@ -1561,6 +1556,10 @@ class SeatingChartConfigBuilder
               objectCategories: _objectCategories?.build(),
               mode: mode,
               loading: loading,
+              showLoadingAnimation: BuiltValueNullFieldError.checkNotNull(
+                  showLoadingAnimation,
+                  'SeatingChartConfig',
+                  'showLoadingAnimation'),
               ticketListings: ticketListings,
               holdOnSelectForGAs: holdOnSelectForGAs,
               holdToken: holdToken,
@@ -1569,7 +1568,6 @@ class SeatingChartConfigBuilder
               objectIcon: objectIcon,
               isObjectVisible: isObjectVisible,
               isObjectSelectable: isObjectSelectable,
-              canGASelectionBeIncreased: canGASelectionBeIncreased,
               objectColor: objectColor,
               sectionColor: sectionColor,
               extraConfig: _extraConfig?.build(),
@@ -1588,9 +1586,6 @@ class SeatingChartConfigBuilder
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'events';
-        events.build();
-
         _$failedField = 'pricing';
         _pricing?.build();
 

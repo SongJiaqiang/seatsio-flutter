@@ -24,36 +24,50 @@ abstract class SeatingChartConfig
   factory SeatingChartConfig([updates(SeatingChartConfigBuilder b)]) =
       _$SeatingChartConfig;
 
-  factory SeatingChartConfig.init() {
-    return SeatingChartConfig((b) => b
-      ..publicKey = ""
-      ..events = ListBuilder()
-      ..showLegend = false
-      ..mode = "static" // 设置成静态模式，禁止前端占座，由后端派座
-      ..showFullScreenButton = false // 不显示seatsio自带的区域图标
-      ..showMinimap = false // 不显示右下角小地图
-      ..showActiveSectionTooltip = false // 不显示右下角section信息
-      ..loading = "<div class='loader'></div>" // 不显示官方loading动画
-      ..enableObjectClickedCallback = true
-      ..enableChartRenderedCallback = true);
-  }
+  /// The workspace key for the workspace in which the chart was created.
+  /// You can find it on your workspace settings page.
+  /// This parameter used to be called [publicKey]
+  @BuiltValueField(wireName: 'publicKey')
+  String get workspaceKey;
 
-  String get publicKey;
+  /// The key of the event for which you want to render the seating chart.
+  /// Either [events] or [event] must be passed in, but not both.
+  /// Currently the Channels functionality is not supported when using multiple events.
+  @BuiltValueField(wireName: 'event')
+  String get eventKey;
 
-  BuiltList<String?> get events;
-
+  /// I can't find accurate documentation for [chart]
+  /// Maybe this, https://docs.seats.io/docs/embedded-designer/configuration-chartkey/
   String? get chart;
 
+  /// Seats supports two types of pricing: simple pricing and multi-level pricing.
+  /// Both are defined using the pricing configuration parameter
+  /// Detail: https://docs.seats.io/docs/renderer/config-pricing/
   BuiltList<PricingForCategory>? get pricing;
 
+  /// Activates one-click selection mode.
+  /// If you pass in numberOfPlacesToSelect: 3,
+  /// the ticket buyer only needs to click once to select 3 places.
+  /// Previously selected places are deselected automatically.
   int? get numberOfPlacesToSelect;
 
+  /// If set to false,
+  /// objects that don't have pricing information will be rendered as not selectable (i.e. greyed out).
+  /// Defaults to true.
   bool? get objectWithoutPricingSelectable;
 
+  /// If set to false,
+  /// objects that don't have a category will be rendered as not selectable (i.e. greyed out).
+  /// Defaults to true.
   bool? get objectWithoutCategorySelectable;
 
+  /// Render the chart with the specified objects selected (if they are still free).
+  /// Detail: https://docs.seats.io/docs/renderer/config-selectedobjects/
   BuiltList<SelectedObject>? get selectedObjects;
 
+  /// Allows to toggle on or off some features of the cursor tooltip,
+  /// displayed when hovering objects on mouse-input devices like laptops and desktop computers.
+  /// Detail: https://docs.seats.io/docs/renderer/config-objecttooltip/
   ObjectTooltip? get objectTooltip;
 
   /// https://docs.seats.io/docs/renderer/stylepreset/
@@ -80,19 +94,26 @@ abstract class SeatingChartConfig
 
   String? get showSectionContents;
 
+  /// If true, a legend with the category names and colors is rendered at the top of the chart.
   /// https://docs.seats.io/docs/renderer/config-legend
-  /// Default value: false
   bool? get showLegend;
-
   LegendForCategory? get legend;
 
+  /// When zoomed in on a chart with sections,
+  /// a minimap is shown so ticket buyers have a better sense which seats they're looking at.
+  /// You can hide this minimap by passing showMinimap: false.
   /// https://docs.seats.io/docs/renderer/config-showminimap
-  /// Default value: true
   bool? get showMinimap;
 
+  /// On mobile, when displaying a chart with sections,
+  /// a tooltip is shown at the bottom of the screen with the section name and pricing.
+  /// You can hide this tooltip on mobile by passing showActiveSectionTooltipOnMobile: false.
   @BuiltValueField(wireName: 'showActiveSectionTooltipOnMobile')
   bool? get showActiveSectionTooltip;
 
+  /// On mobile, a view from seat thumbnail is displayed on the top left of the screen.
+  /// Tapping this image will expand the thumbnail.
+  /// You can hide this thumbnail on mobile by passing showViewFromYourSeatOnMobile: false.
   @BuiltValueField(wireName: 'showViewFromYourSeatOnMobile')
   bool? get showViewFromYourSeat;
 
@@ -102,11 +123,22 @@ abstract class SeatingChartConfig
 
   BuiltMap<String, String>? get objectCategories;
 
+  /// This parameter supports three values:
+  /// normal: the default setting. Objects are selectable, and zooming and panning are enabled
+  /// static: objects are not selectable, but zooming and panning is enabled
+  /// print: objects are not selectable and zooming and panning is disabled
   /// https://docs.seats.io/docs/renderer/config-mode
-  /// Possible values: 'normal', 'static', 'print'
   String? get mode;
 
+  /// This parameter allows you to override the default seats.io spinner
+  /// that is shown while the floor plan is being loaded.
+  ///  The value can contain (valid) html, like so: "<div class='loader'>Loading...</div>"
+  /// https://docs.seats.io/docs/renderer/config-loading/
   String? get loading;
+
+  /// If [showLoadingAnimation] is false,
+  /// will set [loading] is "<div class='loader'></div>"
+  bool get showLoadingAnimation;
 
   /// https://docs.seats.io/docs/renderer/config-ticketlistings/
   List<TicketListing>? get ticketListings;
@@ -122,13 +154,12 @@ abstract class SeatingChartConfig
 
   String? get objectLabel;
 
+  /// [objectIcon] must be used with [extraConfig], otherwise it will not take effect.
   String? get objectIcon;
 
   String? get isObjectVisible;
 
   String? get isObjectSelectable;
-
-  String? get canGASelectionBeIncreased;
 
   String? get objectColor;
 
@@ -145,25 +176,39 @@ abstract class SeatingChartConfig
 
   bool get enableChartRenderedCallback;
 
+  factory SeatingChartConfig.init() {
+    return SeatingChartConfig((b) => b
+      ..workspaceKey = ""
+      ..eventKey = ""
+      ..showLoadingAnimation = true
+      ..enableObjectClickedCallback = true
+      ..enableChartRenderedCallback = true);
+  }
+
   Map<String, Object?> toMap() {
     final configMap = {
-      "publicKey": publicKey,
-      "events": events.toList(),
+      "publicKey": workspaceKey,
+      "event": eventKey,
       "holdToken": holdToken ?? "",
       "session": session,
       "mode": mode,
       "showLegend": showLegend ?? true,
       "showFullScreenButton": showFullScreenButton ?? true,
       "showMinimap": showMinimap ?? true,
+      "showActiveSectionTooltipOnMobile": showActiveSectionTooltip ?? true,
+      "showViewFromYourSeatOnMobile": showViewFromYourSeat ?? true,
     };
 
     if (loading != null) {
       configMap["loading"] = loading;
     }
 
+    if (!showLoadingAnimation) {
+      configMap["loading"] = "<div class='loader'></div>";
+    }
+
     if (objectIcon != null) {
       configMap["objectIcon"] = objectIcon;
-      // objectIcon必需配合extraConfig使用，否则不生效
       if (extraConfig == null) {
         configMap["extraConfig"] = {};
       }
