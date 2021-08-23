@@ -16,13 +16,10 @@ final String seatsioHTML = """
         }
 
         function changeConfig(data, callback) {
-            // let json = '{"objectColor":"(object, dfValue, extraConfig) => {if(extraConfig[object.label] == \\\'true\\\') {return \\\'#7F2728\\\'} else {return dfValue}}", "maxSelectedObjects":2, "extraConfig":{"W-27":"true"}}'
-            // let obj = JSON.parse(json)
-
             let obj = JSON.parse(data)
             chart.changeConfig(obj)
 
-            // callback(data)
+            callback(data)
         }
 
         // [end]
@@ -34,7 +31,7 @@ final String seatsioHTML = """
 
       </script>
   </body>
-</html>;
+</html>
 """;
 
 final String seatsioHTML4Android = """
