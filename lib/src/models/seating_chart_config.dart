@@ -172,17 +172,23 @@ abstract class SeatingChartConfig
 
   BuiltList<String>? get channels;
 
+  bool get enableChartRenderedCallback;
+
   bool get enableObjectClickedCallback;
 
-  bool get enableChartRenderedCallback;
+  bool get enableObjectSelectedCallback;
+
+  bool get enableObjectDeselectedCallback;
 
   factory SeatingChartConfig.init() {
     return SeatingChartConfig((b) => b
       ..workspaceKey = ""
       ..eventKey = ""
       ..showLoadingAnimation = true
+      ..enableChartRenderedCallback = true
       ..enableObjectClickedCallback = true
-      ..enableChartRenderedCallback = true);
+      ..enableObjectSelectedCallback = true
+      ..enableObjectDeselectedCallback = true);
   }
 
   Map<String, Object?> toMap() {

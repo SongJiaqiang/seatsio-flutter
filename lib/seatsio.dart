@@ -1,7 +1,7 @@
 library seatsio;
 export 'src/ui/seatsio_web_view.dart';
-export 'src/assets/seatsio_html.dart';
 export 'src/util/seatsio_js_bridge.dart';
+export 'src/util/seatsio_web_view_controller.dart';
 export 'src/models/seating_chart_config.dart';
 export 'src/models/seating_chart.dart';
 export 'src/models/seating_config_change.dart';

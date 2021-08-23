@@ -6,15 +6,23 @@ class SeatsioJsBridge {
       SeatingChartConfig chartConfig) {
     final List<String> callbacks = [];
 
-    if (chartConfig.enableObjectClickedCallback) {
-      final callbackString =
-          SeatsioJsBridge.buildCallbackConfigAsJS("onObjectClicked");
+    if (chartConfig.enableChartRenderedCallback) {
+      final callbackString = buildCallbackConfigAsJS("onChartRendered");
       callbacks.add(callbackString);
     }
 
-    if (chartConfig.enableChartRenderedCallback) {
-      final callbackString =
-          SeatsioJsBridge.buildCallbackConfigAsJS("onChartRendered");
+    if (chartConfig.enableObjectClickedCallback) {
+      final callbackString = buildCallbackConfigAsJS("onObjectClicked");
+      callbacks.add(callbackString);
+    }
+
+    if (chartConfig.enableObjectSelectedCallback) {
+      final callbackString = buildCallbackConfigAsJS("onObjectSelected");
+      callbacks.add(callbackString);
+    }
+
+    if (chartConfig.enableObjectDeselectedCallback) {
+      final callbackString = buildCallbackConfigAsJS("onObjectDeselected");
       callbacks.add(callbackString);
     }
 

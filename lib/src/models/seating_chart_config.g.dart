@@ -42,11 +42,17 @@ class _$SeatingChartConfigSerializer
       'showLoadingAnimation',
       serializers.serialize(object.showLoadingAnimation,
           specifiedType: const FullType(bool)),
+      'enableChartRenderedCallback',
+      serializers.serialize(object.enableChartRenderedCallback,
+          specifiedType: const FullType(bool)),
       'enableObjectClickedCallback',
       serializers.serialize(object.enableObjectClickedCallback,
           specifiedType: const FullType(bool)),
-      'enableChartRenderedCallback',
-      serializers.serialize(object.enableChartRenderedCallback,
+      'enableObjectSelectedCallback',
+      serializers.serialize(object.enableObjectSelectedCallback,
+          specifiedType: const FullType(bool)),
+      'enableObjectDeselectedCallback',
+      serializers.serialize(object.enableObjectDeselectedCallback,
           specifiedType: const FullType(bool)),
     ];
     Object? value;
@@ -543,12 +549,20 @@ class _$SeatingChartConfigSerializer
                       BuiltList, const [const FullType(String)]))!
               as BuiltList<Object?>);
           break;
+        case 'enableChartRenderedCallback':
+          result.enableChartRenderedCallback = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'enableObjectClickedCallback':
           result.enableObjectClickedCallback = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
-        case 'enableChartRenderedCallback':
-          result.enableChartRenderedCallback = serializers.deserialize(value,
+        case 'enableObjectSelectedCallback':
+          result.enableObjectSelectedCallback = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'enableObjectDeselectedCallback':
+          result.enableObjectDeselectedCallback = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
       }
@@ -1002,9 +1016,13 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final BuiltList<String>? channels;
   @override
+  final bool enableChartRenderedCallback;
+  @override
   final bool enableObjectClickedCallback;
   @override
-  final bool enableChartRenderedCallback;
+  final bool enableObjectSelectedCallback;
+  @override
+  final bool enableObjectDeselectedCallback;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -1054,8 +1072,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.extraConfig,
       this.showFullScreenButton,
       this.channels,
+      required this.enableChartRenderedCallback,
       required this.enableObjectClickedCallback,
-      required this.enableChartRenderedCallback})
+      required this.enableObjectSelectedCallback,
+      required this.enableObjectDeselectedCallback})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, 'SeatingChartConfig', 'workspaceKey');
@@ -1063,10 +1083,14 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         eventKey, 'SeatingChartConfig', 'eventKey');
     BuiltValueNullFieldError.checkNotNull(
         showLoadingAnimation, 'SeatingChartConfig', 'showLoadingAnimation');
-    BuiltValueNullFieldError.checkNotNull(enableObjectClickedCallback,
-        'SeatingChartConfig', 'enableObjectClickedCallback');
     BuiltValueNullFieldError.checkNotNull(enableChartRenderedCallback,
         'SeatingChartConfig', 'enableChartRenderedCallback');
+    BuiltValueNullFieldError.checkNotNull(enableObjectClickedCallback,
+        'SeatingChartConfig', 'enableObjectClickedCallback');
+    BuiltValueNullFieldError.checkNotNull(enableObjectSelectedCallback,
+        'SeatingChartConfig', 'enableObjectSelectedCallback');
+    BuiltValueNullFieldError.checkNotNull(enableObjectDeselectedCallback,
+        'SeatingChartConfig', 'enableObjectDeselectedCallback');
   }
 
   @override
@@ -1127,8 +1151,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         extraConfig == other.extraConfig &&
         showFullScreenButton == other.showFullScreenButton &&
         channels == other.channels &&
+        enableChartRenderedCallback == other.enableChartRenderedCallback &&
         enableObjectClickedCallback == other.enableObjectClickedCallback &&
-        enableChartRenderedCallback == other.enableChartRenderedCallback;
+        enableObjectSelectedCallback == other.enableObjectSelectedCallback &&
+        enableObjectDeselectedCallback == other.enableObjectDeselectedCallback;
   }
 
   @override
@@ -1151,26 +1177,26 @@ class _$SeatingChartConfig extends SeatingChartConfig {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            $jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc(0, workspaceKey.hashCode), eventKey.hashCode), chart.hashCode), pricing.hashCode), numberOfPlacesToSelect.hashCode), objectWithoutPricingSelectable.hashCode), objectWithoutCategorySelectable.hashCode), selectedObjects.hashCode), objectTooltip.hashCode), themePreset.hashCode), themeColor.hashCode), language.hashCode), messages.hashCode), priceLevelsTooltipMessage.hashCode), maxSelectedObjects.hashCode), unavailableCategories.hashCode), selectBestAvailable.hashCode), alwaysShowSectionContents.hashCode), showSectionContents.hashCode), showLegend.hashCode), legend.hashCode), showMinimap.hashCode), showActiveSectionTooltip.hashCode), showViewFromYourSeat.hashCode), selectionValidators.hashCode), categories.hashCode),
-                                                                                objectCategories.hashCode),
-                                                                            mode.hashCode),
-                                                                        loading.hashCode),
-                                                                    showLoadingAnimation.hashCode),
-                                                                ticketListings.hashCode),
-                                                            holdOnSelectForGAs.hashCode),
-                                                        holdToken.hashCode),
-                                                    session.hashCode),
-                                                objectLabel.hashCode),
-                                            objectIcon.hashCode),
-                                        isObjectVisible.hashCode),
-                                    isObjectSelectable.hashCode),
-                                objectColor.hashCode),
-                            sectionColor.hashCode),
-                        extraConfig.hashCode),
-                    showFullScreenButton.hashCode),
-                channels.hashCode),
-            enableObjectClickedCallback.hashCode),
-        enableChartRenderedCallback.hashCode));
+                                                                            $jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc(0, workspaceKey.hashCode), eventKey.hashCode), chart.hashCode), pricing.hashCode), numberOfPlacesToSelect.hashCode), objectWithoutPricingSelectable.hashCode), objectWithoutCategorySelectable.hashCode), selectedObjects.hashCode), objectTooltip.hashCode), themePreset.hashCode), themeColor.hashCode), language.hashCode), messages.hashCode), priceLevelsTooltipMessage.hashCode), maxSelectedObjects.hashCode), unavailableCategories.hashCode), selectBestAvailable.hashCode), alwaysShowSectionContents.hashCode), showSectionContents.hashCode), showLegend.hashCode), legend.hashCode), showMinimap.hashCode), showActiveSectionTooltip.hashCode), showViewFromYourSeat.hashCode), selectionValidators.hashCode), categories.hashCode), objectCategories.hashCode), mode.hashCode),
+                                                                                loading.hashCode),
+                                                                            showLoadingAnimation.hashCode),
+                                                                        ticketListings.hashCode),
+                                                                    holdOnSelectForGAs.hashCode),
+                                                                holdToken.hashCode),
+                                                            session.hashCode),
+                                                        objectLabel.hashCode),
+                                                    objectIcon.hashCode),
+                                                isObjectVisible.hashCode),
+                                            isObjectSelectable.hashCode),
+                                        objectColor.hashCode),
+                                    sectionColor.hashCode),
+                                extraConfig.hashCode),
+                            showFullScreenButton.hashCode),
+                        channels.hashCode),
+                    enableChartRenderedCallback.hashCode),
+                enableObjectClickedCallback.hashCode),
+            enableObjectSelectedCallback.hashCode),
+        enableObjectDeselectedCallback.hashCode));
   }
 
   @override
@@ -1221,8 +1247,11 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('extraConfig', extraConfig)
           ..add('showFullScreenButton', showFullScreenButton)
           ..add('channels', channels)
+          ..add('enableChartRenderedCallback', enableChartRenderedCallback)
           ..add('enableObjectClickedCallback', enableObjectClickedCallback)
-          ..add('enableChartRenderedCallback', enableChartRenderedCallback))
+          ..add('enableObjectSelectedCallback', enableObjectSelectedCallback)
+          ..add(
+              'enableObjectDeselectedCallback', enableObjectDeselectedCallback))
         .toString();
   }
 }
@@ -1443,15 +1472,27 @@ class SeatingChartConfigBuilder
       _$this._channels ??= new ListBuilder<String>();
   set channels(ListBuilder<String>? channels) => _$this._channels = channels;
 
+  bool? _enableChartRenderedCallback;
+  bool? get enableChartRenderedCallback => _$this._enableChartRenderedCallback;
+  set enableChartRenderedCallback(bool? enableChartRenderedCallback) =>
+      _$this._enableChartRenderedCallback = enableChartRenderedCallback;
+
   bool? _enableObjectClickedCallback;
   bool? get enableObjectClickedCallback => _$this._enableObjectClickedCallback;
   set enableObjectClickedCallback(bool? enableObjectClickedCallback) =>
       _$this._enableObjectClickedCallback = enableObjectClickedCallback;
 
-  bool? _enableChartRenderedCallback;
-  bool? get enableChartRenderedCallback => _$this._enableChartRenderedCallback;
-  set enableChartRenderedCallback(bool? enableChartRenderedCallback) =>
-      _$this._enableChartRenderedCallback = enableChartRenderedCallback;
+  bool? _enableObjectSelectedCallback;
+  bool? get enableObjectSelectedCallback =>
+      _$this._enableObjectSelectedCallback;
+  set enableObjectSelectedCallback(bool? enableObjectSelectedCallback) =>
+      _$this._enableObjectSelectedCallback = enableObjectSelectedCallback;
+
+  bool? _enableObjectDeselectedCallback;
+  bool? get enableObjectDeselectedCallback =>
+      _$this._enableObjectDeselectedCallback;
+  set enableObjectDeselectedCallback(bool? enableObjectDeselectedCallback) =>
+      _$this._enableObjectDeselectedCallback = enableObjectDeselectedCallback;
 
   SeatingChartConfigBuilder();
 
@@ -1501,8 +1542,10 @@ class SeatingChartConfigBuilder
       _extraConfig = $v.extraConfig?.toBuilder();
       _showFullScreenButton = $v.showFullScreenButton;
       _channels = $v.channels?.toBuilder();
-      _enableObjectClickedCallback = $v.enableObjectClickedCallback;
       _enableChartRenderedCallback = $v.enableChartRenderedCallback;
+      _enableObjectClickedCallback = $v.enableObjectClickedCallback;
+      _enableObjectSelectedCallback = $v.enableObjectSelectedCallback;
+      _enableObjectDeselectedCallback = $v.enableObjectDeselectedCallback;
       _$v = null;
     }
     return this;
@@ -1557,9 +1600,7 @@ class SeatingChartConfigBuilder
               mode: mode,
               loading: loading,
               showLoadingAnimation: BuiltValueNullFieldError.checkNotNull(
-                  showLoadingAnimation,
-                  'SeatingChartConfig',
-                  'showLoadingAnimation'),
+                  showLoadingAnimation, 'SeatingChartConfig', 'showLoadingAnimation'),
               ticketListings: ticketListings,
               holdOnSelectForGAs: holdOnSelectForGAs,
               holdToken: holdToken,
@@ -1573,16 +1614,16 @@ class SeatingChartConfigBuilder
               extraConfig: _extraConfig?.build(),
               showFullScreenButton: showFullScreenButton,
               channels: _channels?.build(),
-              enableObjectClickedCallback:
-                  BuiltValueNullFieldError.checkNotNull(
-                      enableObjectClickedCallback,
-                      'SeatingChartConfig',
-                      'enableObjectClickedCallback'),
-              enableChartRenderedCallback:
-                  BuiltValueNullFieldError.checkNotNull(
-                      enableChartRenderedCallback,
-                      'SeatingChartConfig',
-                      'enableChartRenderedCallback'));
+              enableChartRenderedCallback: BuiltValueNullFieldError.checkNotNull(
+                  enableChartRenderedCallback, 'SeatingChartConfig', 'enableChartRenderedCallback'),
+              enableObjectClickedCallback: BuiltValueNullFieldError.checkNotNull(
+                  enableObjectClickedCallback, 'SeatingChartConfig', 'enableObjectClickedCallback'),
+              enableObjectSelectedCallback: BuiltValueNullFieldError.checkNotNull(
+                  enableObjectSelectedCallback, 'SeatingChartConfig', 'enableObjectSelectedCallback'),
+              enableObjectDeselectedCallback: BuiltValueNullFieldError.checkNotNull(
+                  enableObjectDeselectedCallback,
+                  'SeatingChartConfig',
+                  'enableObjectDeselectedCallback'));
     } catch (_) {
       late String _$failedField;
       try {

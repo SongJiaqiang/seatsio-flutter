@@ -6,35 +6,44 @@ import '../models/seating_chart.dart';
 import '../models/seatsio_category.dart';
 import '../models/seating_chart_config.dart';
 import '../models/seatsio_object.dart';
+import '../util/seatsio_web_view_controller.dart';
 
 class SeatsioWebView extends StatefulWidget {
   const SeatsioWebView({
     Key? key,
-    required this.enableRenderChart,
-    this.seatsioController,
-    this.onObjectClicked,
-    this.onChartRendered,
-    this.onWebViewCreated,
-    this.onCategoryListCallback,
-  }) : super(key: key);
+    bool enableDebug = false,
+    SeatsioWebViewCreatedCallback? onWebViewCreated,
+    SeatingChartCallback? onChartRendered,
+    SeatsioCategoryListCallback? onCategoryListCallback,
+    SeatsioObjectCallback? onObjectClicked,
+    SeatsioObjectCallback? onObjectSelected,
+    SeatsioObjectCallback? onObjectDeselected,
+  })  : this._enableDebug = enableDebug,
+        this._onWebViewCreated = onWebViewCreated,
+        this._onChartRendered = onChartRendered,
+        this._onCategoryListCallback = onCategoryListCallback,
+        this._onObjectClicked = onObjectClicked,
+        this._onObjectSelected = onObjectSelected,
+        this._onObjectDeselected = onObjectDeselected,
+        super(key: key);
 
-  final WebViewCreatedCallback? onWebViewCreated;
-  final SeatingChartCallback? onChartRendered;
-  final SeatsioObjectCallback? onObjectClicked;
-  final SeatsioCategoryListCallback? onCategoryListCallback;
-  final bool enableRenderChart;
-  final SeatsioController? seatsioController;
+  final bool _enableDebug;
+  final SeatsioWebViewCreatedCallback? _onWebViewCreated;
+  final SeatingChartCallback? _onChartRendered;
+  final SeatsioCategoryListCallback? _onCategoryListCallback;
+  final SeatsioObjectCallback? _onObjectClicked;
+  final SeatsioObjectCallback? _onObjectSelected;
+  final SeatsioObjectCallback? _onObjectDeselected;
 
   @override
   State<StatefulWidget> createState() => _SeatsioWebViewState();
 }
 
 class _SeatsioWebViewState extends State<SeatsioWebView> {
-  late WebViewController webviewController;
+  late SeatsioWebViewController _seatsioController;
 
   @override
   void initState() {
-    // Android指定WebView
     if (Platform.isAndroid) {
       WebView.platform = SurfaceAndroidWebView();
     }
@@ -54,27 +63,31 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       initialUrl: "",
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (controller) {
-        webviewController = controller;
-        widget.onWebViewCreated?.call(controller);
+        _seatsioController =
+            SeatsioWebViewController(webViewController: controller);
+        widget._onWebViewCreated?.call(_seatsioController);
       },
       javascriptChannels: <JavascriptChannel>{
-        _onObjectClickedChannel(),
-        _onChartRenderedChannel(),
         _onFlutterJsBridgeChannel(),
+        _onChartRenderedChannel(),
+        _onObjectClickedChannel(),
+        _onObjectSelectedChannel(),
+        _onObjectDeselectedChannel(),
       },
     );
   }
 
-  JavascriptChannel _onObjectClickedChannel() {
+  JavascriptChannel _onFlutterJsBridgeChannel() {
     return JavascriptChannel(
-      name: "onObjectClicked",
+      name: "FlutterJsBridge",
       onMessageReceived: (JavascriptMessage message) {
-        debugPrint(
-            "[Seatsio]-> onObjectClicked callback message: ${message.message}");
+        if (widget._enableDebug)
+          debugPrint(
+              "[Seatsio]-> _onFlutterJsBridgeChannel callback message: ${message.message}");
 
-        final object = SeatsioObject.fromJson(message.message);
-        if (object != null) {
-          widget.onObjectClicked?.call(object);
+        final cagetories = SeatsioCategory.arrayFromJson(message.message);
+        if (cagetories != null && cagetories.isNotEmpty) {
+          widget._onCategoryListCallback?.call(cagetories);
         }
       },
     );
@@ -84,25 +97,55 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
     return JavascriptChannel(
       name: "onChartRendered",
       onMessageReceived: (JavascriptMessage message) {
-        debugPrint(
-            "[Seatsio]-> onChartRendered callback message: ${message.message}");
-
-        final seatingChart = SeatingChart(webviewController);
-        widget.onChartRendered?.call(seatingChart);
+        if (widget._enableDebug)
+          debugPrint(
+              "[Seatsio]-> onChartRendered callback message: ${message.message}");
+        final seatingChart = SeatingChart(_seatsioController);
+        widget._onChartRendered?.call(seatingChart);
       },
     );
   }
 
-  JavascriptChannel _onFlutterJsBridgeChannel() {
+  JavascriptChannel _onObjectClickedChannel() {
     return JavascriptChannel(
-      name: "FlutterJsBridge",
+      name: "onObjectClicked",
       onMessageReceived: (JavascriptMessage message) {
-        debugPrint(
-            "[Seatsio]-> _onFlutterJsBridgeChannel callback message: ${message.message}");
+        if (widget._enableDebug)
+          debugPrint(
+              "[Seatsio]-> onObjectClicked callback message: ${message.message}");
+        final object = SeatsioObject.fromJson(message.message);
+        if (object != null) {
+          widget._onObjectClicked?.call(object);
+        }
+      },
+    );
+  }
 
-        final cagetories = SeatsioCategory.arrayFromJson(message.message);
-        if (cagetories != null && cagetories.isNotEmpty) {
-          widget.onCategoryListCallback?.call(cagetories);
+  JavascriptChannel _onObjectSelectedChannel() {
+    return JavascriptChannel(
+      name: "onObjectSelected",
+      onMessageReceived: (JavascriptMessage message) {
+        if (widget._enableDebug)
+          debugPrint(
+              "[Seatsio]-> onObjectSelected callback message: ${message.message}");
+        final object = SeatsioObject.fromJson(message.message);
+        if (object != null) {
+          widget._onObjectSelected?.call(object);
+        }
+      },
+    );
+  }
+
+  JavascriptChannel _onObjectDeselectedChannel() {
+    return JavascriptChannel(
+      name: "onObjectDeselected",
+      onMessageReceived: (JavascriptMessage message) {
+        if (widget._enableDebug)
+          debugPrint(
+              "[Seatsio]-> onObjectDeselected callback message: ${message.message}");
+        final object = SeatsioObject.fromJson(message.message);
+        if (object != null) {
+          widget._onObjectDeselected?.call(object);
         }
       },
     );

@@ -3,7 +3,7 @@
 ## Description
 Seatsio SDK for Flutter.
 </br>
-![seatsio-flutter-demo](./seatsio-flutter-demo.gif)
+![seatsio-flutter-demo](https://github.com/SongJiaqiang/seatsio-flutter/raw/main/seatsio-flutter-demo.gif)
 
 ## Getting Started
 
