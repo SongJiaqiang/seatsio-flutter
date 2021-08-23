@@ -13,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  seatsio: ^0.0.2
+  seatsio: ^0.0.3
 ```
 
 Then, import `seatsio` package to your dart file.
@@ -23,9 +23,22 @@ import 'package:seatsio/seatsio.dart';
 
 Finally, config your seatsio chart with some parameters.
 ``` dart
+
 class _MyHomePageState extends State<MyHomePage> {
-  WebViewController? _seatsioController;
-  String? objectLabel;
+  SeatsioWebViewController? _seatsioController;
+  final List<String> selectedObjectLabels = ['Try to click a seat object'];
+
+  late SeatingChartConfig _chartConfig;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _chartConfig = SeatingChartConfig.init().rebuild((b) => b
+      ..workspaceKey = YourWorkspaceKey
+      ..eventKey = YourEventKey
+      ..session = "start");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,15 +53,17 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 456,
               child: _buildSeatsioView(),
             ),
-            Text(
-              objectLabel ?? 'Try to click a seat object',
-            ),
+            SizedBox(
+              height: 100,
+              child: ListView.builder(
+                  itemCount: selectedObjectLabels.length,
+                  itemBuilder: (_, index) => Text(selectedObjectLabels[index])),
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _loadSeatsio,
-        tooltip: 'Increment',
         child: Icon(Icons.refresh),
       ),
     );
@@ -56,74 +71,44 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildSeatsioView() {
     return SeatsioWebView(
-      enableRenderChart: false,
       onWebViewCreated: (controller) {
         print("[seatsio]->[example]-> onWebViewCreated");
         _seatsioController = controller;
         _loadSeatsio();
       },
-      onObjectClicked: (object) {
-        print("[seatsio]->[example]-> onObjectClicked, label: ${object.label}");
-        _clickSeat(object);
-      },
       onChartRendered: (chart) {
         print("[seatsio]->[example]-> onChartRendered");
-        chart.requestListCategories();
       },
-      onCategoryListCallback: (categoryList) {
+      onObjectSelected: (object) {
         print(
-            "[seatsio]->[example]-> onCategoryListCallback, categoryList: $categoryList");
+            "[seatsio]->[example]-> onObjectSelected, label: ${object.label}");
+        _selectSeat(object);
+      },
+      onObjectDeselected: (object) {
+        print(
+            "[seatsio]->[example]-> onObjectDeselected, label: ${object.label}");
+        _deselectSeat(object);
       },
     );
   }
 
-  void _clickSeat(SeatsioObject object) {
+  void _selectSeat(SeatsioObject object) {
     setState(() {
-      objectLabel = object.label;
+      selectedObjectLabels.add(object.label);
     });
+  }
+
+  void _deselectSeat(SeatsioObject object) {
+    if (selectedObjectLabels.contains(object.label)) {
+      setState(() {
+        selectedObjectLabels.remove(object.label);
+      });
+    }
   }
 
   void _loadSeatsio() {
-    final chartConfig = SeatingChartConfig.init().rebuild((b) => b
-      ..workspaceKey = YourWorkspaceKey
-      ..eventKey = YourEventKey
-      ..session = "start");
-
-    final url = _generateHtmlContent(chartConfig);
-    _seatsioController?.loadUrl(url);
-  }
-
-  /// Generate html for seatsio webview
-  String _generateHtmlContent(SeatingChartConfig chartConfig) {
-    // Convert chart configs to map
-    final chartConfigMap = chartConfig.toMap();
-
-    // Convert map to json string
-    String chartConfigJson = jsonEncode(chartConfigMap);
-    chartConfigJson = '$chartConfigJson';
-    // Append callback string to json string.
-    final callbacks = SeatsioJsBridge.buildCallbacksConfiguration(chartConfig);
-    chartConfigJson = chartConfigJson.substring(0, chartConfigJson.length - 1);
-    callbacks.forEach((e) {
-      chartConfigJson = "$chartConfigJson, $e";
-    });
-    chartConfigJson = "$chartConfigJson}";
-
-    // Insert json string of chart config to the seatsio HTML template.
-    final htmlString = seatsioHTML
-        .replaceFirst("%region%", "eu")
-        .replaceFirst("%configAsJs%", chartConfigJson);
-
-    debugPrint("[Event]-> _generateHtmlContent: $htmlString");
-
-    // Encode HTML string with utf8
-    final url = Uri.dataFromString(
-      htmlString,
-      mimeType: "text/html",
-      encoding: utf8,
-    );
-
-    return url.toString();
+    final newChartConfig = _chartConfig.rebuild((b) => b..showLegend = false);
+    _seatsioController?.reload(newChartConfig);
   }
 }
 
