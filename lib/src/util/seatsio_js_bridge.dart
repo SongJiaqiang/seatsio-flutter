@@ -7,26 +7,60 @@ class SeatsioJsBridge {
     final List<String> callbacks = [];
 
     if (chartConfig.enableChartRenderedCallback) {
-      final callbackString = buildCallbackConfigAsJS("onChartRendered");
-      callbacks.add(callbackString);
+      callbacks.add(buildCallbackConfigAsJS("onChartRendered"));
+    }
+
+    if (chartConfig.enableChartRenderingFailedCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onChartRenderingFailed"));
     }
 
     if (chartConfig.enableObjectClickedCallback) {
-      final callbackString = buildCallbackConfigAsJS("onObjectClicked");
-      callbacks.add(callbackString);
+      callbacks.add(buildCallbackConfigAsJS("onObjectClicked"));
     }
 
     if (chartConfig.enableObjectSelectedCallback) {
-      final callbackString = buildCallbackConfigAsJS("onObjectSelected");
-      callbacks.add(callbackString);
+      callbacks.add(buildCallbackConfigAsJS("onObjectSelected"));
     }
 
     if (chartConfig.enableObjectDeselectedCallback) {
-      final callbackString = buildCallbackConfigAsJS("onObjectDeselected");
-      callbacks.add(callbackString);
+      callbacks.add(buildCallbackConfigAsJS("onObjectDeselected"));
     }
 
-    // todo(sjq): 更多callback放到SDK中再做支持
+    if (chartConfig.enableSelectionValidCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onSelectionValid"));
+    }
+
+    if (chartConfig.enableSelectionInvalidCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onSelectionInvalid"));
+    }
+
+    if (chartConfig.enableBestAvailableSelectedCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onBestAvailableSelected"));
+    }
+
+    if (chartConfig.enableBestAvailableSelectionFailedCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onBestAvailableSelectionFailed"));
+    }
+
+    if (chartConfig.enableHoldSucceededCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onHoldSucceeded"));
+    }
+
+    if (chartConfig.enableHoldFailedCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onHoldFailed"));
+    }
+
+    if (chartConfig.enableReleaseHoldSucceededCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onReleaseHoldSucceeded"));
+    }
+
+    if (chartConfig.enableReleaseHoldFailedCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onReleaseHoldFailed"));
+    }
+
+    if (chartConfig.enableSelectedObjectBookedCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onSelectedObjectBooked"));
+    }
 
     return callbacks;
   }

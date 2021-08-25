@@ -35,8 +35,7 @@ abstract class SeatsioObject
 
   bool get selectable;
 
-  static SeatsioObject? fromJson(String jsonString) {
-    final data = json.decode(jsonString);
+  static SeatsioObject? fromMap(Map? data) {
     if (data == null) {
       return null;
     }
@@ -51,6 +50,29 @@ abstract class SeatsioObject
       ..status = data["status"]
       ..forSale = data["forSale"]
       ..selectable = data["selectable"]);
+  }
+
+  static SeatsioObject? fromJson(String jsonString) {
+    final data = json.decode(jsonString);
+    if (data == null) {
+      return null;
+    }
+    return fromMap(data);
+  }
+
+  static List<SeatsioObject>? arrayFromJson(String jsonString) {
+    final data = json.decode(jsonString);
+    if (data is List) {
+      final List<SeatsioObject> objects = [];
+      data.forEach((e) {
+        final object = fromMap(e);
+        if (object != null) {
+          objects.add(object);
+        }
+      });
+      return objects;
+    }
+    return null;
   }
 
   static Serializer<SeatsioObject> get serializer => _$seatsioObjectSerializer;

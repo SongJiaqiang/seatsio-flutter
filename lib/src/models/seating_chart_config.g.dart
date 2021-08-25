@@ -45,6 +45,9 @@ class _$SeatingChartConfigSerializer
       'enableChartRenderedCallback',
       serializers.serialize(object.enableChartRenderedCallback,
           specifiedType: const FullType(bool)),
+      'enableChartRenderingFailedCallback',
+      serializers.serialize(object.enableChartRenderingFailedCallback,
+          specifiedType: const FullType(bool)),
       'enableObjectClickedCallback',
       serializers.serialize(object.enableObjectClickedCallback,
           specifiedType: const FullType(bool)),
@@ -53,6 +56,33 @@ class _$SeatingChartConfigSerializer
           specifiedType: const FullType(bool)),
       'enableObjectDeselectedCallback',
       serializers.serialize(object.enableObjectDeselectedCallback,
+          specifiedType: const FullType(bool)),
+      'enableSelectionValidCallback',
+      serializers.serialize(object.enableSelectionValidCallback,
+          specifiedType: const FullType(bool)),
+      'enableSelectionInvalidCallback',
+      serializers.serialize(object.enableSelectionInvalidCallback,
+          specifiedType: const FullType(bool)),
+      'enableBestAvailableSelectedCallback',
+      serializers.serialize(object.enableBestAvailableSelectedCallback,
+          specifiedType: const FullType(bool)),
+      'enableBestAvailableSelectionFailedCallback',
+      serializers.serialize(object.enableBestAvailableSelectionFailedCallback,
+          specifiedType: const FullType(bool)),
+      'enableHoldSucceededCallback',
+      serializers.serialize(object.enableHoldSucceededCallback,
+          specifiedType: const FullType(bool)),
+      'enableHoldFailedCallback',
+      serializers.serialize(object.enableHoldFailedCallback,
+          specifiedType: const FullType(bool)),
+      'enableReleaseHoldSucceededCallback',
+      serializers.serialize(object.enableReleaseHoldSucceededCallback,
+          specifiedType: const FullType(bool)),
+      'enableReleaseHoldFailedCallback',
+      serializers.serialize(object.enableReleaseHoldFailedCallback,
+          specifiedType: const FullType(bool)),
+      'enableSelectedObjectBookedCallback',
+      serializers.serialize(object.enableSelectedObjectBookedCallback,
           specifiedType: const FullType(bool)),
     ];
     Object? value;
@@ -553,6 +583,10 @@ class _$SeatingChartConfigSerializer
           result.enableChartRenderedCallback = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
+        case 'enableChartRenderingFailedCallback':
+          result.enableChartRenderingFailedCallback = serializers
+              .deserialize(value, specifiedType: const FullType(bool)) as bool;
+          break;
         case 'enableObjectClickedCallback':
           result.enableObjectClickedCallback = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
@@ -564,6 +598,42 @@ class _$SeatingChartConfigSerializer
         case 'enableObjectDeselectedCallback':
           result.enableObjectDeselectedCallback = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'enableSelectionValidCallback':
+          result.enableSelectionValidCallback = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'enableSelectionInvalidCallback':
+          result.enableSelectionInvalidCallback = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'enableBestAvailableSelectedCallback':
+          result.enableBestAvailableSelectedCallback = serializers
+              .deserialize(value, specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'enableBestAvailableSelectionFailedCallback':
+          result.enableBestAvailableSelectionFailedCallback = serializers
+              .deserialize(value, specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'enableHoldSucceededCallback':
+          result.enableHoldSucceededCallback = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'enableHoldFailedCallback':
+          result.enableHoldFailedCallback = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'enableReleaseHoldSucceededCallback':
+          result.enableReleaseHoldSucceededCallback = serializers
+              .deserialize(value, specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'enableReleaseHoldFailedCallback':
+          result.enableReleaseHoldFailedCallback = serializers
+              .deserialize(value, specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'enableSelectedObjectBookedCallback':
+          result.enableSelectedObjectBookedCallback = serializers
+              .deserialize(value, specifiedType: const FullType(bool)) as bool;
           break;
       }
     }
@@ -1018,11 +1088,31 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final bool enableChartRenderedCallback;
   @override
+  final bool enableChartRenderingFailedCallback;
+  @override
   final bool enableObjectClickedCallback;
   @override
   final bool enableObjectSelectedCallback;
   @override
   final bool enableObjectDeselectedCallback;
+  @override
+  final bool enableSelectionValidCallback;
+  @override
+  final bool enableSelectionInvalidCallback;
+  @override
+  final bool enableBestAvailableSelectedCallback;
+  @override
+  final bool enableBestAvailableSelectionFailedCallback;
+  @override
+  final bool enableHoldSucceededCallback;
+  @override
+  final bool enableHoldFailedCallback;
+  @override
+  final bool enableReleaseHoldSucceededCallback;
+  @override
+  final bool enableReleaseHoldFailedCallback;
+  @override
+  final bool enableSelectedObjectBookedCallback;
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
@@ -1073,9 +1163,19 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.showFullScreenButton,
       this.channels,
       required this.enableChartRenderedCallback,
+      required this.enableChartRenderingFailedCallback,
       required this.enableObjectClickedCallback,
       required this.enableObjectSelectedCallback,
-      required this.enableObjectDeselectedCallback})
+      required this.enableObjectDeselectedCallback,
+      required this.enableSelectionValidCallback,
+      required this.enableSelectionInvalidCallback,
+      required this.enableBestAvailableSelectedCallback,
+      required this.enableBestAvailableSelectionFailedCallback,
+      required this.enableHoldSucceededCallback,
+      required this.enableHoldFailedCallback,
+      required this.enableReleaseHoldSucceededCallback,
+      required this.enableReleaseHoldFailedCallback,
+      required this.enableSelectedObjectBookedCallback})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         workspaceKey, 'SeatingChartConfig', 'workspaceKey');
@@ -1085,12 +1185,34 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         showLoadingAnimation, 'SeatingChartConfig', 'showLoadingAnimation');
     BuiltValueNullFieldError.checkNotNull(enableChartRenderedCallback,
         'SeatingChartConfig', 'enableChartRenderedCallback');
+    BuiltValueNullFieldError.checkNotNull(enableChartRenderingFailedCallback,
+        'SeatingChartConfig', 'enableChartRenderingFailedCallback');
     BuiltValueNullFieldError.checkNotNull(enableObjectClickedCallback,
         'SeatingChartConfig', 'enableObjectClickedCallback');
     BuiltValueNullFieldError.checkNotNull(enableObjectSelectedCallback,
         'SeatingChartConfig', 'enableObjectSelectedCallback');
     BuiltValueNullFieldError.checkNotNull(enableObjectDeselectedCallback,
         'SeatingChartConfig', 'enableObjectDeselectedCallback');
+    BuiltValueNullFieldError.checkNotNull(enableSelectionValidCallback,
+        'SeatingChartConfig', 'enableSelectionValidCallback');
+    BuiltValueNullFieldError.checkNotNull(enableSelectionInvalidCallback,
+        'SeatingChartConfig', 'enableSelectionInvalidCallback');
+    BuiltValueNullFieldError.checkNotNull(enableBestAvailableSelectedCallback,
+        'SeatingChartConfig', 'enableBestAvailableSelectedCallback');
+    BuiltValueNullFieldError.checkNotNull(
+        enableBestAvailableSelectionFailedCallback,
+        'SeatingChartConfig',
+        'enableBestAvailableSelectionFailedCallback');
+    BuiltValueNullFieldError.checkNotNull(enableHoldSucceededCallback,
+        'SeatingChartConfig', 'enableHoldSucceededCallback');
+    BuiltValueNullFieldError.checkNotNull(enableHoldFailedCallback,
+        'SeatingChartConfig', 'enableHoldFailedCallback');
+    BuiltValueNullFieldError.checkNotNull(enableReleaseHoldSucceededCallback,
+        'SeatingChartConfig', 'enableReleaseHoldSucceededCallback');
+    BuiltValueNullFieldError.checkNotNull(enableReleaseHoldFailedCallback,
+        'SeatingChartConfig', 'enableReleaseHoldFailedCallback');
+    BuiltValueNullFieldError.checkNotNull(enableSelectedObjectBookedCallback,
+        'SeatingChartConfig', 'enableSelectedObjectBookedCallback');
   }
 
   @override
@@ -1152,9 +1274,27 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         showFullScreenButton == other.showFullScreenButton &&
         channels == other.channels &&
         enableChartRenderedCallback == other.enableChartRenderedCallback &&
+        enableChartRenderingFailedCallback ==
+            other.enableChartRenderingFailedCallback &&
         enableObjectClickedCallback == other.enableObjectClickedCallback &&
         enableObjectSelectedCallback == other.enableObjectSelectedCallback &&
-        enableObjectDeselectedCallback == other.enableObjectDeselectedCallback;
+        enableObjectDeselectedCallback ==
+            other.enableObjectDeselectedCallback &&
+        enableSelectionValidCallback == other.enableSelectionValidCallback &&
+        enableSelectionInvalidCallback ==
+            other.enableSelectionInvalidCallback &&
+        enableBestAvailableSelectedCallback ==
+            other.enableBestAvailableSelectedCallback &&
+        enableBestAvailableSelectionFailedCallback ==
+            other.enableBestAvailableSelectionFailedCallback &&
+        enableHoldSucceededCallback == other.enableHoldSucceededCallback &&
+        enableHoldFailedCallback == other.enableHoldFailedCallback &&
+        enableReleaseHoldSucceededCallback ==
+            other.enableReleaseHoldSucceededCallback &&
+        enableReleaseHoldFailedCallback ==
+            other.enableReleaseHoldFailedCallback &&
+        enableSelectedObjectBookedCallback ==
+            other.enableSelectedObjectBookedCallback;
   }
 
   @override
@@ -1177,26 +1317,26 @@ class _$SeatingChartConfig extends SeatingChartConfig {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            $jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc(0, workspaceKey.hashCode), eventKey.hashCode), chart.hashCode), pricing.hashCode), numberOfPlacesToSelect.hashCode), objectWithoutPricingSelectable.hashCode), objectWithoutCategorySelectable.hashCode), selectedObjects.hashCode), objectTooltip.hashCode), themePreset.hashCode), themeColor.hashCode), language.hashCode), messages.hashCode), priceLevelsTooltipMessage.hashCode), maxSelectedObjects.hashCode), unavailableCategories.hashCode), selectBestAvailable.hashCode), alwaysShowSectionContents.hashCode), showSectionContents.hashCode), showLegend.hashCode), legend.hashCode), showMinimap.hashCode), showActiveSectionTooltip.hashCode), showViewFromYourSeat.hashCode), selectionValidators.hashCode), categories.hashCode), objectCategories.hashCode), mode.hashCode),
-                                                                                loading.hashCode),
-                                                                            showLoadingAnimation.hashCode),
-                                                                        ticketListings.hashCode),
-                                                                    holdOnSelectForGAs.hashCode),
-                                                                holdToken.hashCode),
-                                                            session.hashCode),
-                                                        objectLabel.hashCode),
-                                                    objectIcon.hashCode),
-                                                isObjectVisible.hashCode),
-                                            isObjectSelectable.hashCode),
-                                        objectColor.hashCode),
-                                    sectionColor.hashCode),
-                                extraConfig.hashCode),
-                            showFullScreenButton.hashCode),
-                        channels.hashCode),
-                    enableChartRenderedCallback.hashCode),
-                enableObjectClickedCallback.hashCode),
-            enableObjectSelectedCallback.hashCode),
-        enableObjectDeselectedCallback.hashCode));
+                                                                            $jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc(0, workspaceKey.hashCode), eventKey.hashCode), chart.hashCode), pricing.hashCode), numberOfPlacesToSelect.hashCode), objectWithoutPricingSelectable.hashCode), objectWithoutCategorySelectable.hashCode), selectedObjects.hashCode), objectTooltip.hashCode), themePreset.hashCode), themeColor.hashCode), language.hashCode), messages.hashCode), priceLevelsTooltipMessage.hashCode), maxSelectedObjects.hashCode), unavailableCategories.hashCode), selectBestAvailable.hashCode), alwaysShowSectionContents.hashCode), showSectionContents.hashCode), showLegend.hashCode), legend.hashCode), showMinimap.hashCode), showActiveSectionTooltip.hashCode), showViewFromYourSeat.hashCode), selectionValidators.hashCode), categories.hashCode), objectCategories.hashCode), mode.hashCode), loading.hashCode), showLoadingAnimation.hashCode), ticketListings.hashCode), holdOnSelectForGAs.hashCode), holdToken.hashCode), session.hashCode), objectLabel.hashCode), objectIcon.hashCode), isObjectVisible.hashCode), isObjectSelectable.hashCode),
+                                                                                objectColor.hashCode),
+                                                                            sectionColor.hashCode),
+                                                                        extraConfig.hashCode),
+                                                                    showFullScreenButton.hashCode),
+                                                                channels.hashCode),
+                                                            enableChartRenderedCallback.hashCode),
+                                                        enableChartRenderingFailedCallback.hashCode),
+                                                    enableObjectClickedCallback.hashCode),
+                                                enableObjectSelectedCallback.hashCode),
+                                            enableObjectDeselectedCallback.hashCode),
+                                        enableSelectionValidCallback.hashCode),
+                                    enableSelectionInvalidCallback.hashCode),
+                                enableBestAvailableSelectedCallback.hashCode),
+                            enableBestAvailableSelectionFailedCallback.hashCode),
+                        enableHoldSucceededCallback.hashCode),
+                    enableHoldFailedCallback.hashCode),
+                enableReleaseHoldSucceededCallback.hashCode),
+            enableReleaseHoldFailedCallback.hashCode),
+        enableSelectedObjectBookedCallback.hashCode));
   }
 
   @override
@@ -1248,10 +1388,27 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('showFullScreenButton', showFullScreenButton)
           ..add('channels', channels)
           ..add('enableChartRenderedCallback', enableChartRenderedCallback)
+          ..add('enableChartRenderingFailedCallback',
+              enableChartRenderingFailedCallback)
           ..add('enableObjectClickedCallback', enableObjectClickedCallback)
           ..add('enableObjectSelectedCallback', enableObjectSelectedCallback)
           ..add(
-              'enableObjectDeselectedCallback', enableObjectDeselectedCallback))
+              'enableObjectDeselectedCallback', enableObjectDeselectedCallback)
+          ..add('enableSelectionValidCallback', enableSelectionValidCallback)
+          ..add(
+              'enableSelectionInvalidCallback', enableSelectionInvalidCallback)
+          ..add('enableBestAvailableSelectedCallback',
+              enableBestAvailableSelectedCallback)
+          ..add('enableBestAvailableSelectionFailedCallback',
+              enableBestAvailableSelectionFailedCallback)
+          ..add('enableHoldSucceededCallback', enableHoldSucceededCallback)
+          ..add('enableHoldFailedCallback', enableHoldFailedCallback)
+          ..add('enableReleaseHoldSucceededCallback',
+              enableReleaseHoldSucceededCallback)
+          ..add('enableReleaseHoldFailedCallback',
+              enableReleaseHoldFailedCallback)
+          ..add('enableSelectedObjectBookedCallback',
+              enableSelectedObjectBookedCallback))
         .toString();
   }
 }
@@ -1477,6 +1634,14 @@ class SeatingChartConfigBuilder
   set enableChartRenderedCallback(bool? enableChartRenderedCallback) =>
       _$this._enableChartRenderedCallback = enableChartRenderedCallback;
 
+  bool? _enableChartRenderingFailedCallback;
+  bool? get enableChartRenderingFailedCallback =>
+      _$this._enableChartRenderingFailedCallback;
+  set enableChartRenderingFailedCallback(
+          bool? enableChartRenderingFailedCallback) =>
+      _$this._enableChartRenderingFailedCallback =
+          enableChartRenderingFailedCallback;
+
   bool? _enableObjectClickedCallback;
   bool? get enableObjectClickedCallback => _$this._enableObjectClickedCallback;
   set enableObjectClickedCallback(bool? enableObjectClickedCallback) =>
@@ -1493,6 +1658,66 @@ class SeatingChartConfigBuilder
       _$this._enableObjectDeselectedCallback;
   set enableObjectDeselectedCallback(bool? enableObjectDeselectedCallback) =>
       _$this._enableObjectDeselectedCallback = enableObjectDeselectedCallback;
+
+  bool? _enableSelectionValidCallback;
+  bool? get enableSelectionValidCallback =>
+      _$this._enableSelectionValidCallback;
+  set enableSelectionValidCallback(bool? enableSelectionValidCallback) =>
+      _$this._enableSelectionValidCallback = enableSelectionValidCallback;
+
+  bool? _enableSelectionInvalidCallback;
+  bool? get enableSelectionInvalidCallback =>
+      _$this._enableSelectionInvalidCallback;
+  set enableSelectionInvalidCallback(bool? enableSelectionInvalidCallback) =>
+      _$this._enableSelectionInvalidCallback = enableSelectionInvalidCallback;
+
+  bool? _enableBestAvailableSelectedCallback;
+  bool? get enableBestAvailableSelectedCallback =>
+      _$this._enableBestAvailableSelectedCallback;
+  set enableBestAvailableSelectedCallback(
+          bool? enableBestAvailableSelectedCallback) =>
+      _$this._enableBestAvailableSelectedCallback =
+          enableBestAvailableSelectedCallback;
+
+  bool? _enableBestAvailableSelectionFailedCallback;
+  bool? get enableBestAvailableSelectionFailedCallback =>
+      _$this._enableBestAvailableSelectionFailedCallback;
+  set enableBestAvailableSelectionFailedCallback(
+          bool? enableBestAvailableSelectionFailedCallback) =>
+      _$this._enableBestAvailableSelectionFailedCallback =
+          enableBestAvailableSelectionFailedCallback;
+
+  bool? _enableHoldSucceededCallback;
+  bool? get enableHoldSucceededCallback => _$this._enableHoldSucceededCallback;
+  set enableHoldSucceededCallback(bool? enableHoldSucceededCallback) =>
+      _$this._enableHoldSucceededCallback = enableHoldSucceededCallback;
+
+  bool? _enableHoldFailedCallback;
+  bool? get enableHoldFailedCallback => _$this._enableHoldFailedCallback;
+  set enableHoldFailedCallback(bool? enableHoldFailedCallback) =>
+      _$this._enableHoldFailedCallback = enableHoldFailedCallback;
+
+  bool? _enableReleaseHoldSucceededCallback;
+  bool? get enableReleaseHoldSucceededCallback =>
+      _$this._enableReleaseHoldSucceededCallback;
+  set enableReleaseHoldSucceededCallback(
+          bool? enableReleaseHoldSucceededCallback) =>
+      _$this._enableReleaseHoldSucceededCallback =
+          enableReleaseHoldSucceededCallback;
+
+  bool? _enableReleaseHoldFailedCallback;
+  bool? get enableReleaseHoldFailedCallback =>
+      _$this._enableReleaseHoldFailedCallback;
+  set enableReleaseHoldFailedCallback(bool? enableReleaseHoldFailedCallback) =>
+      _$this._enableReleaseHoldFailedCallback = enableReleaseHoldFailedCallback;
+
+  bool? _enableSelectedObjectBookedCallback;
+  bool? get enableSelectedObjectBookedCallback =>
+      _$this._enableSelectedObjectBookedCallback;
+  set enableSelectedObjectBookedCallback(
+          bool? enableSelectedObjectBookedCallback) =>
+      _$this._enableSelectedObjectBookedCallback =
+          enableSelectedObjectBookedCallback;
 
   SeatingChartConfigBuilder();
 
@@ -1543,9 +1768,24 @@ class SeatingChartConfigBuilder
       _showFullScreenButton = $v.showFullScreenButton;
       _channels = $v.channels?.toBuilder();
       _enableChartRenderedCallback = $v.enableChartRenderedCallback;
+      _enableChartRenderingFailedCallback =
+          $v.enableChartRenderingFailedCallback;
       _enableObjectClickedCallback = $v.enableObjectClickedCallback;
       _enableObjectSelectedCallback = $v.enableObjectSelectedCallback;
       _enableObjectDeselectedCallback = $v.enableObjectDeselectedCallback;
+      _enableSelectionValidCallback = $v.enableSelectionValidCallback;
+      _enableSelectionInvalidCallback = $v.enableSelectionInvalidCallback;
+      _enableBestAvailableSelectedCallback =
+          $v.enableBestAvailableSelectedCallback;
+      _enableBestAvailableSelectionFailedCallback =
+          $v.enableBestAvailableSelectionFailedCallback;
+      _enableHoldSucceededCallback = $v.enableHoldSucceededCallback;
+      _enableHoldFailedCallback = $v.enableHoldFailedCallback;
+      _enableReleaseHoldSucceededCallback =
+          $v.enableReleaseHoldSucceededCallback;
+      _enableReleaseHoldFailedCallback = $v.enableReleaseHoldFailedCallback;
+      _enableSelectedObjectBookedCallback =
+          $v.enableSelectedObjectBookedCallback;
       _$v = null;
     }
     return this;
@@ -1616,14 +1856,25 @@ class SeatingChartConfigBuilder
               channels: _channels?.build(),
               enableChartRenderedCallback: BuiltValueNullFieldError.checkNotNull(
                   enableChartRenderedCallback, 'SeatingChartConfig', 'enableChartRenderedCallback'),
+              enableChartRenderingFailedCallback:
+                  BuiltValueNullFieldError.checkNotNull(
+                      enableChartRenderingFailedCallback,
+                      'SeatingChartConfig',
+                      'enableChartRenderingFailedCallback'),
               enableObjectClickedCallback: BuiltValueNullFieldError.checkNotNull(
                   enableObjectClickedCallback, 'SeatingChartConfig', 'enableObjectClickedCallback'),
-              enableObjectSelectedCallback: BuiltValueNullFieldError.checkNotNull(
-                  enableObjectSelectedCallback, 'SeatingChartConfig', 'enableObjectSelectedCallback'),
-              enableObjectDeselectedCallback: BuiltValueNullFieldError.checkNotNull(
-                  enableObjectDeselectedCallback,
-                  'SeatingChartConfig',
-                  'enableObjectDeselectedCallback'));
+              enableObjectSelectedCallback:
+                  BuiltValueNullFieldError.checkNotNull(enableObjectSelectedCallback, 'SeatingChartConfig', 'enableObjectSelectedCallback'),
+              enableObjectDeselectedCallback: BuiltValueNullFieldError.checkNotNull(enableObjectDeselectedCallback, 'SeatingChartConfig', 'enableObjectDeselectedCallback'),
+              enableSelectionValidCallback: BuiltValueNullFieldError.checkNotNull(enableSelectionValidCallback, 'SeatingChartConfig', 'enableSelectionValidCallback'),
+              enableSelectionInvalidCallback: BuiltValueNullFieldError.checkNotNull(enableSelectionInvalidCallback, 'SeatingChartConfig', 'enableSelectionInvalidCallback'),
+              enableBestAvailableSelectedCallback: BuiltValueNullFieldError.checkNotNull(enableBestAvailableSelectedCallback, 'SeatingChartConfig', 'enableBestAvailableSelectedCallback'),
+              enableBestAvailableSelectionFailedCallback: BuiltValueNullFieldError.checkNotNull(enableBestAvailableSelectionFailedCallback, 'SeatingChartConfig', 'enableBestAvailableSelectionFailedCallback'),
+              enableHoldSucceededCallback: BuiltValueNullFieldError.checkNotNull(enableHoldSucceededCallback, 'SeatingChartConfig', 'enableHoldSucceededCallback'),
+              enableHoldFailedCallback: BuiltValueNullFieldError.checkNotNull(enableHoldFailedCallback, 'SeatingChartConfig', 'enableHoldFailedCallback'),
+              enableReleaseHoldSucceededCallback: BuiltValueNullFieldError.checkNotNull(enableReleaseHoldSucceededCallback, 'SeatingChartConfig', 'enableReleaseHoldSucceededCallback'),
+              enableReleaseHoldFailedCallback: BuiltValueNullFieldError.checkNotNull(enableReleaseHoldFailedCallback, 'SeatingChartConfig', 'enableReleaseHoldFailedCallback'),
+              enableSelectedObjectBookedCallback: BuiltValueNullFieldError.checkNotNull(enableSelectedObjectBookedCallback, 'SeatingChartConfig', 'enableSelectedObjectBookedCallback'));
     } catch (_) {
       late String _$failedField;
       try {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
 
-const String YourWorkspaceKey = "afcfc4d1-d11d-476d-9956-e2c4f6c5e769";
-const String YourEventKey =
-    "20210807-1000-eee8070a-cfd3-4cdd-9ab0-64ae38e84900";
+const String YourWorkspaceKey = " ";
+const String YourEventKey = " ";
 
 void main() {
   runApp(MyApp());
@@ -77,22 +76,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildSeatsioView() {
     return SeatsioWebView(
+      enableDebug: true,
       onWebViewCreated: (controller) {
-        print("[seatsio]->[example]-> onWebViewCreated");
+        print("[Seatsio]->[example]-> onWebViewCreated");
         _seatsioController = controller;
         _loadSeatsio();
       },
       onChartRendered: (chart) {
-        print("[seatsio]->[example]-> onChartRendered");
+        print("[Seatsio]->[example]-> onChartRendered");
       },
-      onObjectSelected: (object) {
+      onChartRenderingFailed: () {
+        print("[Seatsio]->[example]-> onChartRenderingFailed");
+      },
+      onObjectSelected: (object, type) {
         print(
-            "[seatsio]->[example]-> onObjectSelected, label: ${object.label}");
+            "[Seatsio]->[example]-> onObjectSelected, label: ${object.label}");
         _selectSeat(object);
       },
-      onObjectDeselected: (object) {
+      onObjectDeselected: (object, type) {
         print(
-            "[seatsio]->[example]-> onObjectDeselected, label: ${object.label}");
+            "[Seatsio]->[example]-> onObjectDeselected, label: ${object.label}");
         _deselectSeat(object);
       },
     );

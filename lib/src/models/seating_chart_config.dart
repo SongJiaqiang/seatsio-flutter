@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'seating_chart.dart';
 
 import 'pricing_for_category.dart';
+import 'seating_chart.dart';
 import 'seatsio_category.dart';
 import 'seatsio_object.dart';
+import 'seatsio_ticket_type.dart';
 
 part 'seating_chart_config.g.dart';
 
@@ -16,6 +17,18 @@ typedef SeatsioObjectCallback = void Function(SeatsioObject);
 typedef SeatingChartCallback = void Function(SeatingChart);
 typedef SeatsioCategoryListCallback = void Function(
     BuiltList<SeatsioCategory>?);
+typedef SelectionValidatorTypesCallback = void Function(
+    List<SelectionValidatorType>);
+typedef SeatsioObjectsBoolCallback = void Function(List<SeatsioObject>, bool);
+typedef SeatsioObjectTicketTypeCallback = void Function(
+    SeatsioObject, SeatsioTicketType?);
+typedef SeatsioObjectsTicketTypesCallback = void Function(
+    List<SeatsioObject>, List<SeatsioTicketType>?);
+
+enum SelectionValidatorType {
+  consecutiveSeats,
+  noOrphanSeats,
+}
 
 abstract class SeatingChartConfig
     implements Built<SeatingChartConfig, SeatingChartConfigBuilder> {
@@ -97,6 +110,7 @@ abstract class SeatingChartConfig
   /// If true, a legend with the category names and colors is rendered at the top of the chart.
   /// https://docs.seats.io/docs/renderer/config-legend
   bool? get showLegend;
+
   LegendForCategory? get legend;
 
   /// When zoomed in on a chart with sections,
@@ -174,11 +188,31 @@ abstract class SeatingChartConfig
 
   bool get enableChartRenderedCallback;
 
+  bool get enableChartRenderingFailedCallback;
+
   bool get enableObjectClickedCallback;
 
   bool get enableObjectSelectedCallback;
 
   bool get enableObjectDeselectedCallback;
+
+  bool get enableSelectionValidCallback;
+
+  bool get enableSelectionInvalidCallback;
+
+  bool get enableBestAvailableSelectedCallback;
+
+  bool get enableBestAvailableSelectionFailedCallback;
+
+  bool get enableHoldSucceededCallback;
+
+  bool get enableHoldFailedCallback;
+
+  bool get enableReleaseHoldSucceededCallback;
+
+  bool get enableReleaseHoldFailedCallback;
+
+  bool get enableSelectedObjectBookedCallback;
 
   factory SeatingChartConfig.init() {
     return SeatingChartConfig((b) => b
@@ -186,11 +220,23 @@ abstract class SeatingChartConfig
       ..eventKey = ""
       ..showLoadingAnimation = true
       ..enableChartRenderedCallback = true
+      ..enableChartRenderingFailedCallback = true
       ..enableObjectClickedCallback = true
       ..enableObjectSelectedCallback = true
-      ..enableObjectDeselectedCallback = true);
+      ..enableObjectDeselectedCallback = true
+      ..enableSelectionValidCallback = false
+      ..enableSelectionInvalidCallback = false
+      ..enableBestAvailableSelectedCallback = false
+      ..enableBestAvailableSelectionFailedCallback = false
+      ..enableHoldSucceededCallback = false
+      ..enableHoldFailedCallback = false
+      ..enableReleaseHoldSucceededCallback = false
+      ..enableReleaseHoldFailedCallback = false
+      ..enableSelectedObjectBookedCallback = false);
   }
 
+  // todo: Miss some key-values
+  /// Convert chart config info to a map
   Map<String, Object?> toMap() {
     final configMap = {
       "publicKey": workspaceKey,
@@ -203,6 +249,7 @@ abstract class SeatingChartConfig
       "showMinimap": showMinimap ?? true,
       "showActiveSectionTooltipOnMobile": showActiveSectionTooltip ?? true,
       "showViewFromYourSeatOnMobile": showViewFromYourSeat ?? true,
+      "numberOfPlacesToSelect": numberOfPlacesToSelect ?? 0
     };
 
     if (loading != null) {
