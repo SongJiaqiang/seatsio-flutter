@@ -1,3 +1,7 @@
+## 0.1.0
+* [Feature] Add some callbacks for SeatsioWebView.
+* 🎉 Congratulations, the first beta version is ready!
+
 ## 0.0.3
 * [Feature] Add onObjectSelected and onObjectDeselected callbacks for SeatsioWebView.
 * [Bugfix] Fix the html string of Seatsio.

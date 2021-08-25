@@ -1,6 +1,6 @@
 # example
 
-Seatsio SDK for Flutter.
+Seatsio SDK Example.
 
 ## Getting Started
 

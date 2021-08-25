@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # seatsio: ^0.0.3
+  # seatsio: ^0.1.0
   seatsio:
     path: ../
 

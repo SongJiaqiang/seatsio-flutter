@@ -2,8 +2,8 @@
 
 ## Description
 Seatsio SDK for Flutter.
-</br>
-![seatsio-flutter-demo](https://github.com/SongJiaqiang/seatsio-flutter/raw/main/seatsio-flutter-demo.gif)
+
+<img alt='seatsio-flutter-demo' src='https://github.com/SongJiaqiang/seatsio-flutter/raw/main/seatsio-flutter-demo.gif' width='200'/>
 
 ## Getting Started
 
@@ -13,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  seatsio: ^0.0.3
+  seatsio: ^0.1.0
 ```
 
 Then, import `seatsio` package to your dart file.
@@ -23,7 +23,6 @@ import 'package:seatsio/seatsio.dart';
 
 Finally, config your seatsio chart with some parameters.
 ``` dart
-
 class _MyHomePageState extends State<MyHomePage> {
   SeatsioWebViewController? _seatsioController;
   final List<String> selectedObjectLabels = ['Try to click a seat object'];
@@ -71,22 +70,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildSeatsioView() {
     return SeatsioWebView(
+      enableDebug: true,
       onWebViewCreated: (controller) {
-        print("[seatsio]->[example]-> onWebViewCreated");
+        print("[Seatsio]->[example]-> onWebViewCreated");
         _seatsioController = controller;
         _loadSeatsio();
       },
       onChartRendered: (chart) {
-        print("[seatsio]->[example]-> onChartRendered");
+        print("[Seatsio]->[example]-> onChartRendered");
       },
-      onObjectSelected: (object) {
+      onChartRenderingFailed: () {
+        print("[Seatsio]->[example]-> onChartRenderingFailed");
+      },
+      onObjectSelected: (object, type) {
         print(
-            "[seatsio]->[example]-> onObjectSelected, label: ${object.label}");
+            "[Seatsio]->[example]-> onObjectSelected, label: ${object.label}");
         _selectSeat(object);
       },
-      onObjectDeselected: (object) {
+      onObjectDeselected: (object, type) {
         print(
-            "[seatsio]->[example]-> onObjectDeselected, label: ${object.label}");
+            "[Seatsio]->[example]-> onObjectDeselected, label: ${object.label}");
         _deselectSeat(object);
       },
     );
@@ -111,6 +114,5 @@ class _MyHomePageState extends State<MyHomePage> {
     _seatsioController?.reload(newChartConfig);
   }
 }
-
 ```
 
