@@ -249,7 +249,6 @@ abstract class SeatingChartConfig
       "showMinimap": showMinimap ?? true,
       "showActiveSectionTooltipOnMobile": showActiveSectionTooltip ?? true,
       "showViewFromYourSeatOnMobile": showViewFromYourSeat ?? true,
-      "numberOfPlacesToSelect": numberOfPlacesToSelect ?? 0
     };
 
     if (loading != null) {
@@ -281,6 +280,10 @@ abstract class SeatingChartConfig
 
     if (Platform.isIOS) {
       configMap["_library"] = "ios";
+    }
+
+    if (numberOfPlacesToSelect != null) {
+      configMap["numberOfPlacesToSelect"] = numberOfPlacesToSelect;
     }
 
     return configMap;
