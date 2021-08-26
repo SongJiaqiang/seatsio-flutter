@@ -1,3 +1,6 @@
+## 0.1.1
+* 🐞 Don't set a default value for the numberOfPlacesToSelect field.
+
 ## 0.1.0+1
 * 😥 Forgot to submit the code before publishing.
 

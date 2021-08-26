@@ -1,7 +1,7 @@
-# seatsio
+<img alt='seatsio-logo' src='https://www.seats.io/assets/v77/static/brandassets/seatsio-black.svg' width='100%'/>
 
 ## Description
-Seatsio SDK for Flutter.
+A Flutter plugin for [Seatsio](https://www.seats.io/).
 
 <img alt='seatsio-flutter-demo' src='https://github.com/SongJiaqiang/seatsio-flutter/raw/main/seatsio-flutter-demo.gif' width='200'/>
 
@@ -13,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  seatsio: ^0.1.0+1
+  seatsio: ^0.1.1
 ```
 
 Then, import `seatsio` package to your dart file.

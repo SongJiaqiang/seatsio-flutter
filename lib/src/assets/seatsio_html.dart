@@ -16,9 +16,7 @@ final String seatsioHTML = """
         }
 
         function changeConfig(data, callback) {
-            let obj = JSON.parse(data)
-            chart.changeConfig(obj)
-
+            chart.changeConfig(JSON.parse(data))
             callback(data)
         }
 
