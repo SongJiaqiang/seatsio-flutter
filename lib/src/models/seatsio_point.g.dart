@@ -36,17 +36,17 @@ class _$SeatsioPointSerializer implements StructuredSerializer<SeatsioPoint> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'x':
           result.x = serializers.deserialize(value,
-              specifiedType: const FullType(double)) as double;
+              specifiedType: const FullType(double))! as double;
           break;
         case 'y':
           result.y = serializers.deserialize(value,
-              specifiedType: const FullType(double)) as double;
+              specifiedType: const FullType(double))! as double;
           break;
       }
     }
@@ -62,11 +62,11 @@ class _$SeatsioPoint extends SeatsioPoint {
   final double y;
 
   factory _$SeatsioPoint([void Function(SeatsioPointBuilder)? updates]) =>
-      (new SeatsioPointBuilder()..update(updates)).build();
+      (new SeatsioPointBuilder()..update(updates))._build();
 
   _$SeatsioPoint._({required this.x, required this.y}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(x, 'SeatsioPoint', 'x');
-    BuiltValueNullFieldError.checkNotNull(y, 'SeatsioPoint', 'y');
+    BuiltValueNullFieldError.checkNotNull(x, r'SeatsioPoint', 'x');
+    BuiltValueNullFieldError.checkNotNull(y, r'SeatsioPoint', 'y');
   }
 
   @override
@@ -89,7 +89,7 @@ class _$SeatsioPoint extends SeatsioPoint {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SeatsioPoint')
+    return (newBuiltValueToStringHelper(r'SeatsioPoint')
           ..add('x', x)
           ..add('y', y))
         .toString();
@@ -132,14 +132,16 @@ class SeatsioPointBuilder
   }
 
   @override
-  _$SeatsioPoint build() {
+  SeatsioPoint build() => _build();
+
+  _$SeatsioPoint _build() {
     final _$result = _$v ??
         new _$SeatsioPoint._(
-            x: BuiltValueNullFieldError.checkNotNull(x, 'SeatsioPoint', 'x'),
-            y: BuiltValueNullFieldError.checkNotNull(y, 'SeatsioPoint', 'y'));
+            x: BuiltValueNullFieldError.checkNotNull(x, r'SeatsioPoint', 'x'),
+            y: BuiltValueNullFieldError.checkNotNull(y, r'SeatsioPoint', 'y'));
     replace(_$result);
     return _$result;
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
