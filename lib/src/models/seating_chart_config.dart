@@ -53,6 +53,14 @@ abstract class SeatingChartConfig
   /// Maybe this, https://docs.seats.io/docs/embedded-designer/configuration-chartkey/
   String? get chart;
 
+  /// The [region] need to be specified, have four region options:
+  /// [region] = 'eu'
+  /// [region] = 'na'
+  /// [region] = 'sa'
+  /// [region] = 'oc'
+  /// Maybe this, https://docs.seats.io/docs/embedded-designer/introduction
+  String? get region;
+
   /// Seats supports two types of pricing: simple pricing and multi-level pricing.
   /// Both are defined using the pricing configuration parameter
   /// Detail: https://docs.seats.io/docs/renderer/config-pricing/
@@ -218,6 +226,7 @@ abstract class SeatingChartConfig
     return SeatingChartConfig((b) => b
       ..workspaceKey = ""
       ..eventKey = ""
+      ..region = 'eu'
       ..showLoadingAnimation = true
       ..enableChartRenderedCallback = true
       ..enableChartRenderingFailedCallback = true
@@ -241,6 +250,7 @@ abstract class SeatingChartConfig
     final configMap = {
       "publicKey": workspaceKey,
       "event": eventKey,
+      "region": region,
       "holdToken": holdToken ?? "",
       "session": session,
       "mode": mode,

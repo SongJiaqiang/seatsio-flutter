@@ -35,21 +35,47 @@ abstract class SeatsioObject
 
   bool get selectable;
 
+  List<SeatsioObject>? get seats;
+
   static SeatsioObject? fromMap(Map? data) {
     if (data == null) {
       return null;
     }
-    return SeatsioObject((b) => b
-      ..id = data["id"]
-      ..label = data["label"]
-      ..uuid = data["uuid"]
-      ..objectType = data["objectType"]
-      ..labelDetail = SeatsioLabel.fromMap(data["labels"])!.toBuilder()
-      ..category = SeatsioCategory.fromMap(data["category"])!.toBuilder()
-      ..center = SeatsioPoint.fromMap(data["center"])!.toBuilder()
-      ..status = data["status"]
-      ..forSale = data["forSale"]
-      ..selectable = data["selectable"]);
+
+    if (data['objectType'] == 'Table') {
+      data['labels'].addAll({'parent': 'table'});
+    }
+
+    if (data['seats'] != null) {
+      for (int i = 0; i < data['seats'].length; i++) {
+        data['seats'][i].addAll(
+          {
+            'category': data['category'],
+            'status': data['status'],
+            'forSale': data['forSale'],
+            'selectable': data['selectable'],
+          },
+        );
+      }
+    }
+
+    return SeatsioObject(
+      (b) => b
+        ..id = data["id"]
+        ..label = data["label"]
+        ..uuid = data["uuid"]
+        ..objectType = data["objectType"]
+        ..labelDetail = SeatsioLabel.fromMap(data["labels"])!.toBuilder()
+        ..category = SeatsioCategory.fromMap(data["category"])!.toBuilder()
+        ..center = SeatsioPoint.fromMap(data["center"])!.toBuilder()
+        ..status = data["status"] ?? ''
+        ..forSale = data["forSale"]
+        ..selectable = data["selectable"]
+        ..seats = data['seats'] != null
+            ? List<SeatsioObject>.from(
+                data['seats']?.map((x) => SeatsioObject.fromMap(x)))
+            : null,
+    );
   }
 
   static SeatsioObject? fromJson(String jsonString) {

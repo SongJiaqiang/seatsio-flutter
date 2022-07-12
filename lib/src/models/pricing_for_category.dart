@@ -56,8 +56,7 @@ abstract class TicketTypePricing
 
   String? get label;
 
-  static TicketTypePricing? fromJson(String jsonString) {
-    final data = json.decode(jsonString);
+  static TicketTypePricing? fromMap(Map<String, dynamic>? data) {
     if (data != null) {
       return TicketTypePricing((b) => b
         ..ticketType = data["ticketType"]
@@ -72,7 +71,7 @@ abstract class TicketTypePricing
     if (data != null && data is List) {
       final List<TicketTypePricing> objects = [];
       data.forEach((e) {
-        final object = TicketTypePricing.fromJson(e);
+        final object = TicketTypePricing.fromMap(e);
         if (object != null) {
           objects.add(object);
         }

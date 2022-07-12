@@ -14,7 +14,7 @@ abstract class SeatsioCategory
   factory SeatsioCategory([updates(SeatsioCategoryBuilder b)]) =
       _$SeatsioCategory;
 
-  int get key;
+  String get key;
 
   String? get label;
 
@@ -40,7 +40,7 @@ abstract class SeatsioCategory
     }
 
     return SeatsioCategory((b) => b
-      ..key = data["key"]
+      ..key = data["key"].toString()
       ..label = data["label"]
       ..color = data["color"]
       ..pricing = PricingForCategory.fromMap(data["pricing"])?.toBuilder()
