@@ -13,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  seatsio: ^0.1.1
+  seatsio: ^0.1.2
 ```
 
 Then, import `seatsio` package to your dart file.

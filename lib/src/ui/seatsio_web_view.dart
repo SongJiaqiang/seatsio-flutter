@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../models/seating_chart.dart';
 import '../models/seatsio_category.dart';

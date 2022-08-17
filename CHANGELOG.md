@@ -1,3 +1,6 @@
+## 0.1.2
+* 🆕 new parameter showSectionContents. Can be set to auto, always and onlyAfterZoom.
+
 ## 0.1.1
 * 🐞 Don't set a default value for the numberOfPlacesToSelect field.
 

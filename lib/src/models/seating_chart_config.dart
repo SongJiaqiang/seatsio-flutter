@@ -259,6 +259,7 @@ abstract class SeatingChartConfig
       "showMinimap": showMinimap ?? true,
       "showActiveSectionTooltipOnMobile": showActiveSectionTooltip ?? true,
       "showViewFromYourSeatOnMobile": showViewFromYourSeat ?? true,
+      "showSectionContents": showSectionContents ?? "auto",
     };
 
     if (loading != null) {
