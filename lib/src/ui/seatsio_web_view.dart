@@ -134,9 +134,9 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
             debugPrint(
                 "[Seatsio]-> _onFlutterJsBridgeChannel callback message: ${message.message}");
           // Get categories of chart if call chart.requestCategories() on the onChartRendered callback.
-          final cagetories = SeatsioCategory.arrayFromJson(message.message);
-          if (cagetories != null && cagetories.isNotEmpty) {
-            widget._onCategoryListCallback?.call(cagetories);
+          final categories = SeatsioCategory.arrayFromJson(message.message);
+          if (categories != null && categories.isNotEmpty) {
+            widget._onCategoryListCallback?.call(categories);
           }
         },
       ));

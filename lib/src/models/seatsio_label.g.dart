@@ -51,17 +51,17 @@ class _$SeatsioLabelSerializer implements StructuredSerializer<SeatsioLabel> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current! as String;
+      final key = iterator.current as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'own':
           result.own = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String;
           break;
         case 'parent':
           result.parent = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String;
           break;
         case 'section':
           result.section = serializers.deserialize(value,
@@ -89,7 +89,7 @@ class _$SeatsioLabel extends SeatsioLabel {
   final String? displayedLabel;
 
   factory _$SeatsioLabel([void Function(SeatsioLabelBuilder)? updates]) =>
-      (new SeatsioLabelBuilder()..update(updates))._build();
+      (new SeatsioLabelBuilder()..update(updates)).build();
 
   _$SeatsioLabel._(
       {required this.own,
@@ -97,8 +97,8 @@ class _$SeatsioLabel extends SeatsioLabel {
       this.section,
       this.displayedLabel})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(own, r'SeatsioLabel', 'own');
-    BuiltValueNullFieldError.checkNotNull(parent, r'SeatsioLabel', 'parent');
+    BuiltValueNullFieldError.checkNotNull(own, 'SeatsioLabel', 'own');
+    BuiltValueNullFieldError.checkNotNull(parent, 'SeatsioLabel', 'parent');
   }
 
   @override
@@ -127,7 +127,7 @@ class _$SeatsioLabel extends SeatsioLabel {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'SeatsioLabel')
+    return (newBuiltValueToStringHelper('SeatsioLabel')
           ..add('own', own)
           ..add('parent', parent)
           ..add('section', section)
@@ -183,15 +183,13 @@ class SeatsioLabelBuilder
   }
 
   @override
-  SeatsioLabel build() => _build();
-
-  _$SeatsioLabel _build() {
+  _$SeatsioLabel build() {
     final _$result = _$v ??
         new _$SeatsioLabel._(
             own: BuiltValueNullFieldError.checkNotNull(
-                own, r'SeatsioLabel', 'own'),
+                own, 'SeatsioLabel', 'own'),
             parent: BuiltValueNullFieldError.checkNotNull(
-                parent, r'SeatsioLabel', 'parent'),
+                parent, 'SeatsioLabel', 'parent'),
             section: section,
             displayedLabel: displayedLabel);
     replace(_$result);
@@ -199,4 +197,4 @@ class SeatsioLabelBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

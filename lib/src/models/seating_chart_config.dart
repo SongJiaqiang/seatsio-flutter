@@ -61,6 +61,17 @@ abstract class SeatingChartConfig
   /// Maybe this, https://docs.seats.io/docs/embedded-designer/introduction
   String? get region;
 
+  /// Sets the [language] of the designer.
+  /// Currently supported languages are:
+  /// English ('en')
+  /// Spanish ('es')
+  /// French ('fr')
+  /// Portuguese ('pt')
+  /// German ('de').
+  /// For the list of supported languages, check this page.
+  /// https://support.seats.io/en/articles/2074430-translating-embedded-floor-plans-i18n
+  String? get language;
+
   /// Seats supports two types of pricing: simple pricing and multi-level pricing.
   /// Both are defined using the pricing configuration parameter
   /// Detail: https://docs.seats.io/docs/renderer/config-pricing/
@@ -98,8 +109,6 @@ abstract class SeatingChartConfig
   /// https://docs.seats.io/docs/renderer/colorscheme/
   /// Possible values: 'light', 'dark',
   String? get themeColor;
-
-  String? get language;
 
   BuiltMap<String, String>? get messages;
 
@@ -227,6 +236,7 @@ abstract class SeatingChartConfig
       ..workspaceKey = ""
       ..eventKey = ""
       ..region = 'eu'
+      ..language = 'en'
       ..showLoadingAnimation = true
       ..enableChartRenderedCallback = true
       ..enableChartRenderingFailedCallback = true
@@ -248,9 +258,10 @@ abstract class SeatingChartConfig
   /// Convert chart config info to a map
   Map<String, Object?> toMap() {
     final configMap = {
-      "publicKey": workspaceKey,
+      "workspaceKey": workspaceKey,
       "event": eventKey,
-      "region": region,
+      "region": region ?? "eu",
+      "language": language ?? "en",
       "holdToken": holdToken ?? "",
       "session": session,
       "mode": mode,
