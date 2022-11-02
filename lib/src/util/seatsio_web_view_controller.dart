@@ -61,7 +61,7 @@ class SeatsioWebViewController {
 
     // Insert json string of chart config to the seatsio HTML template.
     final htmlString = seatsioHTML
-        .replaceFirst("%region%", chartConfig.region!)
+        .replaceFirst("%region%", chartConfig.region ?? "eu")
         .replaceFirst("%configAsJs%", chartConfigJson);
 
     debugPrint("[Seatsio]-> _generateHtmlContent: $htmlString");
@@ -76,6 +76,6 @@ class SeatsioWebViewController {
     return url.toString();
   }
 
-  Future<String> evaluateJavascript(String javascriptString) =>
-      _webViewController.evaluateJavascript(javascriptString);
+  Future<void> evaluateJavascript(String javascriptString) =>
+      _webViewController.runJavascript(javascriptString);
 }

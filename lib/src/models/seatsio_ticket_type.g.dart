@@ -39,17 +39,17 @@ class _$SeatsioTicketTypeSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current! as String;
+      final key = iterator.current as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'price':
           result.price = serializers.deserialize(value,
-              specifiedType: const FullType(double))! as double;
+              specifiedType: const FullType(double)) as double;
           break;
         case 'ticketType':
           result.ticketType = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String;
           break;
       }
     }
@@ -66,13 +66,13 @@ class _$SeatsioTicketType extends SeatsioTicketType {
 
   factory _$SeatsioTicketType(
           [void Function(SeatsioTicketTypeBuilder)? updates]) =>
-      (new SeatsioTicketTypeBuilder()..update(updates))._build();
+      (new SeatsioTicketTypeBuilder()..update(updates)).build();
 
   _$SeatsioTicketType._({required this.price, required this.ticketType})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(price, r'SeatsioTicketType', 'price');
+    BuiltValueNullFieldError.checkNotNull(price, 'SeatsioTicketType', 'price');
     BuiltValueNullFieldError.checkNotNull(
-        ticketType, r'SeatsioTicketType', 'ticketType');
+        ticketType, 'SeatsioTicketType', 'ticketType');
   }
 
   @override
@@ -98,7 +98,7 @@ class _$SeatsioTicketType extends SeatsioTicketType {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'SeatsioTicketType')
+    return (newBuiltValueToStringHelper('SeatsioTicketType')
           ..add('price', price)
           ..add('ticketType', ticketType))
         .toString();
@@ -141,18 +141,16 @@ class SeatsioTicketTypeBuilder
   }
 
   @override
-  SeatsioTicketType build() => _build();
-
-  _$SeatsioTicketType _build() {
+  _$SeatsioTicketType build() {
     final _$result = _$v ??
         new _$SeatsioTicketType._(
             price: BuiltValueNullFieldError.checkNotNull(
-                price, r'SeatsioTicketType', 'price'),
+                price, 'SeatsioTicketType', 'price'),
             ticketType: BuiltValueNullFieldError.checkNotNull(
-                ticketType, r'SeatsioTicketType', 'ticketType'));
+                ticketType, 'SeatsioTicketType', 'ticketType'));
     replace(_$result);
     return _$result;
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
