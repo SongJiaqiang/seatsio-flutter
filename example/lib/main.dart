@@ -1,8 +1,11 @@
+import 'dart:convert';
+
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
 
-const String YourWorkspaceKey = " ";
-const String YourEventKey = " ";
+const String YourWorkspaceKey = "";
+const String YourEventKey = "";
 
 void main() {
   runApp(MyApp());
@@ -42,6 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
     _chartConfig = SeatingChartConfig.init().rebuild((b) => b
       ..workspaceKey = YourWorkspaceKey
       ..eventKey = YourEventKey
+      ..enableHoldSucceededCallback = true
+      ..enableHoldFailedCallback = true
+      ..enableObjectClickedCallback = false // Set this to false if you want to have the objectToolTip to be shown
       ..session = "start");
   }
 
@@ -97,6 +103,10 @@ class _MyHomePageState extends State<MyHomePage> {
         print(
             "[Seatsio]->[example]-> onObjectDeselected, label: ${object.label}");
         _deselectSeat(object);
+      },
+      onHoldSucceeded: (objects, ticketTypes) {
+        print(
+            "[Seatsio]->[example]-> onObjectSelected, objects: $objects | ticket types: $ticketTypes");
       },
     );
   }

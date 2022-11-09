@@ -70,13 +70,13 @@ class _$SeatsioCategorySerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'key':
           result.key = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'label':
           result.label = serializers.deserialize(value,
@@ -121,7 +121,7 @@ class _$SeatsioCategory extends SeatsioCategory {
   final bool? isFiltered;
 
   factory _$SeatsioCategory([void Function(SeatsioCategoryBuilder)? updates]) =>
-      (new SeatsioCategoryBuilder()..update(updates)).build();
+      (new SeatsioCategoryBuilder()..update(updates))._build();
 
   _$SeatsioCategory._(
       {required this.key,
@@ -131,7 +131,7 @@ class _$SeatsioCategory extends SeatsioCategory {
       this.accessible,
       this.isFiltered})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(key, 'SeatsioCategory', 'key');
+    BuiltValueNullFieldError.checkNotNull(key, r'SeatsioCategory', 'key');
   }
 
   @override
@@ -166,7 +166,7 @@ class _$SeatsioCategory extends SeatsioCategory {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SeatsioCategory')
+    return (newBuiltValueToStringHelper(r'SeatsioCategory')
           ..add('key', key)
           ..add('label', label)
           ..add('color', color)
@@ -234,13 +234,15 @@ class SeatsioCategoryBuilder
   }
 
   @override
-  _$SeatsioCategory build() {
+  SeatsioCategory build() => _build();
+
+  _$SeatsioCategory _build() {
     _$SeatsioCategory _$result;
     try {
       _$result = _$v ??
           new _$SeatsioCategory._(
               key: BuiltValueNullFieldError.checkNotNull(
-                  key, 'SeatsioCategory', 'key'),
+                  key, r'SeatsioCategory', 'key'),
               label: label,
               color: color,
               pricing: _pricing?.build(),
@@ -253,7 +255,7 @@ class SeatsioCategoryBuilder
         _pricing?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'SeatsioCategory', _$failedField, e.toString());
+            r'SeatsioCategory', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -262,4 +264,4 @@ class SeatsioCategoryBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
