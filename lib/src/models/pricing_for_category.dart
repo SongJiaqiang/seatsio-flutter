@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'pricing_for_category.g.dart';
 
@@ -13,9 +14,12 @@ abstract class PricingForCategory
   factory PricingForCategory([updates(PricingForCategoryBuilder b)]) =
       _$PricingForCategory;
 
-  String get category;
+  int? get categoryKey;
 
-  double get price;
+  @JsonKey()
+  String? get category;
+
+  num? get price;
 
   BuiltList<TicketTypePricing>? get ticketTypes;
 
@@ -33,6 +37,7 @@ abstract class PricingForCategory
     }
     // todo(sjq):当前pricing数据为空，以下代码待验证
     return PricingForCategory((b) => b
+      ..categoryKey = data["categoryKey"]
       ..category = data["category"]
       ..price = data["price"]
       ..ticketTypes =
@@ -41,6 +46,12 @@ abstract class PricingForCategory
 
   static Serializer<PricingForCategory> get serializer =>
       _$pricingForCategorySerializer;
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'category': categoryKey ?? category,
+    'price': price
+  };
+
 }
 
 abstract class TicketTypePricing
@@ -52,7 +63,7 @@ abstract class TicketTypePricing
 
   String? get ticketType;
 
-  double? get price;
+  num? get price;
 
   String? get label;
 
@@ -66,8 +77,8 @@ abstract class TicketTypePricing
     return null;
   }
 
-  static BuiltList<TicketTypePricing>? arrayFromJson(String jsonString) {
-    final data = json.decode(jsonString);
+  static BuiltList<TicketTypePricing>? arrayFromJson(String? jsonString) {
+    final data = jsonString != null ? json.decode(jsonString!) : null;
     if (data != null && data is List) {
       final List<TicketTypePricing> objects = [];
       data.forEach((e) {

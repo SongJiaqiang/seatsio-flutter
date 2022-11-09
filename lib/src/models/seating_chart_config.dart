@@ -273,6 +273,10 @@ abstract class SeatingChartConfig
       "showSectionContents": showSectionContents ?? "auto",
     };
 
+    if (pricing != null) {
+      configMap["pricing"] = pricing?.toList();
+    }
+
     if (loading != null) {
       configMap["loading"] = loading;
     }

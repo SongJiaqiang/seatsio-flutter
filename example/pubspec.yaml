@@ -14,6 +14,8 @@ dependencies:
   # seatsio: ^0.1.1
   seatsio:
     path: ../
+  built_collection: ^5.1.1
+
 
 dev_dependencies:
   flutter_test:

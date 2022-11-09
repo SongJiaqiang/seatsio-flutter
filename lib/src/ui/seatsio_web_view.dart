@@ -280,8 +280,13 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
           if (widget._enableDebug)
             debugPrint(
                 "[Seatsio]-> onHoldSucceeded callback message: ${message.message}");
-          // todo: get objects and types from message
-          widget._onHoldSucceeded?.call([], null);
+          // todo: what about ticket types?
+          final objects = SeatsioObject.arrayFromJson(message.message);
+          if (objects != null) {
+            widget._onHoldSucceeded?.call(objects, null);
+          } else {
+            widget._onHoldSucceeded?.call([], null);
+          }
         },
       ));
     }
@@ -293,8 +298,13 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
           if (widget._enableDebug)
             debugPrint(
                 "[Seatsio]-> onHoldFailed callback message: ${message.message}");
-          // todo: get objects and types from message
-          widget._onHoldFailed?.call([], null);
+          // todo: what about ticket types?
+          final objects = SeatsioObject.arrayFromJson(message.message);
+          if (objects != null) {
+            widget._onHoldFailed?.call(objects, null);
+          } else {
+            widget._onHoldFailed?.call([], null);
+          }
         },
       ));
     }
