@@ -1,3 +1,9 @@
+## 0.3.0
+* 🆕 PriceCategory supports prices of double type.
+* 🆕 onHoldSucceeded/onHoldFailed add callback parameters.
+* 🆕 Support spotlight mode.
+* 🆕 Update gradle dependencies to support android demo running.
+
 ## 0.2.0
 * 🆕 Supported region config.
 * 🆕 Supported language config.

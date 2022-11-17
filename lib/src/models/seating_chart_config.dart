@@ -158,6 +158,8 @@ abstract class SeatingChartConfig
   /// normal: the default setting. Objects are selectable, and zooming and panning are enabled
   /// static: objects are not selectable, but zooming and panning is enabled
   /// print: objects are not selectable and zooming and panning is disabled
+  /// spotlight: shows selected objects while dimming all others. Navigation controls are enabled but interaction is disabled.
+  /// To use spotlight mode, you should set [session] to 'none' and set [holdToken] to null.
   /// https://docs.seats.io/docs/renderer/config-mode
   String? get mode;
 
@@ -263,7 +265,7 @@ abstract class SeatingChartConfig
       "region": region ?? "eu",
       "language": language ?? "en",
       "holdToken": holdToken ?? "",
-      "session": session,
+      "session": session ?? "none",
       "mode": mode,
       "showLegend": showLegend ?? true,
       "showFullScreenButton": showFullScreenButton ?? true,
@@ -312,6 +314,23 @@ abstract class SeatingChartConfig
       configMap["numberOfPlacesToSelect"] = numberOfPlacesToSelect;
     }
 
+    if (selectedObjects != null) {
+      configMap["selectedObjects"] = selectedObjects!.map((obj) {
+        if (obj.ticketType != null) {
+          final Map<String, dynamic> map = {
+            "label": obj.label,
+            "ticketType": obj.ticketType.toString(),
+          };
+          if (obj.amount != null) {
+            map["amount"] = obj.amount!;
+          }
+          return map;
+        } else {
+          return obj.label;
+        }
+      }).toList();
+    }
+
     return configMap;
   }
 
@@ -325,11 +344,11 @@ abstract class SelectedObject
 
   factory SelectedObject([updates(SelectedObjectBuilder b)]) = _$SelectedObject;
 
-  String get ticketType;
-
-  int get amount;
-
   String get label;
+
+  String? get ticketType;
+
+  int? get amount;
 
   static Serializer<SelectedObject> get serializer =>
       _$selectedObjectSerializer;
