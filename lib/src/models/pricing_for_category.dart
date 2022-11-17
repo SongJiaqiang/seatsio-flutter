@@ -47,11 +47,8 @@ abstract class PricingForCategory
   static Serializer<PricingForCategory> get serializer =>
       _$pricingForCategorySerializer;
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
-    'category': categoryKey ?? category,
-    'price': price
-  };
-
+  Map<String, dynamic> toJson() =>
+      <String, dynamic>{'category': categoryKey ?? category, 'price': price};
 }
 
 abstract class TicketTypePricing
@@ -78,7 +75,7 @@ abstract class TicketTypePricing
   }
 
   static BuiltList<TicketTypePricing>? arrayFromJson(String? jsonString) {
-    final data = jsonString != null ? json.decode(jsonString!) : null;
+    final data = jsonString != null ? json.decode(jsonString) : null;
     if (data != null && data is List) {
       final List<TicketTypePricing> objects = [];
       data.forEach((e) {

@@ -62,7 +62,7 @@ class _$PricingForCategorySerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current! as String;
+      final key = iterator.current as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -134,7 +134,7 @@ class _$TicketTypePricingSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current! as String;
+      final key = iterator.current as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -169,7 +169,7 @@ class _$PricingForCategory extends PricingForCategory {
 
   factory _$PricingForCategory(
           [void Function(PricingForCategoryBuilder)? updates]) =>
-      (new PricingForCategoryBuilder()..update(updates))._build();
+      (new PricingForCategoryBuilder()..update(updates)).build();
 
   _$PricingForCategory._(
       {this.categoryKey, this.category, this.price, this.ticketTypes})
@@ -204,7 +204,7 @@ class _$PricingForCategory extends PricingForCategory {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'PricingForCategory')
+    return (newBuiltValueToStringHelper('PricingForCategory')
           ..add('categoryKey', categoryKey)
           ..add('category', category)
           ..add('price', price)
@@ -261,9 +261,7 @@ class PricingForCategoryBuilder
   }
 
   @override
-  PricingForCategory build() => _build();
-
-  _$PricingForCategory _build() {
+  _$PricingForCategory build() {
     _$PricingForCategory _$result;
     try {
       _$result = _$v ??
@@ -279,7 +277,7 @@ class PricingForCategoryBuilder
         _ticketTypes?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'PricingForCategory', _$failedField, e.toString());
+            'PricingForCategory', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -298,7 +296,7 @@ class _$TicketTypePricing extends TicketTypePricing {
 
   factory _$TicketTypePricing(
           [void Function(TicketTypePricingBuilder)? updates]) =>
-      (new TicketTypePricingBuilder()..update(updates))._build();
+      (new TicketTypePricingBuilder()..update(updates)).build();
 
   _$TicketTypePricing._({this.ticketType, this.price, this.label}) : super._();
 
@@ -327,7 +325,7 @@ class _$TicketTypePricing extends TicketTypePricing {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'TicketTypePricing')
+    return (newBuiltValueToStringHelper('TicketTypePricing')
           ..add('ticketType', ticketType)
           ..add('price', price)
           ..add('label', label))
@@ -376,9 +374,7 @@ class TicketTypePricingBuilder
   }
 
   @override
-  TicketTypePricing build() => _build();
-
-  _$TicketTypePricing _build() {
+  _$TicketTypePricing build() {
     final _$result = _$v ??
         new _$TicketTypePricing._(
             ticketType: ticketType, price: price, label: label);
@@ -387,4 +383,4 @@ class TicketTypePricingBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

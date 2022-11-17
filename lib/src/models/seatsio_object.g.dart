@@ -80,25 +80,25 @@ class _$SeatsioObjectSerializer implements StructuredSerializer<SeatsioObject> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current! as String;
+      final key = iterator.current as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String;
           break;
         case 'uuid':
           result.uuid = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String;
           break;
         case 'objectType':
           result.objectType = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String;
           break;
         case 'label':
           result.label = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String;
           break;
         case 'labels':
           result.labelDetail.replace(serializers.deserialize(value,
@@ -115,15 +115,15 @@ class _$SeatsioObjectSerializer implements StructuredSerializer<SeatsioObject> {
           break;
         case 'status':
           result.status = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String;
           break;
         case 'forSale':
           result.forSale = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
+              specifiedType: const FullType(bool)) as bool;
           break;
         case 'selectable':
           result.selectable = serializers.deserialize(value,
-              specifiedType: const FullType(bool))! as bool;
+              specifiedType: const FullType(bool)) as bool;
           break;
         case 'seats':
           result.seats = serializers.deserialize(value,
@@ -163,7 +163,7 @@ class _$SeatsioObject extends SeatsioObject {
   final List<SeatsioObject>? seats;
 
   factory _$SeatsioObject([void Function(SeatsioObjectBuilder)? updates]) =>
-      (new SeatsioObjectBuilder()..update(updates))._build();
+      (new SeatsioObjectBuilder()..update(updates)).build();
 
   _$SeatsioObject._(
       {required this.id,
@@ -178,15 +178,15 @@ class _$SeatsioObject extends SeatsioObject {
       required this.selectable,
       this.seats})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(id, r'SeatsioObject', 'id');
-    BuiltValueNullFieldError.checkNotNull(uuid, r'SeatsioObject', 'uuid');
+    BuiltValueNullFieldError.checkNotNull(id, 'SeatsioObject', 'id');
+    BuiltValueNullFieldError.checkNotNull(uuid, 'SeatsioObject', 'uuid');
     BuiltValueNullFieldError.checkNotNull(
-        objectType, r'SeatsioObject', 'objectType');
-    BuiltValueNullFieldError.checkNotNull(label, r'SeatsioObject', 'label');
-    BuiltValueNullFieldError.checkNotNull(status, r'SeatsioObject', 'status');
-    BuiltValueNullFieldError.checkNotNull(forSale, r'SeatsioObject', 'forSale');
+        objectType, 'SeatsioObject', 'objectType');
+    BuiltValueNullFieldError.checkNotNull(label, 'SeatsioObject', 'label');
+    BuiltValueNullFieldError.checkNotNull(status, 'SeatsioObject', 'status');
+    BuiltValueNullFieldError.checkNotNull(forSale, 'SeatsioObject', 'forSale');
     BuiltValueNullFieldError.checkNotNull(
-        selectable, r'SeatsioObject', 'selectable');
+        selectable, 'SeatsioObject', 'selectable');
   }
 
   @override
@@ -237,7 +237,7 @@ class _$SeatsioObject extends SeatsioObject {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'SeatsioObject')
+    return (newBuiltValueToStringHelper('SeatsioObject')
           ..add('id', id)
           ..add('uuid', uuid)
           ..add('objectType', objectType)
@@ -338,30 +338,28 @@ class SeatsioObjectBuilder
   }
 
   @override
-  SeatsioObject build() => _build();
-
-  _$SeatsioObject _build() {
+  _$SeatsioObject build() {
     _$SeatsioObject _$result;
     try {
       _$result = _$v ??
           new _$SeatsioObject._(
               id: BuiltValueNullFieldError.checkNotNull(
-                  id, r'SeatsioObject', 'id'),
+                  id, 'SeatsioObject', 'id'),
               uuid: BuiltValueNullFieldError.checkNotNull(
-                  uuid, r'SeatsioObject', 'uuid'),
+                  uuid, 'SeatsioObject', 'uuid'),
               objectType: BuiltValueNullFieldError.checkNotNull(
-                  objectType, r'SeatsioObject', 'objectType'),
+                  objectType, 'SeatsioObject', 'objectType'),
               label: BuiltValueNullFieldError.checkNotNull(
-                  label, r'SeatsioObject', 'label'),
+                  label, 'SeatsioObject', 'label'),
               labelDetail: _labelDetail?.build(),
               category: _category?.build(),
               center: _center?.build(),
               status: BuiltValueNullFieldError.checkNotNull(
-                  status, r'SeatsioObject', 'status'),
+                  status, 'SeatsioObject', 'status'),
               forSale: BuiltValueNullFieldError.checkNotNull(
-                  forSale, r'SeatsioObject', 'forSale'),
+                  forSale, 'SeatsioObject', 'forSale'),
               selectable: BuiltValueNullFieldError.checkNotNull(
-                  selectable, r'SeatsioObject', 'selectable'),
+                  selectable, 'SeatsioObject', 'selectable'),
               seats: seats);
     } catch (_) {
       late String _$failedField;
@@ -374,7 +372,7 @@ class SeatsioObjectBuilder
         _center?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'SeatsioObject', _$failedField, e.toString());
+            'SeatsioObject', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -383,4 +381,4 @@ class SeatsioObjectBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

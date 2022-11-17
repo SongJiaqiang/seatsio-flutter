@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
 
@@ -47,7 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ..eventKey = YourEventKey
       ..enableHoldSucceededCallback = true
       ..enableHoldFailedCallback = true
-      ..enableObjectClickedCallback = false // Set this to false if you want to have the objectToolTip to be shown
+      ..enableObjectClickedCallback =
+          false // Set this to false if you want to have the objectToolTip to be shown
       ..session = "start");
   }
 
