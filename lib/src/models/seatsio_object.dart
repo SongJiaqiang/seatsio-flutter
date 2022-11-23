@@ -65,9 +65,9 @@ abstract class SeatsioObject
         ..label = data["label"]
         ..uuid = data["uuid"]
         ..objectType = data["objectType"]
-        ..labelDetail = SeatsioLabel.fromMap(data["labels"])!.toBuilder()
-        ..category = SeatsioCategory.fromMap(data["category"])!.toBuilder()
-        ..center = SeatsioPoint.fromMap(data["center"])!.toBuilder()
+        ..labelDetail = SeatsioLabel.fromMap(data["labels"])?.toBuilder()
+        ..category = SeatsioCategory.fromMap(data["category"])?.toBuilder()
+        ..center = SeatsioPoint.fromMap(data["center"])?.toBuilder()
         ..status = data["status"] ?? ''
         ..forSale = data["forSale"]
         ..selectable = data["selectable"]
