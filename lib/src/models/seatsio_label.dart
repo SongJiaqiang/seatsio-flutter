@@ -13,7 +13,7 @@ abstract class SeatsioLabel
 
   String get own;
 
-  String get parent;
+  String? get parent;
 
   String? get section;
 

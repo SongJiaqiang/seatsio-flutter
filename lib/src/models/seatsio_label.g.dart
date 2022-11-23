@@ -21,11 +21,15 @@ class _$SeatsioLabelSerializer implements StructuredSerializer<SeatsioLabel> {
     final result = <Object?>[
       'own',
       serializers.serialize(object.own, specifiedType: const FullType(String)),
-      'parent',
-      serializers.serialize(object.parent,
-          specifiedType: const FullType(String)),
     ];
     Object? value;
+    value = object.parent;
+    if (value != null) {
+      result
+        ..add('parent')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.section;
     if (value != null) {
       result
@@ -61,7 +65,7 @@ class _$SeatsioLabelSerializer implements StructuredSerializer<SeatsioLabel> {
           break;
         case 'parent':
           result.parent = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'section':
           result.section = serializers.deserialize(value,
@@ -82,7 +86,7 @@ class _$SeatsioLabel extends SeatsioLabel {
   @override
   final String own;
   @override
-  final String parent;
+  final String? parent;
   @override
   final String? section;
   @override
@@ -92,13 +96,9 @@ class _$SeatsioLabel extends SeatsioLabel {
       (new SeatsioLabelBuilder()..update(updates))._build();
 
   _$SeatsioLabel._(
-      {required this.own,
-      required this.parent,
-      this.section,
-      this.displayedLabel})
+      {required this.own, this.parent, this.section, this.displayedLabel})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(own, r'SeatsioLabel', 'own');
-    BuiltValueNullFieldError.checkNotNull(parent, r'SeatsioLabel', 'parent');
   }
 
   @override
@@ -190,8 +190,7 @@ class SeatsioLabelBuilder
         new _$SeatsioLabel._(
             own: BuiltValueNullFieldError.checkNotNull(
                 own, r'SeatsioLabel', 'own'),
-            parent: BuiltValueNullFieldError.checkNotNull(
-                parent, r'SeatsioLabel', 'parent'),
+            parent: parent,
             section: section,
             displayedLabel: displayedLabel);
     replace(_$result);
