@@ -20,9 +20,9 @@ class _$SeatsioPointSerializer implements StructuredSerializer<SeatsioPoint> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       'x',
-      serializers.serialize(object.x, specifiedType: const FullType(double)),
+      serializers.serialize(object.x, specifiedType: const FullType(num)),
       'y',
-      serializers.serialize(object.y, specifiedType: const FullType(double)),
+      serializers.serialize(object.y, specifiedType: const FullType(num)),
     ];
 
     return result;
@@ -42,11 +42,11 @@ class _$SeatsioPointSerializer implements StructuredSerializer<SeatsioPoint> {
       switch (key) {
         case 'x':
           result.x = serializers.deserialize(value,
-              specifiedType: const FullType(double))! as double;
+              specifiedType: const FullType(num))! as num;
           break;
         case 'y':
           result.y = serializers.deserialize(value,
-              specifiedType: const FullType(double))! as double;
+              specifiedType: const FullType(num))! as num;
           break;
       }
     }
@@ -57,9 +57,9 @@ class _$SeatsioPointSerializer implements StructuredSerializer<SeatsioPoint> {
 
 class _$SeatsioPoint extends SeatsioPoint {
   @override
-  final double x;
+  final num x;
   @override
-  final double y;
+  final num y;
 
   factory _$SeatsioPoint([void Function(SeatsioPointBuilder)? updates]) =>
       (new SeatsioPointBuilder()..update(updates))._build();
@@ -84,7 +84,11 @@ class _$SeatsioPoint extends SeatsioPoint {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, x.hashCode), y.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, x.hashCode);
+    _$hash = $jc(_$hash, y.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -100,13 +104,13 @@ class SeatsioPointBuilder
     implements Builder<SeatsioPoint, SeatsioPointBuilder> {
   _$SeatsioPoint? _$v;
 
-  double? _x;
-  double? get x => _$this._x;
-  set x(double? x) => _$this._x = x;
+  num? _x;
+  num? get x => _$this._x;
+  set x(num? x) => _$this._x = x;
 
-  double? _y;
-  double? get y => _$this._y;
-  set y(double? y) => _$this._y = y;
+  num? _y;
+  num? get y => _$this._y;
+  set y(num? y) => _$this._y = y;
 
   SeatsioPointBuilder();
 
@@ -144,4 +148,4 @@ class SeatsioPointBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

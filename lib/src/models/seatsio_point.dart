@@ -11,9 +11,9 @@ abstract class SeatsioPoint
 
   factory SeatsioPoint([updates(SeatsioPointBuilder b)]) = _$SeatsioPoint;
 
-  double get x;
+  num get x;
 
-  double get y;
+  num get y;
 
   static SeatsioPoint? fromJson(String jsonString) {
     final data = json.decode(jsonString);
