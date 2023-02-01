@@ -1,3 +1,6 @@
+## 0.3.1
+* 🐞 Different coordinate types.
+
 ## 0.3.0
 * 🆕 PriceCategory supports prices of double type.
 * 🆕 onHoldSucceeded/onHoldFailed add callback parameters.
