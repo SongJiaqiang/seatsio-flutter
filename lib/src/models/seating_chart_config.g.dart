@@ -392,17 +392,17 @@ class _$SeatingChartConfigSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'publicKey':
           result.workspaceKey = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'event':
           result.eventKey = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'chart':
           result.chart = serializers.deserialize(value,
@@ -531,7 +531,7 @@ class _$SeatingChartConfigSerializer
           break;
         case 'showLoadingAnimation':
           result.showLoadingAnimation = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'ticketListings':
           result.ticketListings = serializers.deserialize(value,
@@ -592,59 +592,59 @@ class _$SeatingChartConfigSerializer
           break;
         case 'enableChartRenderedCallback':
           result.enableChartRenderedCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableChartRenderingFailedCallback':
           result.enableChartRenderingFailedCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool)) as bool;
+              .deserialize(value, specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableObjectClickedCallback':
           result.enableObjectClickedCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableObjectSelectedCallback':
           result.enableObjectSelectedCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableObjectDeselectedCallback':
           result.enableObjectDeselectedCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableSelectionValidCallback':
           result.enableSelectionValidCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableSelectionInvalidCallback':
           result.enableSelectionInvalidCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableBestAvailableSelectedCallback':
           result.enableBestAvailableSelectedCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool)) as bool;
+              .deserialize(value, specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableBestAvailableSelectionFailedCallback':
           result.enableBestAvailableSelectionFailedCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool)) as bool;
+              .deserialize(value, specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableHoldSucceededCallback':
           result.enableHoldSucceededCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableHoldFailedCallback':
           result.enableHoldFailedCallback = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableReleaseHoldSucceededCallback':
           result.enableReleaseHoldSucceededCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool)) as bool;
+              .deserialize(value, specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableReleaseHoldFailedCallback':
           result.enableReleaseHoldFailedCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool)) as bool;
+              .deserialize(value, specifiedType: const FullType(bool))! as bool;
           break;
         case 'enableSelectedObjectBookedCallback':
           result.enableSelectedObjectBookedCallback = serializers
-              .deserialize(value, specifiedType: const FullType(bool)) as bool;
+              .deserialize(value, specifiedType: const FullType(bool))! as bool;
           break;
       }
     }
@@ -693,13 +693,13 @@ class _$SelectedObjectSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'label':
           result.label = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'ticketType':
           result.ticketType = serializers.deserialize(value,
@@ -763,41 +763,41 @@ class _$ObjectTooltipSerializer implements StructuredSerializer<ObjectTooltip> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'showActionHint':
           result.showActionHint = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'showAvailability':
           result.showAvailability = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'showCategory':
           result.showCategory = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'showLabel':
           result.showLabel = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'showPricing':
           result.showPricing = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'showUnavailableNotice':
           result.showUnavailableNotice = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'stylizedLabel':
           result.stylizedLabel = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'confirmSelectionOnMobile':
           result.confirmSelectionOnMobile = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
       }
     }
@@ -836,17 +836,17 @@ class _$LegendForCategorySerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'hideNonSelectableCategories':
           result.hideNonSelectableCategories = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'hidePricing':
           result.hidePricing = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
       }
     }
@@ -890,13 +890,13 @@ class _$BestAvailableSerializer implements StructuredSerializer<BestAvailable> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'number':
           result.number = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'category':
           result.category.replace(serializers.deserialize(value,
@@ -911,7 +911,7 @@ class _$BestAvailableSerializer implements StructuredSerializer<BestAvailable> {
           break;
         case 'clearSelection':
           result.clearSelection = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
       }
     }
@@ -947,13 +947,13 @@ class _$SelectionValidatorSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'type':
           result.type = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -994,21 +994,21 @@ class _$TicketListingSerializer implements StructuredSerializer<TicketListing> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'section':
           result.section = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'quantity':
           result.quantity = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'price':
           result.price = serializers.deserialize(value,
-              specifiedType: const FullType(double)) as double;
+              specifiedType: const FullType(double))! as double;
           break;
       }
     }
@@ -1137,7 +1137,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
 
   factory _$SeatingChartConfig(
           [void Function(SeatingChartConfigBuilder)? updates]) =>
-      (new SeatingChartConfigBuilder()..update(updates)).build();
+      (new SeatingChartConfigBuilder()..update(updates))._build();
 
   _$SeatingChartConfig._(
       {required this.workspaceKey,
@@ -1200,41 +1200,41 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       required this.enableSelectedObjectBookedCallback})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        workspaceKey, 'SeatingChartConfig', 'workspaceKey');
+        workspaceKey, r'SeatingChartConfig', 'workspaceKey');
     BuiltValueNullFieldError.checkNotNull(
-        eventKey, 'SeatingChartConfig', 'eventKey');
+        eventKey, r'SeatingChartConfig', 'eventKey');
     BuiltValueNullFieldError.checkNotNull(
-        showLoadingAnimation, 'SeatingChartConfig', 'showLoadingAnimation');
+        showLoadingAnimation, r'SeatingChartConfig', 'showLoadingAnimation');
     BuiltValueNullFieldError.checkNotNull(enableChartRenderedCallback,
-        'SeatingChartConfig', 'enableChartRenderedCallback');
+        r'SeatingChartConfig', 'enableChartRenderedCallback');
     BuiltValueNullFieldError.checkNotNull(enableChartRenderingFailedCallback,
-        'SeatingChartConfig', 'enableChartRenderingFailedCallback');
+        r'SeatingChartConfig', 'enableChartRenderingFailedCallback');
     BuiltValueNullFieldError.checkNotNull(enableObjectClickedCallback,
-        'SeatingChartConfig', 'enableObjectClickedCallback');
+        r'SeatingChartConfig', 'enableObjectClickedCallback');
     BuiltValueNullFieldError.checkNotNull(enableObjectSelectedCallback,
-        'SeatingChartConfig', 'enableObjectSelectedCallback');
+        r'SeatingChartConfig', 'enableObjectSelectedCallback');
     BuiltValueNullFieldError.checkNotNull(enableObjectDeselectedCallback,
-        'SeatingChartConfig', 'enableObjectDeselectedCallback');
+        r'SeatingChartConfig', 'enableObjectDeselectedCallback');
     BuiltValueNullFieldError.checkNotNull(enableSelectionValidCallback,
-        'SeatingChartConfig', 'enableSelectionValidCallback');
+        r'SeatingChartConfig', 'enableSelectionValidCallback');
     BuiltValueNullFieldError.checkNotNull(enableSelectionInvalidCallback,
-        'SeatingChartConfig', 'enableSelectionInvalidCallback');
+        r'SeatingChartConfig', 'enableSelectionInvalidCallback');
     BuiltValueNullFieldError.checkNotNull(enableBestAvailableSelectedCallback,
-        'SeatingChartConfig', 'enableBestAvailableSelectedCallback');
+        r'SeatingChartConfig', 'enableBestAvailableSelectedCallback');
     BuiltValueNullFieldError.checkNotNull(
         enableBestAvailableSelectionFailedCallback,
-        'SeatingChartConfig',
+        r'SeatingChartConfig',
         'enableBestAvailableSelectionFailedCallback');
     BuiltValueNullFieldError.checkNotNull(enableHoldSucceededCallback,
-        'SeatingChartConfig', 'enableHoldSucceededCallback');
+        r'SeatingChartConfig', 'enableHoldSucceededCallback');
     BuiltValueNullFieldError.checkNotNull(enableHoldFailedCallback,
-        'SeatingChartConfig', 'enableHoldFailedCallback');
+        r'SeatingChartConfig', 'enableHoldFailedCallback');
     BuiltValueNullFieldError.checkNotNull(enableReleaseHoldSucceededCallback,
-        'SeatingChartConfig', 'enableReleaseHoldSucceededCallback');
+        r'SeatingChartConfig', 'enableReleaseHoldSucceededCallback');
     BuiltValueNullFieldError.checkNotNull(enableReleaseHoldFailedCallback,
-        'SeatingChartConfig', 'enableReleaseHoldFailedCallback');
+        r'SeatingChartConfig', 'enableReleaseHoldFailedCallback');
     BuiltValueNullFieldError.checkNotNull(enableSelectedObjectBookedCallback,
-        'SeatingChartConfig', 'enableSelectedObjectBookedCallback');
+        r'SeatingChartConfig', 'enableSelectedObjectBookedCallback');
   }
 
   @override
@@ -1322,49 +1322,72 @@ class _$SeatingChartConfig extends SeatingChartConfig {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc(
-                            $jc(
-                                $jc(
-                                    $jc(
-                                        $jc(
-                                            $jc(
-                                                $jc(
-                                                    $jc(
-                                                        $jc(
-                                                            $jc(
-                                                                $jc(
-                                                                    $jc(
-                                                                        $jc(
-                                                                            $jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc($jc(0, workspaceKey.hashCode), eventKey.hashCode), chart.hashCode), region.hashCode), language.hashCode), pricing.hashCode), numberOfPlacesToSelect.hashCode), objectWithoutPricingSelectable.hashCode), objectWithoutCategorySelectable.hashCode), selectedObjects.hashCode), objectTooltip.hashCode), themePreset.hashCode), themeColor.hashCode), messages.hashCode), priceLevelsTooltipMessage.hashCode), maxSelectedObjects.hashCode), unavailableCategories.hashCode), selectBestAvailable.hashCode), alwaysShowSectionContents.hashCode), showSectionContents.hashCode), showLegend.hashCode), legend.hashCode), showMinimap.hashCode), showActiveSectionTooltip.hashCode), showViewFromYourSeat.hashCode), selectionValidators.hashCode), categories.hashCode), objectCategories.hashCode), mode.hashCode), loading.hashCode), showLoadingAnimation.hashCode), ticketListings.hashCode), holdOnSelectForGAs.hashCode), holdToken.hashCode), session.hashCode), objectLabel.hashCode), objectIcon.hashCode), isObjectVisible.hashCode), isObjectSelectable.hashCode),
-                                                                                objectColor.hashCode),
-                                                                            sectionColor.hashCode),
-                                                                        extraConfig.hashCode),
-                                                                    showFullScreenButton.hashCode),
-                                                                channels.hashCode),
-                                                            enableChartRenderedCallback.hashCode),
-                                                        enableChartRenderingFailedCallback.hashCode),
-                                                    enableObjectClickedCallback.hashCode),
-                                                enableObjectSelectedCallback.hashCode),
-                                            enableObjectDeselectedCallback.hashCode),
-                                        enableSelectionValidCallback.hashCode),
-                                    enableSelectionInvalidCallback.hashCode),
-                                enableBestAvailableSelectedCallback.hashCode),
-                            enableBestAvailableSelectionFailedCallback.hashCode),
-                        enableHoldSucceededCallback.hashCode),
-                    enableHoldFailedCallback.hashCode),
-                enableReleaseHoldSucceededCallback.hashCode),
-            enableReleaseHoldFailedCallback.hashCode),
-        enableSelectedObjectBookedCallback.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, workspaceKey.hashCode);
+    _$hash = $jc(_$hash, eventKey.hashCode);
+    _$hash = $jc(_$hash, chart.hashCode);
+    _$hash = $jc(_$hash, region.hashCode);
+    _$hash = $jc(_$hash, language.hashCode);
+    _$hash = $jc(_$hash, pricing.hashCode);
+    _$hash = $jc(_$hash, numberOfPlacesToSelect.hashCode);
+    _$hash = $jc(_$hash, objectWithoutPricingSelectable.hashCode);
+    _$hash = $jc(_$hash, objectWithoutCategorySelectable.hashCode);
+    _$hash = $jc(_$hash, selectedObjects.hashCode);
+    _$hash = $jc(_$hash, objectTooltip.hashCode);
+    _$hash = $jc(_$hash, themePreset.hashCode);
+    _$hash = $jc(_$hash, themeColor.hashCode);
+    _$hash = $jc(_$hash, messages.hashCode);
+    _$hash = $jc(_$hash, priceLevelsTooltipMessage.hashCode);
+    _$hash = $jc(_$hash, maxSelectedObjects.hashCode);
+    _$hash = $jc(_$hash, unavailableCategories.hashCode);
+    _$hash = $jc(_$hash, selectBestAvailable.hashCode);
+    _$hash = $jc(_$hash, alwaysShowSectionContents.hashCode);
+    _$hash = $jc(_$hash, showSectionContents.hashCode);
+    _$hash = $jc(_$hash, showLegend.hashCode);
+    _$hash = $jc(_$hash, legend.hashCode);
+    _$hash = $jc(_$hash, showMinimap.hashCode);
+    _$hash = $jc(_$hash, showActiveSectionTooltip.hashCode);
+    _$hash = $jc(_$hash, showViewFromYourSeat.hashCode);
+    _$hash = $jc(_$hash, selectionValidators.hashCode);
+    _$hash = $jc(_$hash, categories.hashCode);
+    _$hash = $jc(_$hash, objectCategories.hashCode);
+    _$hash = $jc(_$hash, mode.hashCode);
+    _$hash = $jc(_$hash, loading.hashCode);
+    _$hash = $jc(_$hash, showLoadingAnimation.hashCode);
+    _$hash = $jc(_$hash, ticketListings.hashCode);
+    _$hash = $jc(_$hash, holdOnSelectForGAs.hashCode);
+    _$hash = $jc(_$hash, holdToken.hashCode);
+    _$hash = $jc(_$hash, session.hashCode);
+    _$hash = $jc(_$hash, objectLabel.hashCode);
+    _$hash = $jc(_$hash, objectIcon.hashCode);
+    _$hash = $jc(_$hash, isObjectVisible.hashCode);
+    _$hash = $jc(_$hash, isObjectSelectable.hashCode);
+    _$hash = $jc(_$hash, objectColor.hashCode);
+    _$hash = $jc(_$hash, sectionColor.hashCode);
+    _$hash = $jc(_$hash, extraConfig.hashCode);
+    _$hash = $jc(_$hash, showFullScreenButton.hashCode);
+    _$hash = $jc(_$hash, channels.hashCode);
+    _$hash = $jc(_$hash, enableChartRenderedCallback.hashCode);
+    _$hash = $jc(_$hash, enableChartRenderingFailedCallback.hashCode);
+    _$hash = $jc(_$hash, enableObjectClickedCallback.hashCode);
+    _$hash = $jc(_$hash, enableObjectSelectedCallback.hashCode);
+    _$hash = $jc(_$hash, enableObjectDeselectedCallback.hashCode);
+    _$hash = $jc(_$hash, enableSelectionValidCallback.hashCode);
+    _$hash = $jc(_$hash, enableSelectionInvalidCallback.hashCode);
+    _$hash = $jc(_$hash, enableBestAvailableSelectedCallback.hashCode);
+    _$hash = $jc(_$hash, enableBestAvailableSelectionFailedCallback.hashCode);
+    _$hash = $jc(_$hash, enableHoldSucceededCallback.hashCode);
+    _$hash = $jc(_$hash, enableHoldFailedCallback.hashCode);
+    _$hash = $jc(_$hash, enableReleaseHoldSucceededCallback.hashCode);
+    _$hash = $jc(_$hash, enableReleaseHoldFailedCallback.hashCode);
+    _$hash = $jc(_$hash, enableSelectedObjectBookedCallback.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SeatingChartConfig')
+    return (newBuiltValueToStringHelper(r'SeatingChartConfig')
           ..add('workspaceKey', workspaceKey)
           ..add('eventKey', eventKey)
           ..add('chart', chart)
@@ -1832,15 +1855,17 @@ class SeatingChartConfigBuilder
   }
 
   @override
-  _$SeatingChartConfig build() {
+  SeatingChartConfig build() => _build();
+
+  _$SeatingChartConfig _build() {
     _$SeatingChartConfig _$result;
     try {
       _$result = _$v ??
           new _$SeatingChartConfig._(
               workspaceKey: BuiltValueNullFieldError.checkNotNull(
-                  workspaceKey, 'SeatingChartConfig', 'workspaceKey'),
+                  workspaceKey, r'SeatingChartConfig', 'workspaceKey'),
               eventKey: BuiltValueNullFieldError.checkNotNull(
-                  eventKey, 'SeatingChartConfig', 'eventKey'),
+                  eventKey, r'SeatingChartConfig', 'eventKey'),
               chart: chart,
               region: region,
               language: language,
@@ -1870,7 +1895,7 @@ class SeatingChartConfigBuilder
               mode: mode,
               loading: loading,
               showLoadingAnimation: BuiltValueNullFieldError.checkNotNull(
-                  showLoadingAnimation, 'SeatingChartConfig', 'showLoadingAnimation'),
+                  showLoadingAnimation, r'SeatingChartConfig', 'showLoadingAnimation'),
               ticketListings: ticketListings,
               holdOnSelectForGAs: holdOnSelectForGAs,
               holdToken: holdToken,
@@ -1885,26 +1910,26 @@ class SeatingChartConfigBuilder
               showFullScreenButton: showFullScreenButton,
               channels: _channels?.build(),
               enableChartRenderedCallback: BuiltValueNullFieldError.checkNotNull(
-                  enableChartRenderedCallback, 'SeatingChartConfig', 'enableChartRenderedCallback'),
+                  enableChartRenderedCallback, r'SeatingChartConfig', 'enableChartRenderedCallback'),
               enableChartRenderingFailedCallback:
                   BuiltValueNullFieldError.checkNotNull(
                       enableChartRenderingFailedCallback,
-                      'SeatingChartConfig',
+                      r'SeatingChartConfig',
                       'enableChartRenderingFailedCallback'),
               enableObjectClickedCallback: BuiltValueNullFieldError.checkNotNull(
-                  enableObjectClickedCallback, 'SeatingChartConfig', 'enableObjectClickedCallback'),
+                  enableObjectClickedCallback, r'SeatingChartConfig', 'enableObjectClickedCallback'),
               enableObjectSelectedCallback:
-                  BuiltValueNullFieldError.checkNotNull(enableObjectSelectedCallback, 'SeatingChartConfig', 'enableObjectSelectedCallback'),
-              enableObjectDeselectedCallback: BuiltValueNullFieldError.checkNotNull(enableObjectDeselectedCallback, 'SeatingChartConfig', 'enableObjectDeselectedCallback'),
-              enableSelectionValidCallback: BuiltValueNullFieldError.checkNotNull(enableSelectionValidCallback, 'SeatingChartConfig', 'enableSelectionValidCallback'),
-              enableSelectionInvalidCallback: BuiltValueNullFieldError.checkNotNull(enableSelectionInvalidCallback, 'SeatingChartConfig', 'enableSelectionInvalidCallback'),
-              enableBestAvailableSelectedCallback: BuiltValueNullFieldError.checkNotNull(enableBestAvailableSelectedCallback, 'SeatingChartConfig', 'enableBestAvailableSelectedCallback'),
-              enableBestAvailableSelectionFailedCallback: BuiltValueNullFieldError.checkNotNull(enableBestAvailableSelectionFailedCallback, 'SeatingChartConfig', 'enableBestAvailableSelectionFailedCallback'),
-              enableHoldSucceededCallback: BuiltValueNullFieldError.checkNotNull(enableHoldSucceededCallback, 'SeatingChartConfig', 'enableHoldSucceededCallback'),
-              enableHoldFailedCallback: BuiltValueNullFieldError.checkNotNull(enableHoldFailedCallback, 'SeatingChartConfig', 'enableHoldFailedCallback'),
-              enableReleaseHoldSucceededCallback: BuiltValueNullFieldError.checkNotNull(enableReleaseHoldSucceededCallback, 'SeatingChartConfig', 'enableReleaseHoldSucceededCallback'),
-              enableReleaseHoldFailedCallback: BuiltValueNullFieldError.checkNotNull(enableReleaseHoldFailedCallback, 'SeatingChartConfig', 'enableReleaseHoldFailedCallback'),
-              enableSelectedObjectBookedCallback: BuiltValueNullFieldError.checkNotNull(enableSelectedObjectBookedCallback, 'SeatingChartConfig', 'enableSelectedObjectBookedCallback'));
+                  BuiltValueNullFieldError.checkNotNull(enableObjectSelectedCallback, r'SeatingChartConfig', 'enableObjectSelectedCallback'),
+              enableObjectDeselectedCallback: BuiltValueNullFieldError.checkNotNull(enableObjectDeselectedCallback, r'SeatingChartConfig', 'enableObjectDeselectedCallback'),
+              enableSelectionValidCallback: BuiltValueNullFieldError.checkNotNull(enableSelectionValidCallback, r'SeatingChartConfig', 'enableSelectionValidCallback'),
+              enableSelectionInvalidCallback: BuiltValueNullFieldError.checkNotNull(enableSelectionInvalidCallback, r'SeatingChartConfig', 'enableSelectionInvalidCallback'),
+              enableBestAvailableSelectedCallback: BuiltValueNullFieldError.checkNotNull(enableBestAvailableSelectedCallback, r'SeatingChartConfig', 'enableBestAvailableSelectedCallback'),
+              enableBestAvailableSelectionFailedCallback: BuiltValueNullFieldError.checkNotNull(enableBestAvailableSelectionFailedCallback, r'SeatingChartConfig', 'enableBestAvailableSelectionFailedCallback'),
+              enableHoldSucceededCallback: BuiltValueNullFieldError.checkNotNull(enableHoldSucceededCallback, r'SeatingChartConfig', 'enableHoldSucceededCallback'),
+              enableHoldFailedCallback: BuiltValueNullFieldError.checkNotNull(enableHoldFailedCallback, r'SeatingChartConfig', 'enableHoldFailedCallback'),
+              enableReleaseHoldSucceededCallback: BuiltValueNullFieldError.checkNotNull(enableReleaseHoldSucceededCallback, r'SeatingChartConfig', 'enableReleaseHoldSucceededCallback'),
+              enableReleaseHoldFailedCallback: BuiltValueNullFieldError.checkNotNull(enableReleaseHoldFailedCallback, r'SeatingChartConfig', 'enableReleaseHoldFailedCallback'),
+              enableSelectedObjectBookedCallback: BuiltValueNullFieldError.checkNotNull(enableSelectedObjectBookedCallback, r'SeatingChartConfig', 'enableSelectedObjectBookedCallback'));
     } catch (_) {
       late String _$failedField;
       try {
@@ -1941,7 +1966,7 @@ class SeatingChartConfigBuilder
         _channels?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'SeatingChartConfig', _$failedField, e.toString());
+            r'SeatingChartConfig', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -1959,11 +1984,11 @@ class _$SelectedObject extends SelectedObject {
   final int? amount;
 
   factory _$SelectedObject([void Function(SelectedObjectBuilder)? updates]) =>
-      (new SelectedObjectBuilder()..update(updates)).build();
+      (new SelectedObjectBuilder()..update(updates))._build();
 
   _$SelectedObject._({required this.label, this.ticketType, this.amount})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(label, 'SelectedObject', 'label');
+    BuiltValueNullFieldError.checkNotNull(label, r'SelectedObject', 'label');
   }
 
   @override
@@ -1985,13 +2010,17 @@ class _$SelectedObject extends SelectedObject {
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, label.hashCode), ticketType.hashCode), amount.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, label.hashCode);
+    _$hash = $jc(_$hash, ticketType.hashCode);
+    _$hash = $jc(_$hash, amount.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SelectedObject')
+    return (newBuiltValueToStringHelper(r'SelectedObject')
           ..add('label', label)
           ..add('ticketType', ticketType)
           ..add('amount', amount))
@@ -2040,11 +2069,13 @@ class SelectedObjectBuilder
   }
 
   @override
-  _$SelectedObject build() {
+  SelectedObject build() => _build();
+
+  _$SelectedObject _build() {
     final _$result = _$v ??
         new _$SelectedObject._(
             label: BuiltValueNullFieldError.checkNotNull(
-                label, 'SelectedObject', 'label'),
+                label, r'SelectedObject', 'label'),
             ticketType: ticketType,
             amount: amount);
     replace(_$result);
@@ -2071,7 +2102,7 @@ class _$ObjectTooltip extends ObjectTooltip {
   final bool confirmSelectionOnMobile;
 
   factory _$ObjectTooltip([void Function(ObjectTooltipBuilder)? updates]) =>
-      (new ObjectTooltipBuilder()..update(updates)).build();
+      (new ObjectTooltipBuilder()..update(updates))._build();
 
   _$ObjectTooltip._(
       {required this.showActionHint,
@@ -2084,21 +2115,21 @@ class _$ObjectTooltip extends ObjectTooltip {
       required this.confirmSelectionOnMobile})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        showActionHint, 'ObjectTooltip', 'showActionHint');
+        showActionHint, r'ObjectTooltip', 'showActionHint');
     BuiltValueNullFieldError.checkNotNull(
-        showAvailability, 'ObjectTooltip', 'showAvailability');
+        showAvailability, r'ObjectTooltip', 'showAvailability');
     BuiltValueNullFieldError.checkNotNull(
-        showCategory, 'ObjectTooltip', 'showCategory');
+        showCategory, r'ObjectTooltip', 'showCategory');
     BuiltValueNullFieldError.checkNotNull(
-        showLabel, 'ObjectTooltip', 'showLabel');
+        showLabel, r'ObjectTooltip', 'showLabel');
     BuiltValueNullFieldError.checkNotNull(
-        showPricing, 'ObjectTooltip', 'showPricing');
+        showPricing, r'ObjectTooltip', 'showPricing');
     BuiltValueNullFieldError.checkNotNull(
-        showUnavailableNotice, 'ObjectTooltip', 'showUnavailableNotice');
+        showUnavailableNotice, r'ObjectTooltip', 'showUnavailableNotice');
     BuiltValueNullFieldError.checkNotNull(
-        stylizedLabel, 'ObjectTooltip', 'stylizedLabel');
+        stylizedLabel, r'ObjectTooltip', 'stylizedLabel');
     BuiltValueNullFieldError.checkNotNull(
-        confirmSelectionOnMobile, 'ObjectTooltip', 'confirmSelectionOnMobile');
+        confirmSelectionOnMobile, r'ObjectTooltip', 'confirmSelectionOnMobile');
   }
 
   @override
@@ -2124,25 +2155,22 @@ class _$ObjectTooltip extends ObjectTooltip {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc(
-                            $jc($jc(0, showActionHint.hashCode),
-                                showAvailability.hashCode),
-                            showCategory.hashCode),
-                        showLabel.hashCode),
-                    showPricing.hashCode),
-                showUnavailableNotice.hashCode),
-            stylizedLabel.hashCode),
-        confirmSelectionOnMobile.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, showActionHint.hashCode);
+    _$hash = $jc(_$hash, showAvailability.hashCode);
+    _$hash = $jc(_$hash, showCategory.hashCode);
+    _$hash = $jc(_$hash, showLabel.hashCode);
+    _$hash = $jc(_$hash, showPricing.hashCode);
+    _$hash = $jc(_$hash, showUnavailableNotice.hashCode);
+    _$hash = $jc(_$hash, stylizedLabel.hashCode);
+    _$hash = $jc(_$hash, confirmSelectionOnMobile.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ObjectTooltip')
+    return (newBuiltValueToStringHelper(r'ObjectTooltip')
           ..add('showActionHint', showActionHint)
           ..add('showAvailability', showAvailability)
           ..add('showCategory', showCategory)
@@ -2226,25 +2254,27 @@ class ObjectTooltipBuilder
   }
 
   @override
-  _$ObjectTooltip build() {
+  ObjectTooltip build() => _build();
+
+  _$ObjectTooltip _build() {
     final _$result = _$v ??
         new _$ObjectTooltip._(
             showActionHint: BuiltValueNullFieldError.checkNotNull(
-                showActionHint, 'ObjectTooltip', 'showActionHint'),
+                showActionHint, r'ObjectTooltip', 'showActionHint'),
             showAvailability: BuiltValueNullFieldError.checkNotNull(
-                showAvailability, 'ObjectTooltip', 'showAvailability'),
+                showAvailability, r'ObjectTooltip', 'showAvailability'),
             showCategory: BuiltValueNullFieldError.checkNotNull(
-                showCategory, 'ObjectTooltip', 'showCategory'),
+                showCategory, r'ObjectTooltip', 'showCategory'),
             showLabel: BuiltValueNullFieldError.checkNotNull(
-                showLabel, 'ObjectTooltip', 'showLabel'),
+                showLabel, r'ObjectTooltip', 'showLabel'),
             showPricing: BuiltValueNullFieldError.checkNotNull(
-                showPricing, 'ObjectTooltip', 'showPricing'),
+                showPricing, r'ObjectTooltip', 'showPricing'),
             showUnavailableNotice: BuiltValueNullFieldError.checkNotNull(
-                showUnavailableNotice, 'ObjectTooltip', 'showUnavailableNotice'),
+                showUnavailableNotice, r'ObjectTooltip', 'showUnavailableNotice'),
             stylizedLabel: BuiltValueNullFieldError.checkNotNull(
-                stylizedLabel, 'ObjectTooltip', 'stylizedLabel'),
+                stylizedLabel, r'ObjectTooltip', 'stylizedLabel'),
             confirmSelectionOnMobile: BuiltValueNullFieldError.checkNotNull(
-                confirmSelectionOnMobile, 'ObjectTooltip', 'confirmSelectionOnMobile'));
+                confirmSelectionOnMobile, r'ObjectTooltip', 'confirmSelectionOnMobile'));
     replace(_$result);
     return _$result;
   }
@@ -2258,15 +2288,15 @@ class _$LegendForCategory extends LegendForCategory {
 
   factory _$LegendForCategory(
           [void Function(LegendForCategoryBuilder)? updates]) =>
-      (new LegendForCategoryBuilder()..update(updates)).build();
+      (new LegendForCategoryBuilder()..update(updates))._build();
 
   _$LegendForCategory._(
       {required this.hideNonSelectableCategories, required this.hidePricing})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(hideNonSelectableCategories,
-        'LegendForCategory', 'hideNonSelectableCategories');
+        r'LegendForCategory', 'hideNonSelectableCategories');
     BuiltValueNullFieldError.checkNotNull(
-        hidePricing, 'LegendForCategory', 'hidePricing');
+        hidePricing, r'LegendForCategory', 'hidePricing');
   }
 
   @override
@@ -2287,13 +2317,16 @@ class _$LegendForCategory extends LegendForCategory {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(0, hideNonSelectableCategories.hashCode), hidePricing.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, hideNonSelectableCategories.hashCode);
+    _$hash = $jc(_$hash, hidePricing.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('LegendForCategory')
+    return (newBuiltValueToStringHelper(r'LegendForCategory')
           ..add('hideNonSelectableCategories', hideNonSelectableCategories)
           ..add('hidePricing', hidePricing))
         .toString();
@@ -2337,15 +2370,17 @@ class LegendForCategoryBuilder
   }
 
   @override
-  _$LegendForCategory build() {
+  LegendForCategory build() => _build();
+
+  _$LegendForCategory _build() {
     final _$result = _$v ??
         new _$LegendForCategory._(
             hideNonSelectableCategories: BuiltValueNullFieldError.checkNotNull(
                 hideNonSelectableCategories,
-                'LegendForCategory',
+                r'LegendForCategory',
                 'hideNonSelectableCategories'),
             hidePricing: BuiltValueNullFieldError.checkNotNull(
-                hidePricing, 'LegendForCategory', 'hidePricing'));
+                hidePricing, r'LegendForCategory', 'hidePricing'));
     replace(_$result);
     return _$result;
   }
@@ -2362,7 +2397,7 @@ class _$BestAvailable extends BestAvailable {
   final bool clearSelection;
 
   factory _$BestAvailable([void Function(BestAvailableBuilder)? updates]) =>
-      (new BestAvailableBuilder()..update(updates)).build();
+      (new BestAvailableBuilder()..update(updates))._build();
 
   _$BestAvailable._(
       {required this.number,
@@ -2370,13 +2405,13 @@ class _$BestAvailable extends BestAvailable {
       required this.ticketTypes,
       required this.clearSelection})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(number, 'BestAvailable', 'number');
+    BuiltValueNullFieldError.checkNotNull(number, r'BestAvailable', 'number');
     BuiltValueNullFieldError.checkNotNull(
-        category, 'BestAvailable', 'category');
+        category, r'BestAvailable', 'category');
     BuiltValueNullFieldError.checkNotNull(
-        ticketTypes, 'BestAvailable', 'ticketTypes');
+        ticketTypes, r'BestAvailable', 'ticketTypes');
     BuiltValueNullFieldError.checkNotNull(
-        clearSelection, 'BestAvailable', 'clearSelection');
+        clearSelection, r'BestAvailable', 'clearSelection');
   }
 
   @override
@@ -2398,15 +2433,18 @@ class _$BestAvailable extends BestAvailable {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc(0, number.hashCode), category.hashCode),
-            ticketTypes.hashCode),
-        clearSelection.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, number.hashCode);
+    _$hash = $jc(_$hash, category.hashCode);
+    _$hash = $jc(_$hash, ticketTypes.hashCode);
+    _$hash = $jc(_$hash, clearSelection.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('BestAvailable')
+    return (newBuiltValueToStringHelper(r'BestAvailable')
           ..add('number', number)
           ..add('category', category)
           ..add('ticketTypes', ticketTypes)
@@ -2465,17 +2503,19 @@ class BestAvailableBuilder
   }
 
   @override
-  _$BestAvailable build() {
+  BestAvailable build() => _build();
+
+  _$BestAvailable _build() {
     _$BestAvailable _$result;
     try {
       _$result = _$v ??
           new _$BestAvailable._(
               number: BuiltValueNullFieldError.checkNotNull(
-                  number, 'BestAvailable', 'number'),
+                  number, r'BestAvailable', 'number'),
               category: category.build(),
               ticketTypes: ticketTypes.build(),
               clearSelection: BuiltValueNullFieldError.checkNotNull(
-                  clearSelection, 'BestAvailable', 'clearSelection'));
+                  clearSelection, r'BestAvailable', 'clearSelection'));
     } catch (_) {
       late String _$failedField;
       try {
@@ -2485,7 +2525,7 @@ class BestAvailableBuilder
         ticketTypes.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'BestAvailable', _$failedField, e.toString());
+            r'BestAvailable', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -2500,10 +2540,10 @@ class _$SelectionValidator extends SelectionValidator {
 
   factory _$SelectionValidator(
           [void Function(SelectionValidatorBuilder)? updates]) =>
-      (new SelectionValidatorBuilder()..update(updates)).build();
+      (new SelectionValidatorBuilder()..update(updates))._build();
 
   _$SelectionValidator._({required this.type}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(type, 'SelectionValidator', 'type');
+    BuiltValueNullFieldError.checkNotNull(type, r'SelectionValidator', 'type');
   }
 
   @override
@@ -2523,12 +2563,15 @@ class _$SelectionValidator extends SelectionValidator {
 
   @override
   int get hashCode {
-    return $jf($jc(0, type.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, type.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SelectionValidator')
+    return (newBuiltValueToStringHelper(r'SelectionValidator')
           ..add('type', type))
         .toString();
   }
@@ -2565,11 +2608,13 @@ class SelectionValidatorBuilder
   }
 
   @override
-  _$SelectionValidator build() {
+  SelectionValidator build() => _build();
+
+  _$SelectionValidator _build() {
     final _$result = _$v ??
         new _$SelectionValidator._(
             type: BuiltValueNullFieldError.checkNotNull(
-                type, 'SelectionValidator', 'type'));
+                type, r'SelectionValidator', 'type'));
     replace(_$result);
     return _$result;
   }
@@ -2584,15 +2629,15 @@ class _$TicketListing extends TicketListing {
   final double price;
 
   factory _$TicketListing([void Function(TicketListingBuilder)? updates]) =>
-      (new TicketListingBuilder()..update(updates)).build();
+      (new TicketListingBuilder()..update(updates))._build();
 
   _$TicketListing._(
       {required this.section, required this.quantity, required this.price})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(section, 'TicketListing', 'section');
+    BuiltValueNullFieldError.checkNotNull(section, r'TicketListing', 'section');
     BuiltValueNullFieldError.checkNotNull(
-        quantity, 'TicketListing', 'quantity');
-    BuiltValueNullFieldError.checkNotNull(price, 'TicketListing', 'price');
+        quantity, r'TicketListing', 'quantity');
+    BuiltValueNullFieldError.checkNotNull(price, r'TicketListing', 'price');
   }
 
   @override
@@ -2613,13 +2658,17 @@ class _$TicketListing extends TicketListing {
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, section.hashCode), quantity.hashCode), price.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, section.hashCode);
+    _$hash = $jc(_$hash, quantity.hashCode);
+    _$hash = $jc(_$hash, price.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('TicketListing')
+    return (newBuiltValueToStringHelper(r'TicketListing')
           ..add('section', section)
           ..add('quantity', quantity)
           ..add('price', price))
@@ -2668,18 +2717,20 @@ class TicketListingBuilder
   }
 
   @override
-  _$TicketListing build() {
+  TicketListing build() => _build();
+
+  _$TicketListing _build() {
     final _$result = _$v ??
         new _$TicketListing._(
             section: BuiltValueNullFieldError.checkNotNull(
-                section, 'TicketListing', 'section'),
+                section, r'TicketListing', 'section'),
             quantity: BuiltValueNullFieldError.checkNotNull(
-                quantity, 'TicketListing', 'quantity'),
+                quantity, r'TicketListing', 'quantity'),
             price: BuiltValueNullFieldError.checkNotNull(
-                price, 'TicketListing', 'price'));
+                price, r'TicketListing', 'price'));
     replace(_$result);
     return _$result;
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint
