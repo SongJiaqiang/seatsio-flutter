@@ -1,3 +1,6 @@
+## 0.3.2
+* 🆕 Expose WebView.gestureRecognizers property.
+
 ## 0.3.1
 * 🐞 Different coordinate types.
 
