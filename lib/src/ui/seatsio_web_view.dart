@@ -1,9 +1,13 @@
 import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 import '../models/seating_chart.dart';
-import '../models/seatsio_category.dart';
 import '../models/seating_chart_config.dart';
+import '../models/seatsio_category.dart';
 import '../models/seatsio_object.dart';
 import '../util/seatsio_web_view_controller.dart';
 
@@ -28,6 +32,7 @@ class SeatsioWebView extends StatefulWidget {
     SeatsioObjectsTicketTypesCallback? onReleaseHoldSucceeded,
     SeatsioObjectsTicketTypesCallback? onReleaseHoldFailed,
     SeatsioObjectCallback? onSelectedObjectBooked,
+    Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   })  : this._enableDebug = enableDebug,
         this._initialUrl = initialUrl,
         this._onWebViewCreated = onWebViewCreated,
@@ -46,6 +51,7 @@ class SeatsioWebView extends StatefulWidget {
         this._onReleaseHoldSucceeded = onReleaseHoldSucceeded,
         this._onReleaseHoldFailed = onReleaseHoldFailed,
         this._onSelectedObjectBooked = onSelectedObjectBooked,
+        this._gestureRecognizers = gestureRecognizers,
         super(key: key);
 
   /// Output some log if setting the [enableDebug] to true.
@@ -91,6 +97,8 @@ class SeatsioWebView extends StatefulWidget {
 
   final SeatsioObjectCallback? _onSelectedObjectBooked;
 
+  final Set<Factory<OneSequenceGestureRecognizer>>? _gestureRecognizers;
+
   @override
   State<StatefulWidget> createState() => _SeatsioWebViewState();
 }
@@ -118,6 +126,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
         widget._onWebViewCreated?.call(_seatsioController);
       },
       javascriptChannels: _javascriptChannels(),
+      gestureRecognizers: widget._gestureRecognizers,
     );
   }
 
