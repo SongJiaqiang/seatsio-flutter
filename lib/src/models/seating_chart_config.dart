@@ -296,6 +296,10 @@ abstract class SeatingChartConfig
       }
     }
 
+    if (maxSelectedObjects != null) {
+      configMap["maxSelectedObjects"] = maxSelectedObjects!;
+    }
+
     if (extraConfig != null) {
       configMap["extraConfig"] = extraConfig!.toMap().toString();
     }
