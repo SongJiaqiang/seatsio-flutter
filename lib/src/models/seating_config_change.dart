@@ -17,7 +17,7 @@ abstract class SeatingConfigChange
 
   String? get objectIcon;
 
-  int? get maxSelectedObjects;
+  List<Map<String, dynamic>>? get maxSelectedObjects;
 
   BuiltMap<String, String>? get extraConfig;
 

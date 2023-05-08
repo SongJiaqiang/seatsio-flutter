@@ -50,7 +50,11 @@ class _$SeatingConfigChangeSerializer
     if (value != null) {
       result
         ..add('maxSelectedObjects')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(List, const [
+              const FullType(
+                  Map, const [const FullType(String), const FullType(dynamic)])
+            ])));
     }
     value = object.extraConfig;
     if (value != null) {
@@ -113,7 +117,10 @@ class _$SeatingConfigChangeSerializer
           break;
         case 'maxSelectedObjects':
           result.maxSelectedObjects = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
+              specifiedType: const FullType(List, const [
+                const FullType(Map,
+                    const [const FullType(String), const FullType(dynamic)])
+              ])) as List<Map<String, dynamic>>?;
           break;
         case 'extraConfig':
           result.extraConfig.replace(serializers.deserialize(value,
@@ -153,7 +160,7 @@ class _$SeatingConfigChange extends SeatingConfigChange {
   @override
   final String? objectIcon;
   @override
-  final int? maxSelectedObjects;
+  final List<Map<String, dynamic>>? maxSelectedObjects;
   @override
   final BuiltMap<String, String>? extraConfig;
   @override
@@ -247,9 +254,10 @@ class SeatingConfigChangeBuilder
   String? get objectIcon => _$this._objectIcon;
   set objectIcon(String? objectIcon) => _$this._objectIcon = objectIcon;
 
-  int? _maxSelectedObjects;
-  int? get maxSelectedObjects => _$this._maxSelectedObjects;
-  set maxSelectedObjects(int? maxSelectedObjects) =>
+  List<Map<String, dynamic>>? _maxSelectedObjects;
+  List<Map<String, dynamic>>? get maxSelectedObjects =>
+      _$this._maxSelectedObjects;
+  set maxSelectedObjects(List<Map<String, dynamic>>? maxSelectedObjects) =>
       _$this._maxSelectedObjects = maxSelectedObjects;
 
   MapBuilder<String, String>? _extraConfig;

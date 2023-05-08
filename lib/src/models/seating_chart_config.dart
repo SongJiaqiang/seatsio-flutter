@@ -114,7 +114,7 @@ abstract class SeatingChartConfig
 
   String? get priceLevelsTooltipMessage;
 
-  int? get maxSelectedObjects;
+  List<Map<String, dynamic>>? get maxSelectedObjects;
 
   BuiltList<String>? get unavailableCategories;
 

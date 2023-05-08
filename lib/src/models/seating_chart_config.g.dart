@@ -183,7 +183,11 @@ class _$SeatingChartConfigSerializer
     if (value != null) {
       result
         ..add('maxSelectedObjects')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(List, const [
+              const FullType(
+                  Map, const [const FullType(String), const FullType(dynamic)])
+            ])));
     }
     value = object.unavailableCategories;
     if (value != null) {
@@ -463,7 +467,10 @@ class _$SeatingChartConfigSerializer
           break;
         case 'maxSelectedObjects':
           result.maxSelectedObjects = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
+              specifiedType: const FullType(List, const [
+                const FullType(Map,
+                    const [const FullType(String), const FullType(dynamic)])
+              ])) as List<Map<String, dynamic>>?;
           break;
         case 'unavailableCategories':
           result.unavailableCategories.replace(serializers.deserialize(value,
@@ -1049,7 +1056,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String? priceLevelsTooltipMessage;
   @override
-  final int? maxSelectedObjects;
+  final List<Map<String, dynamic>>? maxSelectedObjects;
   @override
   final BuiltList<String>? unavailableCategories;
   @override
@@ -1538,9 +1545,10 @@ class SeatingChartConfigBuilder
   set priceLevelsTooltipMessage(String? priceLevelsTooltipMessage) =>
       _$this._priceLevelsTooltipMessage = priceLevelsTooltipMessage;
 
-  int? _maxSelectedObjects;
-  int? get maxSelectedObjects => _$this._maxSelectedObjects;
-  set maxSelectedObjects(int? maxSelectedObjects) =>
+  List<Map<String, dynamic>>? _maxSelectedObjects;
+  List<Map<String, dynamic>>? get maxSelectedObjects =>
+      _$this._maxSelectedObjects;
+  set maxSelectedObjects(List<Map<String, dynamic>>? maxSelectedObjects) =>
       _$this._maxSelectedObjects = maxSelectedObjects;
 
   ListBuilder<String>? _unavailableCategories;
