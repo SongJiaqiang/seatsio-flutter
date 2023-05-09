@@ -116,6 +116,8 @@ abstract class SeatingChartConfig
 
   int? get maxSelectedObjects;
 
+  BuiltList<String>? get availableCategories;
+
   BuiltList<String>? get unavailableCategories;
 
   BestAvailable? get selectBestAvailable;
@@ -296,6 +298,10 @@ abstract class SeatingChartConfig
 
     if (extraConfig != null) {
       configMap["extraConfig"] = extraConfig!.toMap().toString();
+    }
+
+    if (availableCategories != null && availableCategories!.isNotEmpty) {
+      configMap["availableCategories"] = availableCategories!.toList();
     }
 
     if (unavailableCategories != null && unavailableCategories!.isNotEmpty) {
