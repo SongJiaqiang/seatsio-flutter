@@ -1,3 +1,6 @@
+## 0.3.3
+* 🆕 Add more attributes.
+
 ## 0.3.2
 * 🆕 Expose WebView.gestureRecognizers property.
 
