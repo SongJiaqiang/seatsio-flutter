@@ -183,10 +183,16 @@ class _$SeatingChartConfigSerializer
     if (value != null) {
       result
         ..add('maxSelectedObjects')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.maxSelectedObjectList;
+    if (value != null) {
+      result
+        ..add('maxSelectedObjectList')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(BuiltList, const [
-              const FullType(BuiltMap,
-                  const [const FullType(String), const FullType(dynamic)])
+            specifiedType: const FullType(List, const [
+              const FullType(
+                  Map, const [const FullType(String), const FullType(dynamic)])
             ])));
     }
     value = object.availableCategories;
@@ -474,11 +480,15 @@ class _$SeatingChartConfigSerializer
               specifiedType: const FullType(String)) as String?;
           break;
         case 'maxSelectedObjects':
-          result.maxSelectedObjects.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [
-                const FullType(BuiltMap,
+          result.maxSelectedObjects = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'maxSelectedObjectList':
+          result.maxSelectedObjectList = serializers.deserialize(value,
+              specifiedType: const FullType(List, const [
+                const FullType(Map,
                     const [const FullType(String), const FullType(dynamic)])
-              ]))! as BuiltList<Object?>);
+              ])) as List<Map<String, dynamic>>?;
           break;
         case 'availableCategories':
           result.availableCategories.replace(serializers.deserialize(value,
@@ -1070,7 +1080,9 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final String? priceLevelsTooltipMessage;
   @override
-  final BuiltList<BuiltMap<String, dynamic>>? maxSelectedObjects;
+  final int? maxSelectedObjects;
+  @override
+  final List<Map<String, dynamic>>? maxSelectedObjectList;
   @override
   final BuiltList<String>? availableCategories;
   @override
@@ -1179,6 +1191,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.messages,
       this.priceLevelsTooltipMessage,
       this.maxSelectedObjects,
+      this.maxSelectedObjectList,
       this.availableCategories,
       this.unavailableCategories,
       this.selectBestAvailable,
@@ -1292,6 +1305,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         messages == other.messages &&
         priceLevelsTooltipMessage == other.priceLevelsTooltipMessage &&
         maxSelectedObjects == other.maxSelectedObjects &&
+        maxSelectedObjectList == other.maxSelectedObjectList &&
         availableCategories == other.availableCategories &&
         unavailableCategories == other.unavailableCategories &&
         selectBestAvailable == other.selectBestAvailable &&
@@ -1364,6 +1378,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, messages.hashCode);
     _$hash = $jc(_$hash, priceLevelsTooltipMessage.hashCode);
     _$hash = $jc(_$hash, maxSelectedObjects.hashCode);
+    _$hash = $jc(_$hash, maxSelectedObjectList.hashCode);
     _$hash = $jc(_$hash, availableCategories.hashCode);
     _$hash = $jc(_$hash, unavailableCategories.hashCode);
     _$hash = $jc(_$hash, selectBestAvailable.hashCode);
@@ -1432,6 +1447,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('messages', messages)
           ..add('priceLevelsTooltipMessage', priceLevelsTooltipMessage)
           ..add('maxSelectedObjects', maxSelectedObjects)
+          ..add('maxSelectedObjectList', maxSelectedObjectList)
           ..add('availableCategories', availableCategories)
           ..add('unavailableCategories', unavailableCategories)
           ..add('selectBestAvailable', selectBestAvailable)
@@ -1565,13 +1581,17 @@ class SeatingChartConfigBuilder
   set priceLevelsTooltipMessage(String? priceLevelsTooltipMessage) =>
       _$this._priceLevelsTooltipMessage = priceLevelsTooltipMessage;
 
-  ListBuilder<BuiltMap<String, dynamic>>? _maxSelectedObjects;
-  ListBuilder<BuiltMap<String, dynamic>> get maxSelectedObjects =>
-      _$this._maxSelectedObjects ??=
-          new ListBuilder<BuiltMap<String, dynamic>>();
-  set maxSelectedObjects(
-          ListBuilder<BuiltMap<String, dynamic>>? maxSelectedObjects) =>
+  int? _maxSelectedObjects;
+  int? get maxSelectedObjects => _$this._maxSelectedObjects;
+  set maxSelectedObjects(int? maxSelectedObjects) =>
       _$this._maxSelectedObjects = maxSelectedObjects;
+
+  List<Map<String, dynamic>>? _maxSelectedObjectList;
+  List<Map<String, dynamic>>? get maxSelectedObjectList =>
+      _$this._maxSelectedObjectList;
+  set maxSelectedObjectList(
+          List<Map<String, dynamic>>? maxSelectedObjectList) =>
+      _$this._maxSelectedObjectList = maxSelectedObjectList;
 
   ListBuilder<String>? _availableCategories;
   ListBuilder<String> get availableCategories =>
@@ -1826,7 +1846,8 @@ class SeatingChartConfigBuilder
       _themeColor = $v.themeColor;
       _messages = $v.messages?.toBuilder();
       _priceLevelsTooltipMessage = $v.priceLevelsTooltipMessage;
-      _maxSelectedObjects = $v.maxSelectedObjects?.toBuilder();
+      _maxSelectedObjects = $v.maxSelectedObjects;
+      _maxSelectedObjectList = $v.maxSelectedObjectList;
       _availableCategories = $v.availableCategories?.toBuilder();
       _unavailableCategories = $v.unavailableCategories?.toBuilder();
       _selectBestAvailable = $v.selectBestAvailable?.toBuilder();
@@ -1916,7 +1937,8 @@ class SeatingChartConfigBuilder
               themeColor: themeColor,
               messages: _messages?.build(),
               priceLevelsTooltipMessage: priceLevelsTooltipMessage,
-              maxSelectedObjects: _maxSelectedObjects?.build(),
+              maxSelectedObjects: maxSelectedObjects,
+              maxSelectedObjectList: maxSelectedObjectList,
               availableCategories: _availableCategories?.build(),
               unavailableCategories: _unavailableCategories?.build(),
               selectBestAvailable: _selectBestAvailable?.build(),
@@ -1982,8 +2004,6 @@ class SeatingChartConfigBuilder
         _$failedField = 'messages';
         _messages?.build();
 
-        _$failedField = 'maxSelectedObjects';
-        _maxSelectedObjects?.build();
         _$failedField = 'availableCategories';
         _availableCategories?.build();
         _$failedField = 'unavailableCategories';

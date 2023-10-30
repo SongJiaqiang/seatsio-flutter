@@ -17,11 +17,11 @@ abstract class SeatingConfigChange
 
   String? get objectIcon;
 
-  /// [maxSelectedObjects] is an unverified attribute.
-  /// If you have any questions, you are welcome to ask your questions, or directly submit a pull request to the git repository.
-  /// https://github.com/SongJiaqiang/seatsio-flutter/issues
   /// See more: https://docs.seats.io/docs/renderer/config-maxselectedobjects/
-  List<Map<String, dynamic>>? get maxSelectedObjects;
+  int? get maxSelectedObjects;
+
+  /// If [maxSelectedObjectList] is not null, it replaces [maxSelectedObjectList].
+  List<Map<String, dynamic>>? get maxSelectedObjectList;
 
   BuiltMap<String, String>? get extraConfig;
 
@@ -36,19 +36,21 @@ abstract class SeatingConfigChange
     final Map<String, Object?> configMap = {};
 
     if (objectColor != null) {
-      configMap["objectColor"] = objectColor!;
+      configMap["objectColor"] = objectColor;
     }
 
     if (objectIcon != null) {
-      configMap["objectIcon"] = objectIcon!;
+      configMap["objectIcon"] = objectIcon;
     }
 
     if (objectLabel != null) {
-      configMap["objectLabel"] = objectLabel!;
+      configMap["objectLabel"] = objectLabel;
     }
 
-    if (maxSelectedObjects != null) {
-      configMap["maxSelectedObjects"] = maxSelectedObjects!;
+    if (maxSelectedObjectList != null) {
+      configMap["maxSelectedObjects"] = maxSelectedObjectList;
+    } else if (maxSelectedObjects != null) {
+      configMap["maxSelectedObjects"] = maxSelectedObjects;
     }
 
     if (extraConfig != null) {
