@@ -31,12 +31,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
               BuiltMap, const [const FullType(String), const FullType(String)]),
           () => new MapBuilder<String, String>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [
-            const FullType(BuiltMap,
-                const [const FullType(String), const FullType(dynamic)])
-          ]),
-          () => new ListBuilder<BuiltMap<String, dynamic>>())
-      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())
       ..addBuilderFactory(

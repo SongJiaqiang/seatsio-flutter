@@ -50,6 +50,12 @@ class _$SeatingConfigChangeSerializer
     if (value != null) {
       result
         ..add('maxSelectedObjects')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.maxSelectedObjectList;
+    if (value != null) {
+      result
+        ..add('maxSelectedObjectList')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(List, const [
               const FullType(
@@ -117,6 +123,10 @@ class _$SeatingConfigChangeSerializer
           break;
         case 'maxSelectedObjects':
           result.maxSelectedObjects = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'maxSelectedObjectList':
+          result.maxSelectedObjectList = serializers.deserialize(value,
               specifiedType: const FullType(List, const [
                 const FullType(Map,
                     const [const FullType(String), const FullType(dynamic)])
@@ -160,7 +170,9 @@ class _$SeatingConfigChange extends SeatingConfigChange {
   @override
   final String? objectIcon;
   @override
-  final List<Map<String, dynamic>>? maxSelectedObjects;
+  final int? maxSelectedObjects;
+  @override
+  final List<Map<String, dynamic>>? maxSelectedObjectList;
   @override
   final BuiltMap<String, String>? extraConfig;
   @override
@@ -179,6 +191,7 @@ class _$SeatingConfigChange extends SeatingConfigChange {
       this.objectLabel,
       this.objectIcon,
       this.maxSelectedObjects,
+      this.maxSelectedObjectList,
       this.extraConfig,
       this.availableCategories,
       this.unavailableCategories,
@@ -202,6 +215,7 @@ class _$SeatingConfigChange extends SeatingConfigChange {
         objectLabel == other.objectLabel &&
         objectIcon == other.objectIcon &&
         maxSelectedObjects == other.maxSelectedObjects &&
+        maxSelectedObjectList == other.maxSelectedObjectList &&
         extraConfig == other.extraConfig &&
         availableCategories == other.availableCategories &&
         unavailableCategories == other.unavailableCategories &&
@@ -215,6 +229,7 @@ class _$SeatingConfigChange extends SeatingConfigChange {
     _$hash = $jc(_$hash, objectLabel.hashCode);
     _$hash = $jc(_$hash, objectIcon.hashCode);
     _$hash = $jc(_$hash, maxSelectedObjects.hashCode);
+    _$hash = $jc(_$hash, maxSelectedObjectList.hashCode);
     _$hash = $jc(_$hash, extraConfig.hashCode);
     _$hash = $jc(_$hash, availableCategories.hashCode);
     _$hash = $jc(_$hash, unavailableCategories.hashCode);
@@ -230,6 +245,7 @@ class _$SeatingConfigChange extends SeatingConfigChange {
           ..add('objectLabel', objectLabel)
           ..add('objectIcon', objectIcon)
           ..add('maxSelectedObjects', maxSelectedObjects)
+          ..add('maxSelectedObjectList', maxSelectedObjectList)
           ..add('extraConfig', extraConfig)
           ..add('availableCategories', availableCategories)
           ..add('unavailableCategories', unavailableCategories)
@@ -254,11 +270,17 @@ class SeatingConfigChangeBuilder
   String? get objectIcon => _$this._objectIcon;
   set objectIcon(String? objectIcon) => _$this._objectIcon = objectIcon;
 
-  List<Map<String, dynamic>>? _maxSelectedObjects;
-  List<Map<String, dynamic>>? get maxSelectedObjects =>
-      _$this._maxSelectedObjects;
-  set maxSelectedObjects(List<Map<String, dynamic>>? maxSelectedObjects) =>
+  int? _maxSelectedObjects;
+  int? get maxSelectedObjects => _$this._maxSelectedObjects;
+  set maxSelectedObjects(int? maxSelectedObjects) =>
       _$this._maxSelectedObjects = maxSelectedObjects;
+
+  List<Map<String, dynamic>>? _maxSelectedObjectList;
+  List<Map<String, dynamic>>? get maxSelectedObjectList =>
+      _$this._maxSelectedObjectList;
+  set maxSelectedObjectList(
+          List<Map<String, dynamic>>? maxSelectedObjectList) =>
+      _$this._maxSelectedObjectList = maxSelectedObjectList;
 
   MapBuilder<String, String>? _extraConfig;
   MapBuilder<String, String> get extraConfig =>
@@ -293,6 +315,7 @@ class SeatingConfigChangeBuilder
       _objectLabel = $v.objectLabel;
       _objectIcon = $v.objectIcon;
       _maxSelectedObjects = $v.maxSelectedObjects;
+      _maxSelectedObjectList = $v.maxSelectedObjectList;
       _extraConfig = $v.extraConfig?.toBuilder();
       _availableCategories = $v.availableCategories?.toBuilder();
       _unavailableCategories = $v.unavailableCategories?.toBuilder();
@@ -325,6 +348,7 @@ class SeatingConfigChangeBuilder
               objectLabel: objectLabel,
               objectIcon: objectIcon,
               maxSelectedObjects: maxSelectedObjects,
+              maxSelectedObjectList: maxSelectedObjectList,
               extraConfig: _extraConfig?.build(),
               availableCategories: _availableCategories?.build(),
               unavailableCategories: _unavailableCategories?.build(),

@@ -114,11 +114,11 @@ abstract class SeatingChartConfig
 
   String? get priceLevelsTooltipMessage;
 
-  /// [maxSelectedObjects] is an unverified attribute.
-  /// If you have any questions, you are welcome to ask your questions, or directly submit a pull request to the git repository.
-  /// https://github.com/SongJiaqiang/seatsio-flutter/issues
   /// See more: https://docs.seats.io/docs/renderer/config-maxselectedobjects/
-  BuiltList<BuiltMap<String, dynamic>>? get maxSelectedObjects;
+  int? get maxSelectedObjects;
+
+  /// If [maxSelectedObjectList] is not null, it replaces [maxSelectedObjectList].
+  List<Map<String, dynamic>>? get maxSelectedObjectList;
 
   /// See more: https://docs.seats.io/docs/renderer/availablecategories/
   BuiltList<String>? get availableCategories;
@@ -301,8 +301,10 @@ abstract class SeatingChartConfig
       }
     }
 
-    if (maxSelectedObjects != null) {
-      configMap["maxSelectedObjects"] = maxSelectedObjects!;
+    if (maxSelectedObjectList != null) {
+      configMap["maxSelectedObjects"] = maxSelectedObjectList;
+    } else if (maxSelectedObjects != null) {
+      configMap["maxSelectedObjects"] = maxSelectedObjects;
     }
 
     if (extraConfig != null) {

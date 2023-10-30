@@ -1,3 +1,7 @@
+
+## 0.3.4
+* 🐞 "maxSelectedObjects" supports both types int and List<Map<String, dynamic>>.
+
 ## 0.3.3
 * 🆕 Add more attributes.
 
