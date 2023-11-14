@@ -8,7 +8,7 @@ import '../assets/seatsio_html.dart';
 
 typedef void SeatsioWebViewCreatedCallback(SeatsioWebViewController controller);
 
-class SeatsioWebViewController {
+class SeatsioWebViewController extends WebViewController {
   SeatsioWebViewController({
     required WebViewController webViewController,
   }) : this._webViewController = webViewController;
@@ -17,14 +17,14 @@ class SeatsioWebViewController {
 
   SeatingChartConfig? _chartConfig;
 
-  void reload(SeatingChartConfig? newChartConfig) {
+  void runReload(SeatingChartConfig? newChartConfig) {
     if (newChartConfig != null) {
       _chartConfig = newChartConfig;
     }
 
     if (_chartConfig != null) {
       final url = _generateHtmlContent(_chartConfig!);
-      _webViewController.loadUrl(url);
+      _webViewController.loadRequest(Uri.parse(url));
     } else {
       debugPrint("[Seatsio]-> Not found seatsio chart config info.");
     }
@@ -36,7 +36,7 @@ class SeatsioWebViewController {
         ..holdToken = token
         ..session = session);
       final url = _generateHtmlContent(newChartInfo);
-      _webViewController.loadUrl(url);
+      _webViewController.loadRequest(Uri.parse(url));
     } else {
       debugPrint("[Seatsio]-> Not found seatsio chart config info.");
     }
@@ -60,9 +60,8 @@ class SeatsioWebViewController {
     chartConfigJson = "$chartConfigJson}";
 
     // Insert json string of chart config to the seatsio HTML template.
-    final htmlString = seatsioHTML
-        .replaceFirst("%region%", chartConfig.region ?? "eu")
-        .replaceFirst("%configAsJs%", chartConfigJson);
+    final htmlString =
+        seatsioHTML.replaceFirst("%region%", chartConfig.region ?? "eu").replaceFirst("%configAsJs%", chartConfigJson);
 
     debugPrint("[Seatsio]-> _generateHtmlContent: $htmlString");
 
@@ -76,6 +75,5 @@ class SeatsioWebViewController {
     return url.toString();
   }
 
-  Future<void> evaluateJavascript(String javascriptString) =>
-      _webViewController.runJavascript(javascriptString);
+  Future<void> evaluateJavascript(String javascriptString) => _webViewController.runJavaScript(javascriptString);
 }

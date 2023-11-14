@@ -13,7 +13,7 @@ import '../util/seatsio_web_view_controller.dart';
 
 class SeatsioWebView extends StatefulWidget {
   const SeatsioWebView({
-    Key? key,
+    super.key,
     bool enableDebug = false,
     String? initialUrl,
     SeatsioWebViewCreatedCallback? onWebViewCreated,
@@ -32,7 +32,7 @@ class SeatsioWebView extends StatefulWidget {
     SeatsioObjectsTicketTypesCallback? onReleaseHoldSucceeded,
     SeatsioObjectsTicketTypesCallback? onReleaseHoldFailed,
     SeatsioObjectCallback? onSelectedObjectBooked,
-    Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
+    Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = const <Factory<OneSequenceGestureRecognizer>>{},
   })  : this._enableDebug = enableDebug,
         this._initialUrl = initialUrl,
         this._onWebViewCreated = onWebViewCreated,
@@ -51,8 +51,7 @@ class SeatsioWebView extends StatefulWidget {
         this._onReleaseHoldSucceeded = onReleaseHoldSucceeded,
         this._onReleaseHoldFailed = onReleaseHoldFailed,
         this._onSelectedObjectBooked = onSelectedObjectBooked,
-        this._gestureRecognizers = gestureRecognizers,
-        super(key: key);
+        this._gestureRecognizers = gestureRecognizers;
 
   /// Output some log if setting the [enableDebug] to true.
   final bool _enableDebug;
@@ -97,268 +96,192 @@ class SeatsioWebView extends StatefulWidget {
 
   final SeatsioObjectCallback? _onSelectedObjectBooked;
 
-  final Set<Factory<OneSequenceGestureRecognizer>>? _gestureRecognizers;
+  final Set<Factory<OneSequenceGestureRecognizer>> _gestureRecognizers;
 
   @override
   State<StatefulWidget> createState() => _SeatsioWebViewState();
 }
 
 class _SeatsioWebViewState extends State<SeatsioWebView> {
-  late SeatsioWebViewController _seatsioController;
+  late final SeatsioWebViewController _seatsioController;
 
   @override
   void initState() {
-    if (Platform.isAndroid) {
-      WebView.platform = SurfaceAndroidWebView();
-    }
-
     super.initState();
+
+    _seatsioController = SeatsioWebViewController(
+      webViewController: WebViewController()
+        ..setJavaScriptMode(JavaScriptMode.unrestricted)
+        ..addJavaScriptChannel('FlutterJsBridge', onMessageReceived: flutterJsBridge)
+        ..addJavaScriptChannel('onObjectClicked', onMessageReceived: onObjectClicked)
+        ..addJavaScriptChannel('onObjectSelected', onMessageReceived: onObjectSelected)
+        ..addJavaScriptChannel('onObjectDeselected', onMessageReceived: onObjectDeselected)
+        ..addJavaScriptChannel('onChartRendered', onMessageReceived: onChartRendered)
+        ..addJavaScriptChannel('onChartRenderingFailed', onMessageReceived: onChartRenderingFailed)
+        ..addJavaScriptChannel('onSelectionValid', onMessageReceived: onSelectionValid)
+        ..addJavaScriptChannel('onSelectionInvalid', onMessageReceived: onSelectionInvalid)
+        ..addJavaScriptChannel('onSelectionInvalid', onMessageReceived: onSelectionInvalid)
+        ..addJavaScriptChannel('onBestAvailableSelectionFailed', onMessageReceived: onBestAvailableSelectionFailed)
+        ..addJavaScriptChannel('onHoldSucceeded', onMessageReceived: onHoldSucceeded)
+        ..addJavaScriptChannel('onHoldFailed', onMessageReceived: onHoldFailed)
+        ..addJavaScriptChannel('onReleaseHoldSucceeded', onMessageReceived: onReleaseHoldSucceeded)
+        ..addJavaScriptChannel('onReleaseHoldFailed', onMessageReceived: onReleaseHoldFailed)
+        ..setNavigationDelegate(
+          NavigationDelegate(
+            onPageFinished: (url) {
+              widget._onWebViewCreated?.call(_seatsioController);
+            },
+            onWebResourceError: (error) {
+              if (widget._enableDebug) debugPrint("[Seatsio]-> onWebResourceError: ${error.description}");
+            },
+            onNavigationRequest: (request) {
+              if (widget._enableDebug) debugPrint("[Seatsio]-> onNavigationRequest: ${request.url}");
+              return NavigationDecision.navigate;
+            },
+          ),
+        )
+        ..loadRequest(Uri.parse(widget._initialUrl ?? "")),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return WebView(
-      initialUrl: widget._initialUrl ?? "",
-      javascriptMode: JavascriptMode.unrestricted,
-      onWebViewCreated: (controller) {
-        _seatsioController =
-            SeatsioWebViewController(webViewController: controller);
-        widget._onWebViewCreated?.call(_seatsioController);
-      },
-      javascriptChannels: _javascriptChannels(),
+    return WebViewWidget(
+      controller: _seatsioController,
       gestureRecognizers: widget._gestureRecognizers,
     );
   }
 
-  /// Create Javascript channel for seatsio callback.
-  Set<JavascriptChannel> _javascriptChannels() {
-    final Set<JavascriptChannel> channels = {};
-
-    // Handle default callback from javascript
-    {
-      channels.add(JavascriptChannel(
-        name: "FlutterJsBridge",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> _onFlutterJsBridgeChannel callback message: ${message.message}");
-          // Get categories of chart if call chart.requestCategories() on the onChartRendered callback.
-          final categories = SeatsioCategory.arrayFromJson(message.message);
-          if (categories != null && categories.isNotEmpty) {
-            widget._onCategoryListCallback?.call(categories);
-          }
-        },
-      ));
+  // Handle default callback from javascript
+  void flutterJsBridge(JavaScriptMessage message) {
+    if (widget._enableDebug) debugPrint("[Seatsio]-> _onFlutterJsBridgeChannel callback message: ${message.message}");
+    // Get categories of chart if call chart.requestCategories() on the onChartRendered callback.
+    final categories = SeatsioCategory.arrayFromJson(message.message);
+    if (categories != null && categories.isNotEmpty) {
+      widget._onCategoryListCallback?.call(categories);
     }
+  }
 
-    if (widget._onObjectClicked != null) {
-      channels.add(JavascriptChannel(
-        name: "onObjectClicked",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onObjectClicked callback message: ${message.message}");
-          final object = SeatsioObject.fromJson(message.message);
-          if (object != null) {
-            widget._onObjectClicked?.call(object);
-          }
-        },
-      ));
+  void onObjectClicked(JavaScriptMessage message) {
+    if (widget._onObjectClicked == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onObjectClicked callback message: ${message.message}");
+    final object = SeatsioObject.fromJson(message.message);
+    if (object != null) {
+      widget._onObjectClicked?.call(object);
     }
+  }
 
-    if (widget._onObjectSelected != null) {
-      channels.add(JavascriptChannel(
-        name: "onObjectSelected",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onObjectSelected callback message: ${message.message}");
-          final object = SeatsioObject.fromJson(message.message);
-          if (object != null) {
-            // todo: Miss ticketType parameter
-            // Does not found ticketType from javascript message like iOS SDK.
-            widget._onObjectSelected?.call(object, null);
-          }
-        },
-      ));
+  void onObjectSelected(JavaScriptMessage message) {
+    if (widget._onObjectSelected == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onObjectClicked callback message: ${message.message}");
+    final object = SeatsioObject.fromJson(message.message);
+    if (object != null) {
+      widget._onObjectClicked?.call(object);
     }
+  }
 
-    if (widget._onObjectDeselected != null) {
-      channels.add(JavascriptChannel(
-        name: "onObjectDeselected",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onObjectDeselected callback message: ${message.message}");
-          final object = SeatsioObject.fromJson(message.message);
-          if (object != null) {
-            // todo: Miss ticketType parameter
-            // Does not found ticketType from javascript message like iOS SDK.
-            widget._onObjectDeselected?.call(object, null);
-          }
-        },
-      ));
+  void onObjectDeselected(JavaScriptMessage message) {
+    if (widget._onObjectDeselected == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onObjectDeselected callback message: ${message.message}");
+    final object = SeatsioObject.fromJson(message.message);
+    if (object != null) {
+      // todo: Miss ticketType parameter
+      // Does not found ticketType from javascript message like iOS SDK.
+      widget._onObjectDeselected?.call(object, null);
     }
+  }
 
-    if (widget._onChartRendered != null) {
-      channels.add(JavascriptChannel(
-        name: "onChartRendered",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onChartRendered callback message: ${message.message}");
-          final seatingChart = SeatingChart(_seatsioController);
-          widget._onChartRendered?.call(seatingChart);
-        },
-      ));
+  void onChartRendered(JavaScriptMessage message) {
+    if (widget._onChartRendered == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onChartRendered callback message: ${message.message}");
+    final seatingChart = SeatingChart(_seatsioController);
+    widget._onChartRendered?.call(seatingChart);
+  }
+
+  void onChartRenderingFailed(JavaScriptMessage message) {
+    if (widget._onChartRenderingFailed == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onChartRenderingFailed callback message: ${message.message}");
+    widget._onChartRenderingFailed?.call();
+  }
+
+  void onSelectionValid(JavaScriptMessage message) {
+    if (widget._onSelectionValid == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onSelectionValid callback message: ${message.message}");
+    widget._onSelectionValid?.call();
+  }
+
+  void onSelectionInvalid(JavaScriptMessage message) {
+    if (widget._onSelectionInvalid == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onSelectionInvalid callback message: ${message.message}");
+    // todo: Get valid types from message
+    // I don't known how to decode the SelectionValidatorType from the javascript message,
+    // So I always return an empty list.
+    widget._onSelectionInvalid?.call([]);
+  }
+
+  void onBestAvailableSelected(JavaScriptMessage message) {
+    if (widget._onBestAvailableSelected == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onBestAvailableSelected callback message: ${message.message}");
+    // todo: Get array_of_objects and nextToEachOther from message
+    final objects = SeatsioObject.arrayFromJson(message.message);
+    if (objects != null) {
+      widget._onBestAvailableSelected?.call(objects, true);
+    } else {
+      widget._onBestAvailableSelected?.call([], true);
     }
+  }
 
-    if (widget._onChartRenderingFailed != null) {
-      channels.add(JavascriptChannel(
-        name: "onChartRenderingFailed",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onChartRenderingFailed callback message: ${message.message}");
-          widget._onChartRenderingFailed?.call();
-        },
-      ));
+  void onBestAvailableSelectionFailed(JavaScriptMessage message) {
+    if (widget._onBestAvailableSelectionFailed == null) return;
+    if (widget._enableDebug)
+      debugPrint("[Seatsio]-> onBestAvailableSelectionFailed callback message: ${message.message}");
+    widget._onBestAvailableSelectionFailed?.call();
+  }
+
+  void onHoldSucceeded(JavaScriptMessage message) {
+    if (widget._onHoldSucceeded == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onHoldSucceeded callback message: ${message.message}");
+    // todo: what about ticket types?
+    final objects = SeatsioObject.arrayFromJson(message.message);
+    if (objects != null) {
+      widget._onHoldSucceeded?.call(objects, null);
+    } else {
+      widget._onHoldSucceeded?.call([], null);
     }
+  }
 
-    if (widget._onSelectionValid != null) {
-      channels.add(JavascriptChannel(
-        name: "onSelectionValid",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onSelectionValid callback message: ${message.message}");
-          widget._onSelectionValid?.call();
-        },
-      ));
+  void onHoldFailed(JavaScriptMessage message) {
+    if (widget._onHoldFailed == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onHoldFailed callback message: ${message.message}");
+    // todo: what about ticket types?
+    final objects = SeatsioObject.arrayFromJson(message.message);
+    if (objects != null) {
+      widget._onHoldFailed?.call(objects, null);
+    } else {
+      widget._onHoldFailed?.call([], null);
     }
+  }
 
-    if (widget._onSelectionInvalid != null) {
-      channels.add(JavascriptChannel(
-        name: "onSelectionInvalid",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onSelectionInvalid callback message: ${message.message}");
-          // todo: Get valid types from message
-          // I don't known how to decode the SelectionValidatorType from the javascript message,
-          // So I always return an empty list.
-          widget._onSelectionInvalid?.call([]);
-        },
-      ));
+  void onReleaseHoldSucceeded(JavaScriptMessage message) {
+    if (widget._onReleaseHoldSucceeded == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onReleaseHoldSucceeded callback message: ${message.message}");
+    // todo: get objects and types from message
+    widget._onReleaseHoldSucceeded?.call([], null);
+  }
+
+  void onReleaseHoldFailed(JavaScriptMessage message) {
+    if (widget._onReleaseHoldFailed == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onReleaseHoldFailed callback message: ${message.message}");
+    // todo: get objects and types from message
+    widget._onReleaseHoldFailed?.call([], null);
+  }
+
+  void onSelectedObjectBooked(JavaScriptMessage message) {
+    if (widget._onSelectedObjectBooked == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onSelectedObjectBooked callback message: ${message.message}");
+    final object = SeatsioObject.fromJson(message.message);
+    if (object != null) {
+      widget._onSelectedObjectBooked?.call(object);
     }
-
-    if (widget._onBestAvailableSelected != null) {
-      channels.add(JavascriptChannel(
-        name: "onBestAvailableSelected",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onBestAvailableSelected callback message: ${message.message}");
-          // todo: Get array_of_objects and nextToEachOther from message
-          final objects = SeatsioObject.arrayFromJson(message.message);
-          if (objects != null) {
-            widget._onBestAvailableSelected?.call(objects, true);
-          } else {
-            widget._onBestAvailableSelected?.call([], true);
-          }
-        },
-      ));
-    }
-
-    if (widget._onBestAvailableSelectionFailed != null) {
-      channels.add(JavascriptChannel(
-        name: "onBestAvailableSelectionFailed",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onBestAvailableSelectionFailed callback message: ${message.message}");
-          widget._onBestAvailableSelectionFailed?.call();
-        },
-      ));
-    }
-
-    if (widget._onHoldSucceeded != null) {
-      channels.add(JavascriptChannel(
-        name: "onHoldSucceeded",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onHoldSucceeded callback message: ${message.message}");
-          // todo: what about ticket types?
-          final objects = SeatsioObject.arrayFromJson(message.message);
-          if (objects != null) {
-            widget._onHoldSucceeded?.call(objects, null);
-          } else {
-            widget._onHoldSucceeded?.call([], null);
-          }
-        },
-      ));
-    }
-
-    if (widget._onHoldFailed != null) {
-      channels.add(JavascriptChannel(
-        name: "onHoldFailed",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onHoldFailed callback message: ${message.message}");
-          // todo: what about ticket types?
-          final objects = SeatsioObject.arrayFromJson(message.message);
-          if (objects != null) {
-            widget._onHoldFailed?.call(objects, null);
-          } else {
-            widget._onHoldFailed?.call([], null);
-          }
-        },
-      ));
-    }
-
-    if (widget._onReleaseHoldSucceeded != null) {
-      channels.add(JavascriptChannel(
-        name: "onReleaseHoldSucceeded",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onReleaseHoldSucceeded callback message: ${message.message}");
-          // todo: get objects and types from message
-          widget._onReleaseHoldSucceeded?.call([], null);
-        },
-      ));
-    }
-
-    if (widget._onReleaseHoldFailed != null) {
-      channels.add(JavascriptChannel(
-        name: "onReleaseHoldFailed",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onReleaseHoldFailed callback message: ${message.message}");
-          // todo: get objects and types from message
-          widget._onReleaseHoldFailed?.call([], null);
-        },
-      ));
-    }
-
-    if (widget._onSelectedObjectBooked != null) {
-      channels.add(JavascriptChannel(
-        name: "onSelectedObjectBooked",
-        onMessageReceived: (JavascriptMessage message) {
-          if (widget._enableDebug)
-            debugPrint(
-                "[Seatsio]-> onSelectedObjectBooked callback message: ${message.message}");
-          final object = SeatsioObject.fromJson(message.message);
-          if (object != null) {
-            widget._onSelectedObjectBooked?.call(object);
-          }
-        },
-      ));
-    }
-
-    return channels;
   }
 }
