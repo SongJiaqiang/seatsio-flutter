@@ -2,7 +2,7 @@
 set -e
 set -x
 
-output=$(flutter format --set-exit-if-changed .)
+output=$(dart format --set-exit-if-changed .)
 
 if [[ $? != 0 ]]; then
     echo "----> Command failed."
