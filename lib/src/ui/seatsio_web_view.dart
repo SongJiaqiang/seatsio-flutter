@@ -104,50 +104,51 @@ class SeatsioWebView extends StatefulWidget {
 
 class _SeatsioWebViewState extends State<SeatsioWebView> {
   late final SeatsioWebViewController _seatsioController;
+  late final WebViewController _webViewController;
 
   @override
   void initState() {
     super.initState();
 
-    _seatsioController = SeatsioWebViewController(
-      WebViewController()
-        ..setJavaScriptMode(JavaScriptMode.unrestricted)
-        ..addJavaScriptChannel('FlutterJsBridge', onMessageReceived: flutterJsBridge)
-        ..addJavaScriptChannel('onObjectClicked', onMessageReceived: onObjectClicked)
-        ..addJavaScriptChannel('onObjectSelected', onMessageReceived: onObjectSelected)
-        ..addJavaScriptChannel('onObjectDeselected', onMessageReceived: onObjectDeselected)
-        ..addJavaScriptChannel('onChartRendered', onMessageReceived: onChartRendered)
-        ..addJavaScriptChannel('onChartRenderingFailed', onMessageReceived: onChartRenderingFailed)
-        ..addJavaScriptChannel('onSelectionValid', onMessageReceived: onSelectionValid)
-        ..addJavaScriptChannel('onSelectionInvalid', onMessageReceived: onSelectionInvalid)
-        ..addJavaScriptChannel('onSelectionInvalid', onMessageReceived: onSelectionInvalid)
-        ..addJavaScriptChannel('onBestAvailableSelectionFailed', onMessageReceived: onBestAvailableSelectionFailed)
-        ..addJavaScriptChannel('onHoldSucceeded', onMessageReceived: onHoldSucceeded)
-        ..addJavaScriptChannel('onHoldFailed', onMessageReceived: onHoldFailed)
-        ..addJavaScriptChannel('onReleaseHoldSucceeded', onMessageReceived: onReleaseHoldSucceeded)
-        ..addJavaScriptChannel('onReleaseHoldFailed', onMessageReceived: onReleaseHoldFailed)
-        ..setNavigationDelegate(
-          NavigationDelegate(
-            onPageFinished: (url) {
-              widget._onWebViewCreated?.call(_seatsioController);
-            },
-            onWebResourceError: (error) {
-              if (widget._enableDebug) debugPrint("[Seatsio]-> onWebResourceError: ${error.description}");
-            },
-            onNavigationRequest: (request) {
-              if (widget._enableDebug) debugPrint("[Seatsio]-> onNavigationRequest: ${request.url}");
-              return NavigationDecision.navigate;
-            },
-          ),
-        )
-        ..loadRequest(Uri.parse(widget._initialUrl ?? "")),
-    );
+    _webViewController = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..addJavaScriptChannel('FlutterJsBridge', onMessageReceived: flutterJsBridge)
+      ..addJavaScriptChannel('onObjectClicked', onMessageReceived: onObjectClicked)
+      ..addJavaScriptChannel('onObjectSelected', onMessageReceived: onObjectSelected)
+      ..addJavaScriptChannel('onObjectDeselected', onMessageReceived: onObjectDeselected)
+      ..addJavaScriptChannel('onChartRendered', onMessageReceived: onChartRendered)
+      ..addJavaScriptChannel('onChartRenderingFailed', onMessageReceived: onChartRenderingFailed)
+      ..addJavaScriptChannel('onSelectionValid', onMessageReceived: onSelectionValid)
+      ..addJavaScriptChannel('onSelectionInvalid', onMessageReceived: onSelectionInvalid)
+      ..addJavaScriptChannel('onSelectionInvalid', onMessageReceived: onSelectionInvalid)
+      ..addJavaScriptChannel('onBestAvailableSelectionFailed', onMessageReceived: onBestAvailableSelectionFailed)
+      ..addJavaScriptChannel('onHoldSucceeded', onMessageReceived: onHoldSucceeded)
+      ..addJavaScriptChannel('onHoldFailed', onMessageReceived: onHoldFailed)
+      ..addJavaScriptChannel('onReleaseHoldSucceeded', onMessageReceived: onReleaseHoldSucceeded)
+      ..addJavaScriptChannel('onReleaseHoldFailed', onMessageReceived: onReleaseHoldFailed)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onPageFinished: (url) {
+            if (widget._enableDebug) debugPrint("[Seatsio]-> onPageFinished: $url");
+          },
+          onWebResourceError: (error) {
+            if (widget._enableDebug) debugPrint("[Seatsio]-> onWebResourceError: ${error.description}");
+          },
+          onNavigationRequest: (request) {
+            if (widget._enableDebug) debugPrint("[Seatsio]-> onNavigationRequest: ${request.url}");
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(widget._initialUrl ?? ""));
+    _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
+    widget._onWebViewCreated?.call(_seatsioController);
   }
 
   @override
   Widget build(BuildContext context) {
     return WebViewWidget(
-      controller: _seatsioController.webViewController,
+      controller: _webViewController,
       gestureRecognizers: widget._gestureRecognizers,
     );
   }
