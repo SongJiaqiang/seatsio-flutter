@@ -139,8 +139,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
             return NavigationDecision.navigate;
           },
         ),
-      )
-      ..loadRequest(Uri.parse(widget._initialUrl ?? ""));
+      );
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
   }
