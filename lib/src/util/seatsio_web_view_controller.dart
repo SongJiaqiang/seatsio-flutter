@@ -17,7 +17,7 @@ class SeatsioWebViewController {
 
   SeatingChartConfig? _chartConfig;
 
-  void runReload(SeatingChartConfig? newChartConfig) {
+  void reload(SeatingChartConfig? newChartConfig) {
     if (newChartConfig != null) {
       _chartConfig = newChartConfig;
     }

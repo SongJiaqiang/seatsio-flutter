@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _loadSeatsio() {
     final newChartConfig = _chartConfig.rebuild((b) => b..showLegend = false);
-    _seatsioController?.runReload(newChartConfig);
+    _seatsioController?.reload(newChartConfig);
   }
 }
 
