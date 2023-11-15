@@ -135,7 +135,6 @@ class _SeatsioView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SeatsioWebView(
-      initialUrl: "https://cdn-dev.seatsio.net/chart.html?workspaceKey=$YourWorkspaceKey&eventKey=$YourEventKey&session=start",
       enableDebug: true,
       onWebViewCreated: onWebViewCreated,
       onChartRendered: onChartRendered,
