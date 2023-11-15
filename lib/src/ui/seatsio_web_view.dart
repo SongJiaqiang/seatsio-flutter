@@ -110,7 +110,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
     super.initState();
 
     _seatsioController = SeatsioWebViewController(
-      webViewController: WebViewController()
+      WebViewController()
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
         ..addJavaScriptChannel('FlutterJsBridge', onMessageReceived: flutterJsBridge)
         ..addJavaScriptChannel('onObjectClicked', onMessageReceived: onObjectClicked)
@@ -147,7 +147,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   @override
   Widget build(BuildContext context) {
     return WebViewWidget(
-      controller: _seatsioController,
+      controller: _seatsioController.webViewController,
       gestureRecognizers: widget._gestureRecognizers,
     );
   }
