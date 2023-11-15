@@ -120,7 +120,6 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onChartRenderingFailed', onMessageReceived: onChartRenderingFailed)
       ..addJavaScriptChannel('onSelectionValid', onMessageReceived: onSelectionValid)
       ..addJavaScriptChannel('onSelectionInvalid', onMessageReceived: onSelectionInvalid)
-      ..addJavaScriptChannel('onSelectionInvalid', onMessageReceived: onSelectionInvalid)
       ..addJavaScriptChannel('onBestAvailableSelectionFailed', onMessageReceived: onBestAvailableSelectionFailed)
       ..addJavaScriptChannel('onHoldSucceeded', onMessageReceived: onHoldSucceeded)
       ..addJavaScriptChannel('onHoldFailed', onMessageReceived: onHoldFailed)
@@ -146,6 +145,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
 
   @override
   Widget build(BuildContext context) {
+    // return Container();
     return WebViewWidget(
       controller: _webViewController,
       gestureRecognizers: widget._gestureRecognizers,
