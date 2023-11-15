@@ -275,7 +275,7 @@ abstract class SeatingChartConfig
       "session": session ?? "none",
       "mode": mode,
       "showLegend": showLegend ?? true,
-      "showFullScreenButton": showFullScreenButton ?? true,
+      "showFullScreenButton": showFullScreenButton ?? false,
       "showMinimap": showMinimap ?? true,
       "showActiveSectionTooltipOnMobile": showActiveSectionTooltip ?? true,
       "showViewFromYourSeatOnMobile": showViewFromYourSeat ?? true,
