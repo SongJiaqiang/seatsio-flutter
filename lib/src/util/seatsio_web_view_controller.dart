@@ -8,7 +8,7 @@ import '../assets/seatsio_html.dart';
 
 typedef void SeatsioWebViewCreatedCallback(SeatsioWebViewController controller);
 
-class SeatsioWebViewController extends WebViewController {
+class SeatsioWebViewController {
   SeatsioWebViewController({
     required WebViewController webViewController,
   }) : this._webViewController = webViewController;
