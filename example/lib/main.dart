@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   SeatsioWebViewController? _seatsioController;
   final List<String> selectedObjectLabels = ['Try to click a seat object'];
 
-  late SeatingChartConfig _chartConfig;
+  late final SeatingChartConfig _chartConfig;
 
   @override
   void initState() {
@@ -44,8 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ..eventKey = YourEventKey
       ..enableHoldSucceededCallback = true
       ..enableHoldFailedCallback = true
-      ..enableObjectClickedCallback =
-          false // Set this to false if you want to have the objectToolTip to be shown
+      ..enableObjectClickedCallback = false // Set this to false if you want to have the objectToolTip to be shown
       ..session = "start");
   }
 
@@ -60,13 +59,31 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             SizedBox(
               height: 456,
-              child: _buildSeatsioView(),
+              child: _SeatsioView(
+                onWebViewCreated: (controller) {
+                  print("[Seatsio]->[example]-> onWebViewCreated");
+                  _seatsioController = controller;
+                  _loadSeatsio();
+                },
+                onChartRendered: (_) => print("[Seatsio]->[example]-> onChartRendered"),
+                onChartRenderingFailed: () => print("[Seatsio]->[example]-> onChartRenderingFailed"),
+                onObjectSelected: (object, type) {
+                  print("[Seatsio]->[example]-> onObjectSelected, label: ${object.label}");
+                  _selectSeat(object);
+                },
+                onObjectDeselected: (object, type) {
+                  print("[Seatsio]->[example]-> onObjectDeselected, label: ${object.label}");
+                  _deselectSeat(object);
+                },
+                onHoldSucceeded: (objects, ticketTypes) {
+                  print("[Seatsio]->[example]-> onObjectSelected, objects: $objects | ticket types: $ticketTypes");
+                },
+              ),
             ),
             SizedBox(
               height: 100,
               child: ListView.builder(
-                  itemCount: selectedObjectLabels.length,
-                  itemBuilder: (_, index) => Text(selectedObjectLabels[index])),
+                  itemCount: selectedObjectLabels.length, itemBuilder: (_, index) => Text(selectedObjectLabels[index])),
             )
           ],
         ),
@@ -75,37 +92,6 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _loadSeatsio,
         child: Icon(Icons.refresh),
       ),
-    );
-  }
-
-  Widget _buildSeatsioView() {
-    return SeatsioWebView(
-      enableDebug: true,
-      onWebViewCreated: (controller) {
-        print("[Seatsio]->[example]-> onWebViewCreated");
-        _seatsioController = controller;
-        _loadSeatsio();
-      },
-      onChartRendered: (chart) {
-        print("[Seatsio]->[example]-> onChartRendered");
-      },
-      onChartRenderingFailed: () {
-        print("[Seatsio]->[example]-> onChartRenderingFailed");
-      },
-      onObjectSelected: (object, type) {
-        print(
-            "[Seatsio]->[example]-> onObjectSelected, label: ${object.label}");
-        _selectSeat(object);
-      },
-      onObjectDeselected: (object, type) {
-        print(
-            "[Seatsio]->[example]-> onObjectDeselected, label: ${object.label}");
-        _deselectSeat(object);
-      },
-      onHoldSucceeded: (objects, ticketTypes) {
-        print(
-            "[Seatsio]->[example]-> onObjectSelected, objects: $objects | ticket types: $ticketTypes");
-      },
     );
   }
 
@@ -126,5 +112,37 @@ class _MyHomePageState extends State<MyHomePage> {
   void _loadSeatsio() {
     final newChartConfig = _chartConfig.rebuild((b) => b..showLegend = false);
     _seatsioController?.runReload(newChartConfig);
+  }
+}
+
+class _SeatsioView extends StatelessWidget {
+  const _SeatsioView({
+    required this.onWebViewCreated,
+    required this.onChartRendered,
+    required this.onChartRenderingFailed,
+    required this.onObjectSelected,
+    required this.onObjectDeselected,
+    required this.onHoldSucceeded,
+  });
+
+  final void Function(SeatsioWebViewController controller) onWebViewCreated;
+  final void Function(SeatingChart seatingChart) onChartRendered;
+  final void Function() onChartRenderingFailed;
+  final void Function(SeatsioObject object, SeatsioTicketType? type) onObjectSelected;
+  final void Function(SeatsioObject object, SeatsioTicketType? type) onObjectDeselected;
+  final void Function(List<SeatsioObject> objects, List<SeatsioTicketType?>? type) onHoldSucceeded;
+
+  @override
+  Widget build(BuildContext context) {
+    return SeatsioWebView(
+      initialUrl: "https://cdn-dev.seatsio.net/chart.html?workspaceKey=$YourWorkspaceKey&eventKey=$YourEventKey&session=start",
+      enableDebug: true,
+      onWebViewCreated: onWebViewCreated,
+      onChartRendered: onChartRendered,
+      onChartRenderingFailed: onChartRenderingFailed,
+      onObjectSelected: onObjectSelected,
+      onObjectDeselected: onObjectDeselected,
+      onHoldSucceeded: onHoldSucceeded,
+    );
   }
 }
