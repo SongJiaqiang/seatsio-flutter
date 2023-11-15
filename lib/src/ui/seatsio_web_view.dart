@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -139,13 +137,15 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
           },
         ),
       );
+    if (widget._initialUrl != null) {
+      _webViewController.loadRequest(Uri.parse(widget._initialUrl!));
+    }
     _seatsioController = SeatsioWebViewController(webViewController: _webViewController);
     widget._onWebViewCreated?.call(_seatsioController);
   }
 
   @override
   Widget build(BuildContext context) {
-    // return Container();
     return WebViewWidget(
       controller: _webViewController,
       gestureRecognizers: widget._gestureRecognizers,
