@@ -8,12 +8,10 @@ import '../assets/seatsio_html.dart';
 
 typedef void SeatsioWebViewCreatedCallback(SeatsioWebViewController controller);
 
-class SeatsioWebViewController extends WebViewController {
-  SeatsioWebViewController({
-    required WebViewController webViewController,
-  }) : this._webViewController = webViewController;
+class SeatsioWebViewController {
+  SeatsioWebViewController(this.webViewController);
 
-  WebViewController _webViewController;
+  final WebViewController webViewController;
 
   SeatingChartConfig? _chartConfig;
 
@@ -24,7 +22,7 @@ class SeatsioWebViewController extends WebViewController {
 
     if (_chartConfig != null) {
       final url = _generateHtmlContent(_chartConfig!);
-      _webViewController.loadRequest(Uri.parse(url));
+      webViewController.loadRequest(Uri.parse(url));
     } else {
       debugPrint("[Seatsio]-> Not found seatsio chart config info.");
     }
@@ -36,7 +34,7 @@ class SeatsioWebViewController extends WebViewController {
         ..holdToken = token
         ..session = session);
       final url = _generateHtmlContent(newChartInfo);
-      _webViewController.loadRequest(Uri.parse(url));
+      webViewController.loadRequest(Uri.parse(url));
     } else {
       debugPrint("[Seatsio]-> Not found seatsio chart config info.");
     }
@@ -75,5 +73,5 @@ class SeatsioWebViewController extends WebViewController {
     return url.toString();
   }
 
-  Future<void> evaluateJavascript(String javascriptString) => _webViewController.runJavaScript(javascriptString);
+  Future<void> evaluateJavascript(String javascriptString) => webViewController.runJavaScript(javascriptString);
 }
