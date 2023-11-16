@@ -176,7 +176,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
     if (widget._enableDebug) debugPrint("[Seatsio]-> onObjectClicked callback message: ${message.message}");
     final object = SeatsioObject.fromJson(message.message);
     if (object != null) {
-      widget._onObjectClicked?.call(object);
+      widget._onObjectSelected?.call(object, null);
     }
   }
 
