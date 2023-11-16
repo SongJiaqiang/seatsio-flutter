@@ -83,7 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 100,
               child: ListView.builder(
-                  itemCount: selectedObjectLabels.length, itemBuilder: (_, index) => Text(selectedObjectLabels[index])),
+                itemCount: selectedObjectLabels.length,
+                itemBuilder: (_, index) => Text(selectedObjectLabels[index]),
+              ),
             )
           ],
         ),
