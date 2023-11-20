@@ -50,4 +50,7 @@ class SeatingChart {
     final jsString = "listCategories(null, postMessageToFlutter);";
     seatsioController.evaluateJavascript(jsString);
   }
+
+  @override
+  String toString() => 'SeatingChart(seatsioController: $seatsioController)';
 }
