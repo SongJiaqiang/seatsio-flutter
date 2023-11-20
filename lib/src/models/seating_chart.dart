@@ -7,7 +7,7 @@ import 'seatsio_category.dart';
 typedef CategoryListCallback = void Function(List<SeatsioCategory>?);
 
 class SeatingChart {
-  SeatingChart(this.seatsioController);
+  const SeatingChart(this.seatsioController);
 
   final SeatsioWebViewController seatsioController;
 
