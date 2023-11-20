@@ -32,7 +32,7 @@ enum SelectionValidatorType {
 
 abstract class SeatingChartConfig
     implements Built<SeatingChartConfig, SeatingChartConfigBuilder> {
-  SeatingChartConfig._();
+  const SeatingChartConfig._();
 
   factory SeatingChartConfig([updates(SeatingChartConfigBuilder b)]) =
       _$SeatingChartConfig;
