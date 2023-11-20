@@ -369,6 +369,11 @@ abstract class SelectedObject
 
   static Serializer<SelectedObject> get serializer =>
       _$selectedObjectSerializer;
+
+  @override
+  String toString() {
+    return 'SelectedObject(label: $label, ticketType: $ticketType, amount: $amount)';
+  }
 }
 
 abstract class ObjectTooltip
