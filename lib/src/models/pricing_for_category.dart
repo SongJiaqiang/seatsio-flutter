@@ -9,7 +9,7 @@ part 'pricing_for_category.g.dart';
 
 abstract class PricingForCategory
     implements Built<PricingForCategory, PricingForCategoryBuilder> {
-  PricingForCategory._();
+  const PricingForCategory._();
 
   factory PricingForCategory([updates(PricingForCategoryBuilder b)]) =
       _$PricingForCategory;

@@ -10,7 +10,7 @@ part 'seatsio_object.g.dart';
 
 abstract class SeatsioObject
     implements Built<SeatsioObject, SeatsioObjectBuilder> {
-  SeatsioObject._();
+  const SeatsioObject._();
 
   factory SeatsioObject([updates(SeatsioObjectBuilder b)]) = _$SeatsioObject;
 
