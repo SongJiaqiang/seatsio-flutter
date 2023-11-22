@@ -27,6 +27,8 @@ class SeatsioWebView extends StatefulWidget {
     VoidCallback? onBestAvailableSelectionFailed,
     SeatsioObjectsTicketTypesCallback? onHoldSucceeded,
     SeatsioObjectsTicketTypesCallback? onHoldFailed,
+    SeatsioObjectsTicketTypesCallback? onHoldTokenExpired,
+    SeatsioObjectsTicketTypesCallback? onSessionInitialized,
     SeatsioObjectsTicketTypesCallback? onReleaseHoldSucceeded,
     SeatsioObjectsTicketTypesCallback? onReleaseHoldFailed,
     SeatsioObjectCallback? onSelectedObjectBooked,
@@ -46,6 +48,8 @@ class SeatsioWebView extends StatefulWidget {
         this._onBestAvailableSelectionFailed = onBestAvailableSelectionFailed,
         this._onHoldSucceeded = onHoldSucceeded,
         this._onHoldFailed = onHoldFailed,
+        this._onHoldTokenExpired = onHoldTokenExpired,
+        this._onSessionInitialized = onSessionInitialized,
         this._onReleaseHoldSucceeded = onReleaseHoldSucceeded,
         this._onReleaseHoldFailed = onReleaseHoldFailed,
         this._onSelectedObjectBooked = onSelectedObjectBooked,
@@ -87,6 +91,10 @@ class SeatsioWebView extends StatefulWidget {
   final SeatsioObjectsTicketTypesCallback? _onHoldSucceeded;
 
   final SeatsioObjectsTicketTypesCallback? _onHoldFailed;
+
+  final SeatsioObjectsTicketTypesCallback? _onHoldTokenExpired;
+
+  final SeatsioObjectsTicketTypesCallback? _onSessionInitialized;
 
   final SeatsioObjectsTicketTypesCallback? _onReleaseHoldSucceeded;
 
@@ -259,6 +267,30 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       widget._onHoldFailed?.call(objects, null);
     } else {
       widget._onHoldFailed?.call([], null);
+    }
+  }
+
+  void onHoldTokenExpired(JavaScriptMessage message) {
+    if (widget._onHoldTokenExpired == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onHoldTokenExpired callback message: ${message.message}");
+    // todo: what about ticket types?
+    final objects = SeatsioObject.arrayFromJson(message.message);
+    if (objects != null) {
+      widget._onHoldTokenExpired?.call(objects, null);
+    } else {
+      widget._onHoldTokenExpired?.call([], null);
+    }
+  }
+
+  void onSessionInitialized(JavaScriptMessage message) {
+    if (widget._onSessionInitialized == null) return;
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onSessionInitialized callback message: ${message.message}");
+    // todo: what about ticket types?
+    final objects = SeatsioObject.arrayFromJson(message.message);
+    if (objects != null) {
+      widget._onSessionInitialized?.call(objects, null);
+    } else {
+      widget._onSessionInitialized?.call([], null);
     }
   }
 

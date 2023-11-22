@@ -50,6 +50,14 @@ class SeatsioJsBridge {
       callbacks.add(buildCallbackConfigAsJS("onHoldFailed"));
     }
 
+    if (chartConfig.enableHoldTokenExpiredCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onHoldTokenExpired"));
+    }
+
+    if (chartConfig.enableSessionInitializedCallback) {
+      callbacks.add(buildCallbackConfigAsJS("onSessionInitialized"));
+    }
+
     if (chartConfig.enableReleaseHoldSucceededCallback) {
       callbacks.add(buildCallbackConfigAsJS("onReleaseHoldSucceeded"));
     }
