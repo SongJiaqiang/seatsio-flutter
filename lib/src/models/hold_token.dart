@@ -17,6 +17,14 @@ class HoldToken {
     );
   }
 
+  factory HoldToken.fromJson(Map<String, dynamic> json) {
+    return HoldToken(
+      token: json['token'] as String?,
+      expiresAt: json['expiresAt'] == null ? null : DateTime.parse(json['expiresAt'] as String),
+      expiresInSeconds: json['expiresInSeconds'] as int?,
+    );
+  }
+
   @override
   String toString() {
     return 'TokenModel(token: $token, expiresAt: $expiresAt, expiresInSeconds: $expiresInSeconds)';
