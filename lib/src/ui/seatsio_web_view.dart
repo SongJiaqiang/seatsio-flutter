@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -282,7 +284,7 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onSessionInitialized(JavaScriptMessage message) {
     if (widget._onSessionInitialized == null) return;
     if (widget._enableDebug) debugPrint("[Seatsio]-> onSessionInitialized callback message: ${message.message}");
-    final holdToken = HoldToken.fromString(message.message);
+    final holdToken = HoldToken.fromJson(jsonDecode(message.message));
     widget._onSessionInitialized?.call(holdToken);
   }
 
