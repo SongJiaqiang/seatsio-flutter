@@ -282,7 +282,6 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
   void onSessionInitialized(JavaScriptMessage message) {
     if (widget._onSessionInitialized == null) return;
     if (widget._enableDebug) debugPrint("[Seatsio]-> onSessionInitialized callback message: ${message.message}");
-    // todo: what about ticket types?
     final holdToken = HoldToken.fromString(message.message);
     if (holdToken.token != null) {
       widget._onSessionInitialized?.call(holdToken.token!);
