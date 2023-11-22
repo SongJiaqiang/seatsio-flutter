@@ -234,6 +234,10 @@ abstract class SeatingChartConfig
 
   bool get enableHoldFailedCallback;
 
+  bool get enableHoldTokenExpiredCallback;
+
+  bool get enableSessionInitializedCallback;
+
   bool get enableReleaseHoldSucceededCallback;
 
   bool get enableReleaseHoldFailedCallback;
@@ -258,6 +262,8 @@ abstract class SeatingChartConfig
       ..enableBestAvailableSelectionFailedCallback = false
       ..enableHoldSucceededCallback = false
       ..enableHoldFailedCallback = false
+      ..enableHoldTokenExpiredCallback = true
+      ..enableSessionInitializedCallback = true
       ..enableReleaseHoldSucceededCallback = false
       ..enableReleaseHoldFailedCallback = false
       ..enableSelectedObjectBookedCallback = false);

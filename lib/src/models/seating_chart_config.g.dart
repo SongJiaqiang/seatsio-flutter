@@ -75,6 +75,12 @@ class _$SeatingChartConfigSerializer
       'enableHoldFailedCallback',
       serializers.serialize(object.enableHoldFailedCallback,
           specifiedType: const FullType(bool)),
+      'enableHoldTokenExpiredCallback',
+      serializers.serialize(object.enableHoldTokenExpiredCallback,
+          specifiedType: const FullType(bool)),
+      'enableSessionInitializedCallback',
+      serializers.serialize(object.enableSessionInitializedCallback,
+          specifiedType: const FullType(bool)),
       'enableReleaseHoldSucceededCallback',
       serializers.serialize(object.enableReleaseHoldSucceededCallback,
           specifiedType: const FullType(bool)),
@@ -665,6 +671,14 @@ class _$SeatingChartConfigSerializer
           result.enableHoldFailedCallback = serializers.deserialize(value,
               specifiedType: const FullType(bool))! as bool;
           break;
+        case 'enableHoldTokenExpiredCallback':
+          result.enableHoldTokenExpiredCallback = serializers.deserialize(value,
+              specifiedType: const FullType(bool))! as bool;
+          break;
+        case 'enableSessionInitializedCallback':
+          result.enableSessionInitializedCallback = serializers
+              .deserialize(value, specifiedType: const FullType(bool))! as bool;
+          break;
         case 'enableReleaseHoldSucceededCallback':
           result.enableReleaseHoldSucceededCallback = serializers
               .deserialize(value, specifiedType: const FullType(bool))! as bool;
@@ -1164,6 +1178,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final bool enableHoldFailedCallback;
   @override
+  final bool enableHoldTokenExpiredCallback;
+  @override
+  final bool enableSessionInitializedCallback;
+  @override
   final bool enableReleaseHoldSucceededCallback;
   @override
   final bool enableReleaseHoldFailedCallback;
@@ -1232,6 +1250,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       required this.enableBestAvailableSelectionFailedCallback,
       required this.enableHoldSucceededCallback,
       required this.enableHoldFailedCallback,
+      required this.enableHoldTokenExpiredCallback,
+      required this.enableSessionInitializedCallback,
       required this.enableReleaseHoldSucceededCallback,
       required this.enableReleaseHoldFailedCallback,
       required this.enableSelectedObjectBookedCallback})
@@ -1266,6 +1286,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         r'SeatingChartConfig', 'enableHoldSucceededCallback');
     BuiltValueNullFieldError.checkNotNull(enableHoldFailedCallback,
         r'SeatingChartConfig', 'enableHoldFailedCallback');
+    BuiltValueNullFieldError.checkNotNull(enableHoldTokenExpiredCallback,
+        r'SeatingChartConfig', 'enableHoldTokenExpiredCallback');
+    BuiltValueNullFieldError.checkNotNull(enableSessionInitializedCallback,
+        r'SeatingChartConfig', 'enableSessionInitializedCallback');
     BuiltValueNullFieldError.checkNotNull(enableReleaseHoldSucceededCallback,
         r'SeatingChartConfig', 'enableReleaseHoldSucceededCallback');
     BuiltValueNullFieldError.checkNotNull(enableReleaseHoldFailedCallback,
@@ -1351,6 +1375,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
             other.enableBestAvailableSelectionFailedCallback &&
         enableHoldSucceededCallback == other.enableHoldSucceededCallback &&
         enableHoldFailedCallback == other.enableHoldFailedCallback &&
+        enableHoldTokenExpiredCallback ==
+            other.enableHoldTokenExpiredCallback &&
+        enableSessionInitializedCallback ==
+            other.enableSessionInitializedCallback &&
         enableReleaseHoldSucceededCallback ==
             other.enableReleaseHoldSucceededCallback &&
         enableReleaseHoldFailedCallback ==
@@ -1419,6 +1447,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, enableBestAvailableSelectionFailedCallback.hashCode);
     _$hash = $jc(_$hash, enableHoldSucceededCallback.hashCode);
     _$hash = $jc(_$hash, enableHoldFailedCallback.hashCode);
+    _$hash = $jc(_$hash, enableHoldTokenExpiredCallback.hashCode);
+    _$hash = $jc(_$hash, enableSessionInitializedCallback.hashCode);
     _$hash = $jc(_$hash, enableReleaseHoldSucceededCallback.hashCode);
     _$hash = $jc(_$hash, enableReleaseHoldFailedCallback.hashCode);
     _$hash = $jc(_$hash, enableSelectedObjectBookedCallback.hashCode);
@@ -1493,6 +1523,10 @@ class _$SeatingChartConfig extends SeatingChartConfig {
               enableBestAvailableSelectionFailedCallback)
           ..add('enableHoldSucceededCallback', enableHoldSucceededCallback)
           ..add('enableHoldFailedCallback', enableHoldFailedCallback)
+          ..add(
+              'enableHoldTokenExpiredCallback', enableHoldTokenExpiredCallback)
+          ..add('enableSessionInitializedCallback',
+              enableSessionInitializedCallback)
           ..add('enableReleaseHoldSucceededCallback',
               enableReleaseHoldSucceededCallback)
           ..add('enableReleaseHoldFailedCallback',
@@ -1804,6 +1838,20 @@ class SeatingChartConfigBuilder
   set enableHoldFailedCallback(bool? enableHoldFailedCallback) =>
       _$this._enableHoldFailedCallback = enableHoldFailedCallback;
 
+  bool? _enableHoldTokenExpiredCallback;
+  bool? get enableHoldTokenExpiredCallback =>
+      _$this._enableHoldTokenExpiredCallback;
+  set enableHoldTokenExpiredCallback(bool? enableHoldTokenExpiredCallback) =>
+      _$this._enableHoldTokenExpiredCallback = enableHoldTokenExpiredCallback;
+
+  bool? _enableSessionInitializedCallback;
+  bool? get enableSessionInitializedCallback =>
+      _$this._enableSessionInitializedCallback;
+  set enableSessionInitializedCallback(
+          bool? enableSessionInitializedCallback) =>
+      _$this._enableSessionInitializedCallback =
+          enableSessionInitializedCallback;
+
   bool? _enableReleaseHoldSucceededCallback;
   bool? get enableReleaseHoldSucceededCallback =>
       _$this._enableReleaseHoldSucceededCallback;
@@ -1891,6 +1939,8 @@ class SeatingChartConfigBuilder
           $v.enableBestAvailableSelectionFailedCallback;
       _enableHoldSucceededCallback = $v.enableHoldSucceededCallback;
       _enableHoldFailedCallback = $v.enableHoldFailedCallback;
+      _enableHoldTokenExpiredCallback = $v.enableHoldTokenExpiredCallback;
+      _enableSessionInitializedCallback = $v.enableSessionInitializedCallback;
       _enableReleaseHoldSucceededCallback =
           $v.enableReleaseHoldSucceededCallback;
       _enableReleaseHoldFailedCallback = $v.enableReleaseHoldFailedCallback;
@@ -1987,6 +2037,8 @@ class SeatingChartConfigBuilder
               enableBestAvailableSelectionFailedCallback: BuiltValueNullFieldError.checkNotNull(enableBestAvailableSelectionFailedCallback, r'SeatingChartConfig', 'enableBestAvailableSelectionFailedCallback'),
               enableHoldSucceededCallback: BuiltValueNullFieldError.checkNotNull(enableHoldSucceededCallback, r'SeatingChartConfig', 'enableHoldSucceededCallback'),
               enableHoldFailedCallback: BuiltValueNullFieldError.checkNotNull(enableHoldFailedCallback, r'SeatingChartConfig', 'enableHoldFailedCallback'),
+              enableHoldTokenExpiredCallback: BuiltValueNullFieldError.checkNotNull(enableHoldTokenExpiredCallback, r'SeatingChartConfig', 'enableHoldTokenExpiredCallback'),
+              enableSessionInitializedCallback: BuiltValueNullFieldError.checkNotNull(enableSessionInitializedCallback, r'SeatingChartConfig', 'enableSessionInitializedCallback'),
               enableReleaseHoldSucceededCallback: BuiltValueNullFieldError.checkNotNull(enableReleaseHoldSucceededCallback, r'SeatingChartConfig', 'enableReleaseHoldSucceededCallback'),
               enableReleaseHoldFailedCallback: BuiltValueNullFieldError.checkNotNull(enableReleaseHoldFailedCallback, r'SeatingChartConfig', 'enableReleaseHoldFailedCallback'),
               enableSelectedObjectBookedCallback: BuiltValueNullFieldError.checkNotNull(enableSelectedObjectBookedCallback, r'SeatingChartConfig', 'enableSelectedObjectBookedCallback'));
