@@ -142,7 +142,7 @@ class _SeatsioView extends StatelessWidget {
   final void Function(SeatsioObject object, SeatsioTicketType? type) onObjectDeselected;
   final void Function(List<SeatsioObject> objects, List<SeatsioTicketType?>? type) onHoldSucceeded;
   final VoidCallback onHoldTokenExpired;
-  final void Function(String holdToken) onSessionInitialized;
+  final void Function(HoldToken holdToken) onSessionInitialized;
 
   @override
   Widget build(BuildContext context) {
