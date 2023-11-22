@@ -24,6 +24,7 @@ typedef SeatsioObjectTicketTypeCallback = void Function(
     SeatsioObject, SeatsioTicketType?);
 typedef SeatsioObjectsTicketTypesCallback = void Function(
     List<SeatsioObject>, List<SeatsioTicketType>?);
+typedef SeatsioHoldTokenCallback = void Function(String holdToken);
 
 enum SelectionValidatorType {
   consecutiveSeats,

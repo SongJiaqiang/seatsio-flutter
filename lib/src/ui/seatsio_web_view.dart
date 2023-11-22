@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:seatsio/src/models/hold_token.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../models/seating_chart.dart';
@@ -27,8 +28,8 @@ class SeatsioWebView extends StatefulWidget {
     VoidCallback? onBestAvailableSelectionFailed,
     SeatsioObjectsTicketTypesCallback? onHoldSucceeded,
     SeatsioObjectsTicketTypesCallback? onHoldFailed,
-    SeatsioObjectsTicketTypesCallback? onHoldTokenExpired,
-    SeatsioObjectsTicketTypesCallback? onSessionInitialized,
+    VoidCallback? onHoldTokenExpired,
+    SeatsioHoldTokenCallback? onSessionInitialized,
     SeatsioObjectsTicketTypesCallback? onReleaseHoldSucceeded,
     SeatsioObjectsTicketTypesCallback? onReleaseHoldFailed,
     SeatsioObjectCallback? onSelectedObjectBooked,
@@ -92,9 +93,9 @@ class SeatsioWebView extends StatefulWidget {
 
   final SeatsioObjectsTicketTypesCallback? _onHoldFailed;
 
-  final SeatsioObjectsTicketTypesCallback? _onHoldTokenExpired;
+  final VoidCallback? _onHoldTokenExpired;
 
-  final SeatsioObjectsTicketTypesCallback? _onSessionInitialized;
+  final SeatsioHoldTokenCallback? _onSessionInitialized;
 
   final SeatsioObjectsTicketTypesCallback? _onReleaseHoldSucceeded;
 
@@ -129,6 +130,8 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
       ..addJavaScriptChannel('onBestAvailableSelectionFailed', onMessageReceived: onBestAvailableSelectionFailed)
       ..addJavaScriptChannel('onHoldSucceeded', onMessageReceived: onHoldSucceeded)
       ..addJavaScriptChannel('onHoldFailed', onMessageReceived: onHoldFailed)
+      ..addJavaScriptChannel('onHoldTokenExpired', onMessageReceived: onHoldTokenExpired)
+      ..addJavaScriptChannel('onSessionInitialized', onMessageReceived: onSessionInitialized)
       ..addJavaScriptChannel('onReleaseHoldSucceeded', onMessageReceived: onReleaseHoldSucceeded)
       ..addJavaScriptChannel('onReleaseHoldFailed', onMessageReceived: onReleaseHoldFailed)
       ..setNavigationDelegate(
@@ -272,25 +275,19 @@ class _SeatsioWebViewState extends State<SeatsioWebView> {
 
   void onHoldTokenExpired(JavaScriptMessage message) {
     if (widget._onHoldTokenExpired == null) return;
-    if (widget._enableDebug) debugPrint("[Seatsio]-> onHoldTokenExpired callback message: ${message.message}");
-    // todo: what about ticket types?
-    final objects = SeatsioObject.arrayFromJson(message.message);
-    if (objects != null) {
-      widget._onHoldTokenExpired?.call(objects, null);
-    } else {
-      widget._onHoldTokenExpired?.call([], null);
-    }
+    if (widget._enableDebug) debugPrint("[Seatsio]-> onHoldTokenExpired callback was called");
+    widget._onHoldTokenExpired?.call();
   }
 
   void onSessionInitialized(JavaScriptMessage message) {
     if (widget._onSessionInitialized == null) return;
     if (widget._enableDebug) debugPrint("[Seatsio]-> onSessionInitialized callback message: ${message.message}");
     // todo: what about ticket types?
-    final objects = SeatsioObject.arrayFromJson(message.message);
-    if (objects != null) {
-      widget._onSessionInitialized?.call(objects, null);
+    final holdToken = HoldToken.fromString(message.message);
+    if (holdToken.token != null) {
+      widget._onSessionInitialized?.call(holdToken.token!);
     } else {
-      widget._onSessionInitialized?.call([], null);
+      widget._onSessionInitialized?.call('');
     }
   }
 
