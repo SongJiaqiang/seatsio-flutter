@@ -79,11 +79,11 @@ class _MyHomePageState extends State<MyHomePage> {
               onHoldSucceeded: (objects, ticketTypes) {
                 print("[Seatsio]->[example]-> onObjectSelected, objects: $objects | ticket types: $ticketTypes");
               },
-              onHoldTokenExpired: (objects, ticketTypes) {
-                print("[Seatsio]->[example]-> onHoldTokenExpired, objects: $objects | ticket types: $ticketTypes");
+              onHoldTokenExpired: () {
+                print("[Seatsio]->[example]-> onHoldTokenExpired");
               },
-              onSessionInitialized: (objects, ticketTypes) {
-                print("[Seatsio]->[example]-> onSessionInitialized, objects: $objects | ticket types: $ticketTypes");
+              onSessionInitialized: (holdToken) {
+                print("[Seatsio]->[example]-> onSessionInitialized, holdToken: $holdToken");
               },
             ),
           ),
@@ -141,8 +141,8 @@ class _SeatsioView extends StatelessWidget {
   final void Function(SeatsioObject object, SeatsioTicketType? type) onObjectSelected;
   final void Function(SeatsioObject object, SeatsioTicketType? type) onObjectDeselected;
   final void Function(List<SeatsioObject> objects, List<SeatsioTicketType?>? type) onHoldSucceeded;
-  final void Function(List<SeatsioObject> objects, List<SeatsioTicketType?>? type) onHoldTokenExpired;
-  final void Function(List<SeatsioObject> objects, List<SeatsioTicketType?>? type) onSessionInitialized;
+  final VoidCallback onHoldTokenExpired;
+  final void Function(String holdToken) onSessionInitialized;
 
   @override
   Widget build(BuildContext context) {
