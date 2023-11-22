@@ -9,7 +9,7 @@ part 'seatsio_category.g.dart';
 
 abstract class SeatsioCategory
     implements Built<SeatsioCategory, SeatsioCategoryBuilder> {
-  SeatsioCategory._();
+  const SeatsioCategory._();
 
   factory SeatsioCategory([updates(SeatsioCategoryBuilder b)]) =
       _$SeatsioCategory;

@@ -5,7 +5,7 @@ part 'seatsio_ticket_type.g.dart';
 
 abstract class SeatsioTicketType
     implements Built<SeatsioTicketType, SeatsioTicketTypeBuilder> {
-  SeatsioTicketType._();
+  const SeatsioTicketType._();
 
   factory SeatsioTicketType([updates(SeatsioTicketTypeBuilder b)]) = _$SeatsioTicketType;
 

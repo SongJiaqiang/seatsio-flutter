@@ -7,7 +7,7 @@ part 'seatsio_point.g.dart';
 
 abstract class SeatsioPoint
     implements Built<SeatsioPoint, SeatsioPointBuilder> {
-  SeatsioPoint._();
+  const SeatsioPoint._();
 
   factory SeatsioPoint([updates(SeatsioPointBuilder b)]) = _$SeatsioPoint;
 

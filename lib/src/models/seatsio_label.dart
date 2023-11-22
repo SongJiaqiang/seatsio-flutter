@@ -7,7 +7,7 @@ part 'seatsio_label.g.dart';
 
 abstract class SeatsioLabel
     implements Built<SeatsioLabel, SeatsioLabelBuilder> {
-  SeatsioLabel._();
+  const SeatsioLabel._();
 
   factory SeatsioLabel([updates(SeatsioLabelBuilder b)]) = _$SeatsioLabel;
 
