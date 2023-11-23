@@ -259,6 +259,13 @@ class _$SeatingChartConfigSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.inputDevice;
+    if (value != null) {
+      result
+        ..add('inputDevice')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(String)));
+    }
     value = object.showActiveSectionTooltip;
     if (value != null) {
       result
@@ -532,6 +539,10 @@ class _$SeatingChartConfigSerializer
         case 'showMinimap':
           result.showMinimap = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'inputDevice':
+          result.inputDevice = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'showActiveSectionTooltipOnMobile':
           result.showActiveSectionTooltip = serializers.deserialize(value,
@@ -1114,6 +1125,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final bool? showMinimap;
   @override
+  final String? inputDevice;
+  @override
   final bool? showActiveSectionTooltip;
   @override
   final bool? showViewFromYourSeat;
@@ -1218,6 +1231,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.showLegend,
       this.legend,
       this.showMinimap,
+      this.inputDevice,
       this.showActiveSectionTooltip,
       this.showViewFromYourSeat,
       this.selectionValidators,
@@ -1338,6 +1352,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         showLegend == other.showLegend &&
         legend == other.legend &&
         showMinimap == other.showMinimap &&
+        inputDevice == other.inputDevice &&
         showActiveSectionTooltip == other.showActiveSectionTooltip &&
         showViewFromYourSeat == other.showViewFromYourSeat &&
         selectionValidators == other.selectionValidators &&
@@ -1415,6 +1430,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, showLegend.hashCode);
     _$hash = $jc(_$hash, legend.hashCode);
     _$hash = $jc(_$hash, showMinimap.hashCode);
+    _$hash = $jc(_$hash, inputDevice.hashCode);
     _$hash = $jc(_$hash, showActiveSectionTooltip.hashCode);
     _$hash = $jc(_$hash, showViewFromYourSeat.hashCode);
     _$hash = $jc(_$hash, selectionValidators.hashCode);
@@ -1486,6 +1502,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('showLegend', showLegend)
           ..add('legend', legend)
           ..add('showMinimap', showMinimap)
+          ..add('inputDevice', inputDevice)
           ..add('showActiveSectionTooltip', showActiveSectionTooltip)
           ..add('showViewFromYourSeat', showViewFromYourSeat)
           ..add('selectionValidators', selectionValidators)
@@ -1667,6 +1684,10 @@ class SeatingChartConfigBuilder
   bool? _showMinimap;
   bool? get showMinimap => _$this._showMinimap;
   set showMinimap(bool? showMinimap) => _$this._showMinimap = showMinimap;
+
+  String? _inputDevice;
+  String? get inputDevice => _$this._inputDevice;
+  set inputDevice(String? inputDevice) => _$this._inputDevice = inputDevice;
 
   bool? _showActiveSectionTooltip;
   bool? get showActiveSectionTooltip => _$this._showActiveSectionTooltip;
@@ -1904,6 +1925,7 @@ class SeatingChartConfigBuilder
       _showLegend = $v.showLegend;
       _legend = $v.legend?.toBuilder();
       _showMinimap = $v.showMinimap;
+      _inputDevice = $v.inputDevice;
       _showActiveSectionTooltip = $v.showActiveSectionTooltip;
       _showViewFromYourSeat = $v.showViewFromYourSeat;
       _selectionValidators = $v.selectionValidators?.toBuilder();
@@ -1997,6 +2019,7 @@ class SeatingChartConfigBuilder
               showLegend: showLegend,
               legend: _legend?.build(),
               showMinimap: showMinimap,
+              inputDevice: inputDevice,
               showActiveSectionTooltip: showActiveSectionTooltip,
               showViewFromYourSeat: showViewFromYourSeat,
               selectionValidators: _selectionValidators?.build(),
