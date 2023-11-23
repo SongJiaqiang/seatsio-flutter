@@ -27,6 +27,6 @@ class HoldToken {
 
   @override
   String toString() {
-    return 'TokenModel(token: $token, expiresAt: $expiresAt, expiresInSeconds: $expiresInSeconds)';
+    return '{token: $token, expiresAt: $expiresAt, expiresInSeconds: $expiresInSeconds}';
   }
 }
