@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:seatsio/seatsio.dart';
 
@@ -42,6 +43,13 @@ class _MyHomePageState extends State<MyHomePage> {
     _chartConfig = SeatingChartConfig.init().rebuild((b) => b
       ..workspaceKey = YourWorkspaceKey
       ..eventKey = YourEventKey
+      ..pricing = ListBuilder<PricingForCategory>([
+        PricingForCategory(
+          (b) => b
+            ..category = "expensive"
+            ..price = 100,
+        ),
+      ])
       ..enableHoldSucceededCallback = true
       ..enableHoldFailedCallback = true
       ..enableHoldTokenExpiredCallback = true
