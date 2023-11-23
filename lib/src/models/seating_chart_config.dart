@@ -145,6 +145,13 @@ abstract class SeatingChartConfig
   /// https://docs.seats.io/docs/renderer/config-showminimap
   bool? get showMinimap;
 
+  /// Specifies the type of input device to optimize the user interface for. These can either be:
+  /// 'auto': Default. Automatically detects the device main input type
+  /// 'cursor': UI is optimized for a cursor, and touch gestures are mostly ignored.
+  /// 'touch': UI is optimized for touch, with larger buttons and full gesture support.
+  /// https://docs.seats.io/docs/renderer/inputdevice
+  String? get inputDevice;
+
   /// On mobile, when displaying a chart with sections,
   /// a tooltip is shown at the bottom of the screen with the section name and pricing.
   /// You can hide this tooltip on mobile by passing showActiveSectionTooltipOnMobile: false.
@@ -285,6 +292,7 @@ abstract class SeatingChartConfig
       "showLegend": showLegend ?? true,
       "showFullScreenButton": showFullScreenButton ?? true,
       "showMinimap": showMinimap ?? true,
+      "inputDevice": inputDevice ?? 'auto',
       "showActiveSectionTooltipOnMobile": showActiveSectionTooltip ?? true,
       "showViewFromYourSeatOnMobile": showViewFromYourSeat ?? true,
       "showSectionContents": showSectionContents ?? "auto",
