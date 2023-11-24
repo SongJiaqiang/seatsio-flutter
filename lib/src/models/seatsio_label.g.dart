@@ -80,9 +80,9 @@ class _$SeatsioLabelSerializer implements StructuredSerializer<SeatsioLabel> {
 
 class _$SeatsioLabel extends SeatsioLabel {
   @override
-  final String own;
+  final String? own;
   @override
-  final String parent;
+  final String? parent;
   @override
   final String? section;
   @override
@@ -96,10 +96,7 @@ class _$SeatsioLabel extends SeatsioLabel {
       required this.parent,
       this.section,
       this.displayedLabel})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(own, r'SeatsioLabel', 'own');
-    BuiltValueNullFieldError.checkNotNull(parent, r'SeatsioLabel', 'parent');
-  }
+      : super._() {}
 
   @override
   SeatsioLabel rebuild(void Function(SeatsioLabelBuilder) updates) =>
@@ -192,10 +189,8 @@ class SeatsioLabelBuilder
   _$SeatsioLabel _build() {
     final _$result = _$v ??
         new _$SeatsioLabel._(
-            own: BuiltValueNullFieldError.checkNotNull(
-                own, r'SeatsioLabel', 'own'),
-            parent: BuiltValueNullFieldError.checkNotNull(
-                parent, r'SeatsioLabel', 'parent'),
+            own: own,
+            parent: parent,
             section: section,
             displayedLabel: displayedLabel);
     replace(_$result);
