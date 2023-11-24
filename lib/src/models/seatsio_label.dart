@@ -11,9 +11,9 @@ abstract class SeatsioLabel
 
   factory SeatsioLabel([updates(SeatsioLabelBuilder b)]) = _$SeatsioLabel;
 
-  String get own;
+  String? get own;
 
-  String get parent;
+  String? get parent;
 
   String? get section;
 
