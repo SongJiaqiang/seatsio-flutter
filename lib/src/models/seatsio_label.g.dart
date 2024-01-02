@@ -18,14 +18,22 @@ class _$SeatsioLabelSerializer implements StructuredSerializer<SeatsioLabel> {
   @override
   Iterable<Object?> serialize(Serializers serializers, SeatsioLabel object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'own',
-      serializers.serialize(object.own, specifiedType: const FullType(String)),
-      'parent',
-      serializers.serialize(object.parent,
-          specifiedType: const FullType(String)),
-    ];
+    final result = <Object?>[];
     Object? value;
+    value = object.own;
+    if (value != null) {
+      result
+        ..add('own')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.parent;
+    if (value != null) {
+      result
+        ..add('parent')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.section;
     if (value != null) {
       result
@@ -57,11 +65,11 @@ class _$SeatsioLabelSerializer implements StructuredSerializer<SeatsioLabel> {
       switch (key) {
         case 'own':
           result.own = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'parent':
           result.parent = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'section':
           result.section = serializers.deserialize(value,
@@ -91,12 +99,8 @@ class _$SeatsioLabel extends SeatsioLabel {
   factory _$SeatsioLabel([void Function(SeatsioLabelBuilder)? updates]) =>
       (new SeatsioLabelBuilder()..update(updates))._build();
 
-  _$SeatsioLabel._(
-      {required this.own,
-      required this.parent,
-      this.section,
-      this.displayedLabel})
-      : super._() {}
+  _$SeatsioLabel._({this.own, this.parent, this.section, this.displayedLabel})
+      : super._();
 
   @override
   SeatsioLabel rebuild(void Function(SeatsioLabelBuilder) updates) =>

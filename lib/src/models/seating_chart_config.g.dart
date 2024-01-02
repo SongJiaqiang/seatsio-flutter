@@ -263,8 +263,8 @@ class _$SeatingChartConfigSerializer
     if (value != null) {
       result
         ..add('inputDevice')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(String)));
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     value = object.showActiveSectionTooltip;
     if (value != null) {
@@ -1087,6 +1087,8 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   final BuiltList<PricingForCategory>? pricing;
   @override
+  final Function(num price)? priceFormatter;
+  @override
   final int? numberOfPlacesToSelect;
   @override
   final bool? objectWithoutPricingSelectable;
@@ -1212,6 +1214,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
       this.region,
       this.language,
       this.pricing,
+      this.priceFormatter,
       this.numberOfPlacesToSelect,
       this.objectWithoutPricingSelectable,
       this.objectWithoutCategorySelectable,
@@ -1324,6 +1327,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
+    final dynamic _$dynamicOther = other;
     return other is SeatingChartConfig &&
         workspaceKey == other.workspaceKey &&
         eventKey == other.eventKey &&
@@ -1331,6 +1335,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
         region == other.region &&
         language == other.language &&
         pricing == other.pricing &&
+        priceFormatter == _$dynamicOther.priceFormatter &&
         numberOfPlacesToSelect == other.numberOfPlacesToSelect &&
         objectWithoutPricingSelectable ==
             other.objectWithoutPricingSelectable &&
@@ -1411,6 +1416,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
     _$hash = $jc(_$hash, region.hashCode);
     _$hash = $jc(_$hash, language.hashCode);
     _$hash = $jc(_$hash, pricing.hashCode);
+    _$hash = $jc(_$hash, priceFormatter.hashCode);
     _$hash = $jc(_$hash, numberOfPlacesToSelect.hashCode);
     _$hash = $jc(_$hash, objectWithoutPricingSelectable.hashCode);
     _$hash = $jc(_$hash, objectWithoutCategorySelectable.hashCode);
@@ -1481,6 +1487,7 @@ class _$SeatingChartConfig extends SeatingChartConfig {
           ..add('region', region)
           ..add('language', language)
           ..add('pricing', pricing)
+          ..add('priceFormatter', priceFormatter)
           ..add('numberOfPlacesToSelect', numberOfPlacesToSelect)
           ..add(
               'objectWithoutPricingSelectable', objectWithoutPricingSelectable)
@@ -1583,6 +1590,11 @@ class SeatingChartConfigBuilder
       _$this._pricing ??= new ListBuilder<PricingForCategory>();
   set pricing(ListBuilder<PricingForCategory>? pricing) =>
       _$this._pricing = pricing;
+
+  Function(num price)? _priceFormatter;
+  Function(num price)? get priceFormatter => _$this._priceFormatter;
+  set priceFormatter(Function(num price)? priceFormatter) =>
+      _$this._priceFormatter = priceFormatter;
 
   int? _numberOfPlacesToSelect;
   int? get numberOfPlacesToSelect => _$this._numberOfPlacesToSelect;
@@ -1906,6 +1918,7 @@ class SeatingChartConfigBuilder
       _region = $v.region;
       _language = $v.language;
       _pricing = $v.pricing?.toBuilder();
+      _priceFormatter = $v.priceFormatter;
       _numberOfPlacesToSelect = $v.numberOfPlacesToSelect;
       _objectWithoutPricingSelectable = $v.objectWithoutPricingSelectable;
       _objectWithoutCategorySelectable = $v.objectWithoutCategorySelectable;
@@ -2000,6 +2013,7 @@ class SeatingChartConfigBuilder
               region: region,
               language: language,
               pricing: _pricing?.build(),
+              priceFormatter: priceFormatter,
               numberOfPlacesToSelect: numberOfPlacesToSelect,
               objectWithoutPricingSelectable: objectWithoutPricingSelectable,
               objectWithoutCategorySelectable: objectWithoutCategorySelectable,
@@ -2153,15 +2167,6 @@ class _$SelectedObject extends SelectedObject {
     _$hash = $jc(_$hash, amount.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper(r'SelectedObject')
-          ..add('label', label)
-          ..add('ticketType', ticketType)
-          ..add('amount', amount))
-        .toString();
   }
 }
 
