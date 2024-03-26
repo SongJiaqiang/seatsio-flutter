@@ -6,7 +6,6 @@
 .idea
 
 # Files and directories created by pub
-pubspec.lock
 .dart_tool/
 .packages
 .pub/
@@ -17,3 +16,4 @@ ios/Runner/GeneratedPluginRegistrant.*
 
 .flutter-plugins
 .flutter-plugins-dependencies
+.fvm

@@ -1,7 +1,9 @@
 name: seatsio
-description: Seatsio SDK for Flutter.
+description: -> 
+  This is the Flutter version of seatsio SDK.
+  It helps you integrate seating charts into Flutter apps.
 repository: https://github.com/SongJiaqiang/seatsio-flutter
-version: 0.3.4
+version: 0.4.0
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
@@ -12,9 +14,9 @@ dependencies:
     sdk: flutter
 
   json_annotation: ^4.8.1
-  built_collection: ^5.1.1
+  built_collection: ^5.1.0
   built_value: ^8.7.0
-  webview_flutter: ^4.4.2
+  webview_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:
