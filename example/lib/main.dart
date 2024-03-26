@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Seatsio Demo Home Page'),
+      home: MyHomePage(title: 'Assign Seats Page'),
     );
   }
 }
@@ -54,7 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ..enableHoldFailedCallback = true
       ..enableHoldTokenExpiredCallback = true
       ..enableSessionInitializedCallback = true
-      ..enableObjectClickedCallback = false // Set this to false if you want to have the objectToolTip to be shown
+      ..enableObjectClickedCallback =
+          false // Set this to false if you want to have the objectToolTip to be shown
       ..session = "continue");
   }
 
@@ -74,24 +75,30 @@ class _MyHomePageState extends State<MyHomePage> {
                 _seatsioController = controller;
                 _loadSeatsio();
               },
-              onChartRendered: (_) => print("[Seatsio]->[example]-> onChartRendered"),
-              onChartRenderingFailed: () => print("[Seatsio]->[example]-> onChartRenderingFailed"),
+              onChartRendered: (_) =>
+                  print("[Seatsio]->[example]-> onChartRendered"),
+              onChartRenderingFailed: () =>
+                  print("[Seatsio]->[example]-> onChartRenderingFailed"),
               onObjectSelected: (object, type) {
-                print("[Seatsio]->[example]-> onObjectSelected, label: ${object.label}");
+                print(
+                    "[Seatsio]->[example]-> onObjectSelected, label: ${object.label}");
                 _selectSeat(object);
               },
               onObjectDeselected: (object, type) {
-                print("[Seatsio]->[example]-> onObjectDeselected, label: ${object.label}");
+                print(
+                    "[Seatsio]->[example]-> onObjectDeselected, label: ${object.label}");
                 _deselectSeat(object);
               },
               onHoldSucceeded: (objects, ticketTypes) {
-                print("[Seatsio]->[example]-> onObjectSelected, objects: $objects | ticket types: $ticketTypes");
+                print(
+                    "[Seatsio]->[example]-> onObjectSelected, objects: $objects | ticket types: $ticketTypes");
               },
               onHoldTokenExpired: () {
                 print("[Seatsio]->[example]-> onHoldTokenExpired");
               },
               onSessionInitialized: (holdToken) {
-                print("[Seatsio]->[example]-> onSessionInitialized, holdToken: $holdToken");
+                print(
+                    "[Seatsio]->[example]-> onSessionInitialized, holdToken: $holdToken");
               },
             ),
           ),

@@ -1,27 +1,34 @@
 <img alt='seatsio-logo' src='https://www.seats.io/assets/v77/static/brandassets/seatsio-black.svg' width='100%'/>
 
 ## Description
+
 A Flutter plugin for [Seatsio](https://www.seats.io/).
+
+This is the Flutter version of seatsio SDK, which can help you integrate the seating chart into Flutter apps.
+If you want to know more about seatsio's SDK, please go to [seats.io](https://docs.seats.io/).
 
 <img alt='seatsio-flutter-demo' src='https://github.com/SongJiaqiang/seatsio-flutter/raw/main/seatsio-flutter-demo.gif' width='200'/>
 
 ## Getting Started
 
 First, add `seatsio` as a dependency in your `pubspec.yaml` file.
+
 ``` yaml
 dependencies:
   flutter:
     sdk: flutter
 
-  seatsio: ^0.3.4
+  seatsio: ^0.4.0
 ```
 
 Then, import `seatsio` package to your dart file.
+
 ``` dart
 import 'package:seatsio/seatsio.dart';
 ```
 
 Finally, config your seatsio chart with some parameters.
+
 ``` dart
 class _MyHomePageState extends State<MyHomePage> {
   SeatsioWebViewController? _seatsioController;
@@ -70,18 +77,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildSeatsioView() {
     return SeatsioWebView(
-      enableDebug: true,
       onWebViewCreated: (controller) {
         print("[Seatsio]->[example]-> onWebViewCreated");
         _seatsioController = controller;
         _loadSeatsio();
       },
-      onChartRendered: (chart) {
-        print("[Seatsio]->[example]-> onChartRendered");
-      },
-      onChartRenderingFailed: () {
-        print("[Seatsio]->[example]-> onChartRenderingFailed");
-      },
+      onChartRendered: (_) =>
+          print("[Seatsio]->[example]-> onChartRendered"),
+      onChartRenderingFailed: () =>
+          print("[Seatsio]->[example]-> onChartRenderingFailed"),
       onObjectSelected: (object, type) {
         print(
             "[Seatsio]->[example]-> onObjectSelected, label: ${object.label}");
@@ -91,6 +95,17 @@ class _MyHomePageState extends State<MyHomePage> {
         print(
             "[Seatsio]->[example]-> onObjectDeselected, label: ${object.label}");
         _deselectSeat(object);
+      },
+      onHoldSucceeded: (objects, ticketTypes) {
+        print(
+            "[Seatsio]->[example]-> onObjectSelected, objects: $objects | ticket types: $ticketTypes");
+      },
+      onHoldTokenExpired: () {
+        print("[Seatsio]->[example]-> onHoldTokenExpired");
+      },
+      onSessionInitialized: (holdToken) {
+        print(
+            "[Seatsio]->[example]-> onSessionInitialized, holdToken: $holdToken");
       },
     );
   }
@@ -115,4 +130,3 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 ```
-

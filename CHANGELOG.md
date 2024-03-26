@@ -1,3 +1,7 @@
+## 0.4.0
+* 🆕 Migrate the base version of webview_flutter to 4.0.0.
+* 🆕 Support hold token initialization and configuration callbacks.
+* 🙏 Thanks to [RahmiTufanoglu](https://github.com/RahmiTufanoglu) for contributing a lot of excellent code!
 
 ## 0.3.4
 * 🐞 "maxSelectedObjects" supports both types int and List<Map<String, dynamic>>.
