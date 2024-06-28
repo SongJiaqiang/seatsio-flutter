@@ -61,6 +61,21 @@ class _$SeatsioObjectSerializer implements StructuredSerializer<SeatsioObject> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(SeatsioPoint)));
     }
+    value = object.selectedTicketType;
+    if (value != null) {
+      result
+        ..add('selectedTicketType')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.selectionPerTicketType;
+    if (value != null) {
+      result
+        ..add('selectionPerTicketType')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                Map, const [const FullType(String), const FullType(dynamic)])));
+    }
     value = object.seats;
     if (value != null) {
       result
@@ -125,6 +140,17 @@ class _$SeatsioObjectSerializer implements StructuredSerializer<SeatsioObject> {
           result.selectable = serializers.deserialize(value,
               specifiedType: const FullType(bool))! as bool;
           break;
+        case 'selectedTicketType':
+          result.selectedTicketType = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'selectionPerTicketType':
+          result.selectionPerTicketType = serializers.deserialize(value,
+              specifiedType: const FullType(Map, const [
+                const FullType(String),
+                const FullType(dynamic)
+              ])) as Map<String, dynamic>?;
+          break;
         case 'seats':
           result.seats = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -160,6 +186,10 @@ class _$SeatsioObject extends SeatsioObject {
   @override
   final bool selectable;
   @override
+  final String? selectedTicketType;
+  @override
+  final Map<String, dynamic>? selectionPerTicketType;
+  @override
   final List<SeatsioObject>? seats;
 
   factory _$SeatsioObject([void Function(SeatsioObjectBuilder)? updates]) =>
@@ -176,6 +206,8 @@ class _$SeatsioObject extends SeatsioObject {
       required this.status,
       required this.forSale,
       required this.selectable,
+      this.selectedTicketType,
+      this.selectionPerTicketType,
       this.seats})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, r'SeatsioObject', 'id');
@@ -210,6 +242,8 @@ class _$SeatsioObject extends SeatsioObject {
         status == other.status &&
         forSale == other.forSale &&
         selectable == other.selectable &&
+        selectedTicketType == other.selectedTicketType &&
+        selectionPerTicketType == other.selectionPerTicketType &&
         seats == other.seats;
   }
 
@@ -226,6 +260,8 @@ class _$SeatsioObject extends SeatsioObject {
     _$hash = $jc(_$hash, status.hashCode);
     _$hash = $jc(_$hash, forSale.hashCode);
     _$hash = $jc(_$hash, selectable.hashCode);
+    _$hash = $jc(_$hash, selectedTicketType.hashCode);
+    _$hash = $jc(_$hash, selectionPerTicketType.hashCode);
     _$hash = $jc(_$hash, seats.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -244,6 +280,8 @@ class _$SeatsioObject extends SeatsioObject {
           ..add('status', status)
           ..add('forSale', forSale)
           ..add('selectable', selectable)
+          ..add('selectedTicketType', selectedTicketType)
+          ..add('selectionPerTicketType', selectionPerTicketType)
           ..add('seats', seats))
         .toString();
   }
@@ -297,6 +335,17 @@ class SeatsioObjectBuilder
   bool? get selectable => _$this._selectable;
   set selectable(bool? selectable) => _$this._selectable = selectable;
 
+  String? _selectedTicketType;
+  String? get selectedTicketType => _$this._selectedTicketType;
+  set selectedTicketType(String? selectedTicketType) =>
+      _$this._selectedTicketType = selectedTicketType;
+
+  Map<String, dynamic>? _selectionPerTicketType;
+  Map<String, dynamic>? get selectionPerTicketType =>
+      _$this._selectionPerTicketType;
+  set selectionPerTicketType(Map<String, dynamic>? selectionPerTicketType) =>
+      _$this._selectionPerTicketType = selectionPerTicketType;
+
   List<SeatsioObject>? _seats;
   List<SeatsioObject>? get seats => _$this._seats;
   set seats(List<SeatsioObject>? seats) => _$this._seats = seats;
@@ -316,6 +365,8 @@ class SeatsioObjectBuilder
       _status = $v.status;
       _forSale = $v.forSale;
       _selectable = $v.selectable;
+      _selectedTicketType = $v.selectedTicketType;
+      _selectionPerTicketType = $v.selectionPerTicketType;
       _seats = $v.seats;
       _$v = null;
     }
@@ -358,6 +409,8 @@ class SeatsioObjectBuilder
                   forSale, r'SeatsioObject', 'forSale'),
               selectable: BuiltValueNullFieldError.checkNotNull(
                   selectable, r'SeatsioObject', 'selectable'),
+              selectedTicketType: selectedTicketType,
+              selectionPerTicketType: selectionPerTicketType,
               seats: seats);
     } catch (_) {
       late String _$failedField;

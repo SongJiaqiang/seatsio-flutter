@@ -35,6 +35,10 @@ abstract class SeatsioObject
 
   bool get selectable;
 
+  String? get selectedTicketType;
+
+  Map<String, dynamic>? get selectionPerTicketType;
+
   List<SeatsioObject>? get seats;
 
   static SeatsioObject? fromMap(Map? data) {
@@ -54,6 +58,8 @@ abstract class SeatsioObject
             'status': data['status'],
             'forSale': data['forSale'],
             'selectable': data['selectable'],
+            'selectedTicketType': data['selectedTicketType'],
+            'selectionPerTicketType': data['selectionPerTicketType'],
           },
         );
       }
@@ -71,6 +77,8 @@ abstract class SeatsioObject
         ..status = data["status"] ?? ''
         ..forSale = data["forSale"]
         ..selectable = data["selectable"]
+        ..selectedTicketType = data["selectedTicketType"]
+        ..selectionPerTicketType = data["selectionPerTicketType"]
         ..seats = data['seats'] != null
             ? List<SeatsioObject>.from(
                 data['seats']?.map((x) => SeatsioObject.fromMap(x)))
