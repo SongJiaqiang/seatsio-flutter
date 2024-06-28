@@ -41,14 +41,23 @@ abstract class PricingForCategory
       ..category = data["category"]
       ..price = data["price"]
       ..ticketTypes =
-          TicketTypePricing.arrayFromJson(data["ticketTypes"])?.toBuilder());
+        TicketTypePricing.arrayFromMap(data["ticketTypes"])?.toBuilder());
   }
 
   static Serializer<PricingForCategory> get serializer =>
       _$pricingForCategorySerializer;
 
   Map<String, dynamic> toJson() =>
-      <String, dynamic>{'category': categoryKey ?? category, 'price': price};
+      // Exporting either ticketTypes and price as seats.io documentation
+      // implies they are mutually exclusive. Giving ticketTypes the preference
+      // as it is more specific.
+      ticketTypes != null ? <String, dynamic>{
+        'category': categoryKey ?? category,
+        'ticketTypes': ticketTypes!.map((tt) => tt.toJson()).toList()
+      } : <String, dynamic>{
+        'category': categoryKey ?? category,
+        'price': price
+      };
 }
 
 abstract class TicketTypePricing
@@ -74,9 +83,8 @@ abstract class TicketTypePricing
     return null;
   }
 
-  static BuiltList<TicketTypePricing>? arrayFromJson(String? jsonString) {
-    final data = jsonString != null ? json.decode(jsonString) : null;
-    if (data != null && data is List) {
+  static BuiltList<TicketTypePricing>? arrayFromMap(List? data) {
+    if (data != null) {
       final List<TicketTypePricing> objects = [];
       data.forEach((e) {
         final object = TicketTypePricing.fromMap(e);
@@ -88,6 +96,20 @@ abstract class TicketTypePricing
     }
     return null;
   }
+
+  static BuiltList<TicketTypePricing>? arrayFromJson(String? jsonString) {
+    final data = jsonString != null ? json.decode(jsonString) : null;
+    if (data != null && data is List) {
+      return arrayFromMap(data);
+    }
+    return null;
+  }
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'ticketType': ticketType,
+    'price': price,
+    'label': label
+  };
 
   static Serializer<TicketTypePricing> get serializer =>
       _$ticketTypePricingSerializer;

@@ -28,6 +28,8 @@ import 'package:seatsio/seatsio.dart';
 ```
 
 Finally, config your seatsio chart with some parameters.
+Remember to create a .env file in the root of the example folder and
+set your Seats.io workspace key and event key (.env.example file provided for reference)
 
 ``` dart
 class _MyHomePageState extends State<MyHomePage> {
@@ -41,8 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     _chartConfig = SeatingChartConfig.init().rebuild((b) => b
-      ..workspaceKey = YourWorkspaceKey
-      ..eventKey = YourEventKey
+      ..workspaceKey = dotenv.env["WORKSPACE_KEY"]
+      ..eventKey = dotenv.env["EVENT_KEY"]
       ..session = "start");
   }
 

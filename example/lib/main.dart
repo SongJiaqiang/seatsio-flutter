@@ -1,11 +1,10 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:seatsio/seatsio.dart';
 
-const String YourWorkspaceKey = "";
-const String YourEventKey = "";
-
-void main() {
+Future main() async {
+  await dotenv.load(fileName: ".env");
   runApp(MyApp());
 }
 
@@ -41,8 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     _chartConfig = SeatingChartConfig.init().rebuild((b) => b
-      ..workspaceKey = YourWorkspaceKey
-      ..eventKey = YourEventKey
+      // CONFIG: Set your workspace key and event key at .env file (.env.example file provided as example)
+      ..workspaceKey = dotenv.env["WORKSPACE_KEY"]
+      ..eventKey = dotenv.env["EVENT_KEY"]
       ..pricing = ListBuilder<PricingForCategory>([
         PricingForCategory(
           (b) => b

@@ -12,11 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # seatsio: ^0.1.1
   seatsio:
     path: ../
   built_collection: ^5.1.1
-
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -28,3 +27,5 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   uses-material-design: true
+  assets:
+    - .env
